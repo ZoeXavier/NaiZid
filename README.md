@@ -65,7 +65,7 @@ you've just cloned!!
 * [`WhatsApp Admin `](https://wa.me/6281310253704)
 
 * [`Raisa Bot `](https://wa.me/447537102515)
-* 
+
 * [`Ada Bug? Klik Sini Buat Lapor `](https://wa.me/6281310253704)
 
 
