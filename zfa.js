@@ -192,7 +192,7 @@ module.exports = zfa = async (zfa, message) => {
 
         const serial = sender.id
         const isAdmin = adminNumber.includes(sender.id)
-        const ownerNumber = '+17866912852@c.us'
+        const ownerNumber = '6281310253704@c.us'
         const isOwner = ownerNumber.includes(sender.id)
         //const isAfkOn = afk.checkAfkUser(sender.id, _afk)
         if (isGroupMsg && GroupLinkDetector && !isGroupAdmins && !isAdmin && !isOwner){
@@ -649,7 +649,31 @@ module.exports = zfa = async (zfa, message) => {
             if(isBadwordMsg(serial)) return
                 addBadCount(serial)
         }
-        
+        if (args.includes('@447537102515')) { //replace with your bot number
+            zfa.reply(from, 'Iya ada apa?', id)
+        }
+		if (args.includes('ngab')) { //Edit ae ngab
+            zfa.reply(from, '🆖🆎', id)
+        }
+		if (args.includes('zidan')){
+            if (!isGroupMsg){
+			const txt = body.slice(0)
+             zfa.reply(from, 'HAYO LAGI NGOMONGIN OWNER YAA!! RAISA CEPUIN AH:D', id)
+             zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\nGroup : ${formattedTitle} isi pesannya : ${txt}`, id)
+             } else {
+             zfa.reply(from, 'HAYO LAGI NGOMONGIN OWNER YAA!! RAISA CEPUIN AH:D', id)
+             zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\nGroup : ${formattedTitle} isi pesannya : ${txt}`, id)
+                    }
+            }
+		if (args.includes('ngopi')) { //Edit sesuka hati kamu sayang
+            zfa.reply(from, '🆖🅾️🅿️ℹ️', id)
+        }
+		if (args.includes('cok')) { //Edit sesuka hati kamu sayang
+            zfa.reply(from, '©️🆗', id)
+        }
+		if (args.includes('terima kasih') || args.includes('makasih') || args.includes('terimakasih') || args.includes('thank you') || args.includes('thanks')) {
+            zfa.reply(from, `sama-sama ${pushname}💖`, id)
+        }
                 if(body === '#mute' && isMuted(chatId) == true){
                     if(isGroupMsg) {
                         if (!isAdmin) return zfa.reply(from, 'Maaf, perintah ini hanya dapat dilakukan oleh admin Raisa!', id)
@@ -884,6 +908,14 @@ module.exports = zfa = async (zfa, message) => {
                     await zfa.reply(from, ind.wrongFormat(), id)
                 }
             break
+		/*case prefix+'ss': //jika error silahkan buka file di folder settings/api.json dan ubah apiSS 'API-KEY' yang kalian dapat dari website https://apiflash.com/
+            if (args.length == 0) return zfa.reply(from, `Membuat bot men-screenshot sebuah web\n\nPemakaian: ${prefix}ss [url]\n\ncontoh: ${prefix}ss http://zidanzfa`, id)
+            const scrinshit = await meme.ss(args[0])
+            await zfa.sendFile(from, scrinshit, 'ss.jpg', 'cekrek', id)
+            .catch(() => {
+                zfa.reply(from, 'Ada yang Error!', id)
+            })
+            break*/
 		case prefix+'pastebin': //BY VINZ
             if(isReg(obj)) return
             if(cekumur(cekage)) return
@@ -1051,6 +1083,40 @@ module.exports = zfa = async (zfa, message) => {
                 await zfa.sendFileFromUrl(from, `https://api.vhtear.com/logoff?hero=${karakter}&text=${teksff}&apikey=${config.vhtear}`, id)
                 console.log('Success!')
             break*/
+		case prefix+'say':
+		case prefix+'bct':
+		case prefix+'bacot':
+		       if(isReg(obj)) return
+                if(cekumur(cekage)) return
+		            const doto = fs.readFileSync('./lib/say.json')
+                    const dotoJson = JSON.parse(doto)
+                    const rondIndox = Math.floor(Math.random() * dotoJson.length)
+                    const rondKoy = dotoJson[rondIndox]
+                    zfa.reply(from, rondKoy, id)
+                    break
+		case prefix+'addbacot':
+		case prefix+'addbct':
+		case prefix+'addsay':
+		            const says = body.slice(8)
+                 //   say.push(says)
+                    fs.writeFileSync('./lib/say.json', JSON.stringify(say))
+                    zfa.reply(from, `Add ${says} sukses!`, id)
+                    break
+	    case prefix+'delsay':
+		            if (args.length == 1) return zfa.reply(from, `Kirim perintah *!addsay [teks]*, contoh *!addsay anjay*`, id)
+                    const sayso = body.slice(8)
+                    let delsayso = say.indexOf(sayso)
+                    say.splice(delsayso, 1)
+                    fs.writeFileSync('./lib/say.json', JSON.stringify(say))
+                    zfa.reply(from, `Delete ${sayso} sukses!`, id)
+                    break
+        case prefix+'saylist':
+                    let saylisto = `Random say list\nTotal : ${say.length}\n`
+                    for (let i of say) {
+                        saylisto += `☛ ${i}\n`
+                    }
+                    await zfa.reply(from, saylisto, id)
+                    break
 		case prefix+'triggered':
                 if (isMedia && isImage || isQuotedImage) {
                     const encryptMedia = isQuotedImage ? quotedMsg : message
@@ -1087,6 +1153,267 @@ module.exports = zfa = async (zfa, message) => {
                     await zfa.reply(from, 'Format Salah!', id)
                 }
             break
+		case 'iri?':
+        case 'iri':
+                    zfa.sendPtt(from, './posnot/iri.mp3', id)
+                    break
+        case 'abgjago':
+        case 'abangjago':
+                    zfa.sendPtt(from, './posnot/bgjg.mp3', id)
+                    break
+        case 'tarekses':
+        case 'tariksis':
+        case 'tareksis':
+        case 'tareeksis':
+        case 'tareekses':
+                    zfa.sendPtt(from, './posnot/tarekses.mp3', id)
+                    break
+        case 'welotka':
+        case 'welutka':
+        case 'kangcopet':
+                    zfa.sendPtt(from, './posnot/welot.mp3', id)
+                    break
+		case prefix+'cuaca':
+		    if(isReg(obj)) return
+            if(cekumur(cekage)) return
+		    if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#cuaca [tempat]*\nContoh : *#cuaca jakarta utara', id)
+                    const tempat = body.slice(7)
+                    const weather = await get.get(`https://mhankbarbars.herokuapp.com/api/cuaca?q=${tempat}&apiKey=${apiKey}`).json()
+                    if (weather.error) {
+                        zfa.reply(from, weather.error, id)
+                    } else {
+                        zfa.reply(from, `➸ Tempat : ${weather.result.tempat}\n\n➸ Angin : ${weather.result.angin}\n➸ Cuaca : ${weather.result.cuaca}\n➸ Deskripsi : ${weather.result.desk}\n➸ Kelembapan : ${weather.result.kelembapan}\n➸ Suhu : ${weather.result.suhu}\n➸ Udara : ${weather.result.udara}`, id)
+                    }
+                    break
+		case prefix+'listdaerah':
+		    const listDaerah = await get('https://mhankbarbars.herokuapp.com/daerah').json()
+                    zfa.reply(from, listDaerah.result, id)
+                    break
+	    case prefix+'randomnsfwneko':
+		     const nsfwneko = await axios.get('https://aksa-api.herokuapp.com/api/nsfwneko')
+                    const nsfwn = nsfwneko.data
+                    if (nsfwn.result.endsWith('.png')) {
+                        var ext = '.png'
+                    } else {
+                        var ext = '.jpg'
+                    }
+                    zfa.sendImage(from, nsfwn.result, `NsfwNeko${ext}`, 'NsfwNeko!', id)
+                    break
+		case prefix+'randomanime':
+		    const ranime = await axios.get('https://api.computerfreaker.cf/v1/anime')
+                    const ranimen = ranime.data
+                    if (ranimen.url.endsWith('.png')) {
+                        var ext = '.png'
+                    } else {
+                        var ext = '.jpg'
+                    }
+                    zfa.sendFileFromUrl(from, ranime.url, `RandomAnime${ext}`, 'Random Anime!', id)
+                    break
+		case prefix+'nhder':
+		     if (args.length >= 2) {
+                        const code = args[1]
+                        const url = 'https://nhder.herokuapp.com/download/nhentai/' + code + '/zip'
+                        const short = []
+                        const shortener = await urlShortener(url)
+                        url['short'] = shortener
+                        short.push(url)
+                        const caption = `*NEKOPOI DOWNLOADER*\n\nLink: ${shortener}`
+                        zfa.sendText(from, caption)
+                    } else {
+                        zfa.sendText(from, 'Maaf tolong masukan code nuclear')
+                    }
+                    break
+		case prefix+'nhview':
+		     if (args.length === 1) return zfa.reply(from, 'Kirim perintah *@nhview [212121]*\nContoh : *@nhview 321421*', id)
+                    const nhsh = body.slice(11)
+                    const nhsh2 = await axios.get('https://mnazria.herokuapp.com/api/nhentai?code=' + nhsh)
+                    for (let i = 0; i < nhsh2.length; i++) {
+                        await zfa.sendImage(from, nhsh2[i].data, 'thumbserc.jpg', '', id)
+                    }
+                    break
+		case prefix+'nhinfo':
+		     if (!args[1] || args.length >= 3) return
+                    nhentai(args[1]).then(nhinfo => {
+                        zfa.reply(nhinfo)
+                    }).catch(err => {
+                        zfa.reply('Kode nuclear tidak valid!')
+                    })
+                    break
+		case prefix+'randomhentai':
+		     const hentai = await axios.get(`https://aksa-api.herokuapp.com/api/hentai`)
+                    const henta = hentai.data
+                    if (henta.result.endsWith('.png')) {
+                        var ext = '.png'
+                    } else {
+                        var ext = '.jpg'
+                    }
+                    zfa.sendImage(from, henta.result, `RandomHentai${ext}`, 'Random Hentai!', id)
+                    break
+		case prefix+'waifu':
+		     const waifu = await axios.get('https://mhankbarbars.herokuapp.com/api/waifu' + '?apiKey=' + apiKey)
+                    zfa.sendFileFromUrl(from, waifu.data.image, 'Waifu.jpg', `➸ Name : ${waifu.data.name}\n➸ Description : ${waifu.data.desc}\n\n➸ Source : ${waifu.data.source}`, id)
+                    break
+		case prefix+'komiku':
+		     if (args.length === 1) return zfa.reply(from, 'Kirim perintah *@komiku [query]*\nContoh : *@komiku darling in the franxx*', id)
+                    const animepo = await axios.get('https://mhankbarbars.herokuapp.com/api/komiku?q=' + body.slice(7) + '&apiKey=' + apiKey)
+                    if (animepo.data.error) return zfa.reply(from, animepo.data.error, id)
+                    const res_animepo = `${animepo.data.info}\n\n${animepo.data.sinopsis}\n\n${animepo.data.link_dl}`
+                    zfa.sendFileFromUrl(from, animepo.data.thumb, 'komiku.jpg', res_animepo, id)
+                    break
+		case prefix+'kpop':
+		     if (args.length === 1) return zfa.reply(from, `Untuk menggunakan !kpop\nSilahkan ketik: !kpop [query]\nContoh: !kpop bts\n\nquery yang tersedia:\nblackpink, exo, bts`, id)
+                    if (args[1] === 'blackpink' || args[1] === 'exo' || args[1] === 'bts') {
+                        fetch('https://raw.githubusercontent.com/aksaZ/grabbed-results/main/random/kpop/' + args[1] + '.txt')
+                            .then(res => res.text())
+                            .then(body => {
+                                let randomkpop = body.split('\n')
+                                let randomkpopx = randomkpop[Math.floor(Math.random() * randomkpop.length)]
+                                zfa.sendFileFromUrl(from, randomkpopx, '', 'nih..', id)
+                            })
+                            .catch(() => {
+                                zfa.reply(from, 'Ada yang eror!', id)
+                            })
+                    } else {
+                        zfa.reply(from, `Maaf query tidak tersedia. Silahkan ketik !kpop untuk melihat list query`)
+                    }
+                    break
+		case prefix+'downloadmanga':
+		     if (args.length === 1) return zfa.reply(from, `Kirim perintah *#downloadmanga [query]*\nContoh : *#downloadmanga darling in the franxx*`, id)
+                    const animep = await axios.get('https://mhankbarbars.herokuapp.com/api/komiku?q=' + body.slice(15) + '&apiKey=' + apiKey)
+                    if (animep.data.error) return zfa.reply(from, animep.data.error, id)
+                    const res_animep = `${animep.data.info}\n\n${animep.data.sinopsis}\n\n${animep.data.link_dl}`
+                    zfa.sendFileFromUrl(from, animep.data.thumb, 'komiku.jpg', res_animep, id)
+                    break
+	    case prefix+'downloadanime':
+		     if (args.length === 1) return zfa.reply(from, `Kirim perintah *#downloadanime [query]*\nContoh : *#downloadanime darling in the franxx*`, id)
+                    const animeqq = await axios.get('https://mhankbarbars.herokuapp.com/api/kuso?q=' + body.slice(15) + '&apiKey=' + apiKey)
+                    if (animeqq.data.error) return zfa.reply(from, animeqq.data.error, id)
+                    const res_animeqq = `${animeqq.data.title}\n\n${animeqq.data.info}\n\n${animeqq.data.sinopsis}\n\n${animeqq.data.link_dl}`
+                    zfa.sendFileFromUrl(from, animeqq.data.thumb, 'kusonime.jpg', res_animeqq, id)
+                    break
+		case prefix+'wiki':
+		     if (args.length === 1) return zfa.reply(from, 'Kirim perintah *!wiki <query>*\nContoh : *!wiki Indonesia*', id)
+                    const query_ = body.slice(6)
+                    const wiki = await get.get(`https://mhankbarbars.herokuapp.com/api/wiki?q=${query_}&lang=id&apiKey=${apiKey}`).json()
+                    if (wiki.error) {
+                        zfa.reply(from, wiki.error, id)
+                    } else {
+                        zfa.reply(from, `➸ *Query* : ${query_}\n\n➸ *Result* : ${wiki.result}`, id)
+                    }
+                    break
+		case prefix+'slap':
+		            arg = body.trim().split(' ')
+                    const jejiik = author.replace('@c.us', '')
+                    await zfa.sendGiphyAsSticker(from, 'https://media.giphy.com/media/S8507sBJm1598XnsgD/source.gif')
+                    zfa.sendTextWithMentions(from, `${prefix}` + jejiik + ' *slapped* ' + arg[1])
+                    break
+		case prefix+'hug':
+		            arg = body.trim().split(' ')
+                    const janjing = author.replace('@c.us', '')
+                    await zfa.sendGiphyAsSticker(from, 'https://media.giphy.com/media/od5H3PmEG5EVq/giphy.gif')
+                    zfa.sendTextWithMentions(from, `${prefix}` + janjing + ' *peyuuuk* ' + arg[1])
+                    break
+		case prefix+'nye':
+		            arg = body.trim().split('')
+                    const jancuk7 = author.replace('@c.us', '')
+                    await zfa.sendGiphyAsSticker(from, 'https://media.giphy.com/media/cute-baka-13LunYkkBppSBa/giphy.gif')
+                    zfa.sendTextWithMentions(from, `${prefix}` + jancuk7 + ' *nye nye ' + arg[1])
+                    break
+		case prefix+'pat':
+		            arg = body.trim().split(' ')
+                    const jartod = author.replace('@c.us', '')
+                    await zfa.sendGiphyAsSticker(from, 'https://media.giphy.com/media/Z7x24IHBcmV7W/giphy.gif')
+                    zfa.sendTextWithMentions(from, `${prefix}` + jartod + ' *👈 Si Mengelu-elus si👉* ' + arg[1])
+                    break
+		case prefix+'renungan':
+		     const agggg = await get.get(`https://api-jojo.herokuapp.com/api/renungan`).json()
+                    try {
+                        const {
+                            Isi,
+                            judul,
+                            pesan
+                        } = agggg
+                        const rn = `➸ *Judul* : ${judul}\n➸ *Pesan* : ${pesan}\n➸ *Isi* : ${Isi}`
+                        zfa.reply(from, rn, id)
+                    } catch (err) {
+                        zfa.reply(from, 'Error!', id)
+                    }
+                    break
+		case prefix+'indohot':
+		              const dsa = await get.get(`https://arugaz.herokuapp.com/api/indohot`).json()
+                        const {
+                            country,
+                            durasi,
+                            genre,
+                            judul,
+                            url
+                        } = await dsa.result
+                        await zfa.sendText(from, `*Judul* : ${judul}\n*Durasi* : ${durasi}\n*Genre* : ${genre}\n*Negara* : ${country}\n*Link* : ${url}`, id)
+                    break
+					
+		case prefix+'cerpen':
+		     const skyaaa = await get.get('https://arugaz.herokuapp.com/api/cerpen').json()
+                    zfa.reply(from, skyaaa.result, id)
+                    break
+					
+		case prefix+'minion':
+		     const jokqass = body.slice(8)
+                    const jokiqass = await get.get('http://nzcha-api.herokuapp.com/styletext/minion?text1=' + jokqass).json()
+                    zfa.sendFileFromUrl(from, jokiqass.result, id)
+                    break
+					
+		case prefix+'space':
+		     arg = body.trim().split('|')
+                    const sp = arg[1]
+                    const ace = arg[2]
+                    if (args === 1) return zfa.reply(from, 'Silakan gunakan #space |<teks>|<teks2>', id)
+                    const prona = await get.get(`http://nzcha-api.herokuapp.com/styletext/space?text1=${sp}&text2=${ace}`).json()
+                    zfa.sendFileFromUrl(from, prona.result, id)
+                    break
+					
+		case prefix+'sunset':
+		     const jokqas = body.slice(8)
+                    const jokiqas = await get.get('http://nzcha-api.herokuapp.com/styletext/senja?text1=' + jokqas).json()
+                    zfa.sendFileFromUrl(from, jokiqas.result, id)
+                    break
+					
+		case prefix+'avenger':
+		case prefix+'avengers':
+		     arg = body.trim().split('|')
+                    const spa = arg[1]
+                    const acea = arg[2]
+                    if (args === 1) return zfa.reply(from, 'Silakan gunakan !avengers |<teks>|<teks2>', id)
+                    const pronaa = await get.get(`http://nzcha-api.herokuapp.com/styletext/avenger?text1=${spa}&text2=${acea}`).json()
+                    zfa.sendFileFromUrl(from, pronaa.result, id)
+                    break
+					
+	    case prefix+'codmw':
+		     const joka = body.slice(7)
+                    const jokia = await get.get('http://nzcha-api.herokuapp.com/styletext/codmw?text1=' + joka).json()
+                    zfa.sendFileFromUrl(from, jokia.result, id)
+                    break
+					
+		case prefix+'joker':
+		      const jok = body.slice(7)
+                    const joki = await get.get('http://nzcha-api.herokuapp.com/styletext/jokerlogo?text1=' + jok).json()
+                    zfa.sendFileFromUrl(from, joki.result, id)
+                    break
+					
+		case prefix+'glow':
+		    const graffity = body.slice(6)
+                    const graffitystrz = await get.get('http://nzcha-api.herokuapp.com/styletext/advglow?text1=' + graffity).json()
+                    zfa.sendFileFromUrl(from, graffitystrz.result, id)
+                    break
+					
+		case prefix+'phub':
+		 arg = body.trim().split('|')
+                    const porn = arg[1]
+                    const hub = arg[2]
+                    if (args === 1) return zfa.reply(from, 'Silakan gunakan !phub |<teks>|<teks2>', id)
+                    const pron = await get.get(`http://nzcha-api.herokuapp.com/styletext/phub?text1=${porn}&text2=${hub}`).json()
+                    zfa.sendFileFromUrl(from, pron.result, id)
+                    break
+					
 		case prefix+'ytsearch':
             if(isReg(obj)) return
             if(cekumur(cekage)) return
@@ -1657,6 +1984,7 @@ module.exports = zfa = async (zfa, message) => {
         case prefix+'linkgroup':
 		case prefix+'gclink':
 		case prefix+'linkgc':
+		case prefix+'link':
             if (!isGroupMsg) return zfa.reply(from, `Fitur ini hanya bisa di gunakan dalam group`, id)
             if (!isGroupAdmins) return zfa.reply(from, `Fitur ini hanya bisa di gunakan oleh admin group`, id)
             if (!isBotGroupAdmins) return zfa.reply(from, `Fitur ini hanya bisa di gunakan ketika bot menjadi admin`, id)
@@ -1666,6 +1994,8 @@ module.exports = zfa = async (zfa, message) => {
             zfa.reply(from, linkgc, id)
             break
         case prefix+'resetlinkgroup':
+		case prefix+'resetlinkgc':
+		case prefix+'resetlink':
             if (!isGroupMsg) return zfa.reply(from, `Fitur ini hanya bisa di gunakan dalam group`, id)
             if (!isGroupAdmins) return zfa.reply(from, `Fitur ini hanya bisa di gunakan oleh admin group`, id)
             if (!isBotGroupAdmins) return zfa.reply(from, `Fitur ini hanya bisa di gunakan ketika bot menjadi admin`, id)
@@ -1674,6 +2004,69 @@ module.exports = zfa = async (zfa, message) => {
                 zfa.sendTextWithMentions(from, `Link group telah direset oleh admin @${sender.id.replace('@c.us', '')}`)
             }
             break
+		case prefix+'magernulis1': // BY MFARELS
+		case prefix+'nulis':
+		case prefix+'raisanulis':
+            if(isReg(obj)) return
+            if(cekumur(cekage)) return
+            if (args.length === 1) return await zfa.reply(from, 'Kirim perintah *prefix+magernulis1 [teks]*', id)  // BY MFARELS
+            const farel = body.slice(13)  // YOUTUBE : MFARELS CH
+            await zfa.reply(from, mess.magernulissatu, id)  // INSTAGRAM : @mfarelsyahtiawan
+            const zahra = farel.replace(/(\S+\s*){1,10}/g, '$&\n')  // INSTALL IMAGEMAGICK KALO WAU WORK
+            const farelzahra = zahra.split('\n').slice(0, 33).join('\n')  // WAKTU INSTALL IMAGEMAGICK CENTANG KOLOM 1,2,3,5,6
+            var months = ['- 1 -', '- 2 -', '- 3 -', '- 4 -', '- 5 -', '- 6 -', '- 7 -', '- 8 -', '- 9 -', '- 10 -', '- 11 -', '- 12 -'];
+            var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            var date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth();
+            var thisDay = date.getDay(),
+                thisDay = myDays[thisDay];
+            var yy = date.getYear();
+            var year = (yy < 1000) ? yy + 1900 : yy;
+            const zahrafarel = (day + ' ' + months[month] + ' ' + year)
+            const farelllzahraaa = (thisDay)
+            spawn('convert', [
+                './mager/magernulis/magernulis1.jpg',
+                '-font',
+                './font/Zahraaa.ttf',
+                '-size',
+                '700x960',
+                '-pointsize',
+                '100',
+                '-interline-spacing',
+                '1',
+                '-annotate',
+                '+4100+460',
+                farelllzahraaa,
+                '-font',
+                './font/Zahraaa.ttf',
+                '-size',
+                '700x960',
+                '-pointsize',
+                '100',
+                '-interline-spacing',
+                '1',
+                '-annotate',
+                '+4100+640',
+                zahrafarel,
+                '-font',
+                './font/Zahraaa.ttf',
+                '-size',
+                '6000x8000',
+                '-pointsize',
+                '130',
+                '-interline-spacing',
+                '1',
+                '-annotate',
+                '+1010+1010',
+                farelzahra,
+                './mager/magernulis√/magernulis1√.jpg'
+            ])
+            .on('error', () => zfa.reply(from, 'Error Bjeer', id))
+            .on('exit', () => {
+                zfa.sendImage(from, './mager/magernulis√/magernulis1√.jpg', 'magernulis.jpg', '*Sukses Nulis DiBuku✓*\n\n*YouTube : MFarelS CH*\n*Instagram : @mfarelsyahtiawan*\n\n*© Powered By MFarelS | RajinNulis-BOT*', id)
+            })
+            break  // BY MFARELS
 		case prefix+'join':
            // if (args.length === 1) return zfa.reply(from, 'Hanya Owner yang bisa memasukan Bot ke dalam Grup!', id)
            // if (!isOwner) return zfa.reply(from, 'Fitur Ini Hanya Untuk Zidan Tersayang :*', id)
@@ -2047,9 +2440,8 @@ module.exports = zfa = async (zfa, message) => {
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const response = await axios.get('https://meme-api.herokuapp.com/gimme/wholesomeanimemes')
-            const { postlink, title, subreddit, url, nsfw, spoiler } = response.data
-            zfa.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}`)
-            await limitAdd(serial)
+            const { postlink, title, subreddit, urll, nsfw, spoiler } = response.data
+            zfa.sendFileFromUrl(from, `${urll}`, 'meme.jpg', `${title}`)
             break
 		case prefix+'shota':
             if(isReg(obj)) return
@@ -2662,6 +3054,10 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
                     let blsn = jwb[Math.floor(Math.random() * jwb.length)]
                     zfa.reply(from, blsn, id)
                     break
+	    case prefix+'linkraisa':
+		   if(isReg(obj)) return
+            if(cekumur(cekage)) return
+			zfa.sendText(from, 'Ini link nomor Raisa Kak https://wa.me/447537102515 share ke teman kakak juga yah....', id)
 		case prefix+'menu':
         case prefix+'help':
 		case prefix+'raisamenu':
@@ -2676,8 +3072,9 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             zfa.sendText(from, help(prefix, cts, pendaftar))
             break
 		case '.menu':
-		    zfa.reply(from, `Yang Kak ${pushname} maksud mungkin #menu`, id)
-	        break
+		case '!menu':
+            zfa.reply(from, ` Yang kak *${pushname}* maksud mungkin *#menu*`, id)
+            break
 		case prefix+'changelog':
 		    zfa.reply(from, groupcmd(prefix))
 			break
