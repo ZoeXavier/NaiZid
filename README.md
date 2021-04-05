@@ -1,4 +1,5 @@
-<h1 align="center">ジダン<img src="https://user-images.githubusercontent.com/1303154/88677602-1635ba80-d120-11ea-84d8-d263ba5fc3c0.gif" width="40px" alt="hi"><br>ZidanGanzz Was Hare!</h1>
+<h1 align="center">
+모두 안녕<img src="https://user-images.githubusercontent.com/1303154/88677602-1635ba80-d120-11ea-84d8-d263ba5fc3c0.gif" width="40px" alt="hi"><br>ZidanGanzz Was Hare!</h1>
 
 <p align="center">
 <img src="https://i.ibb.co/qnD35XT/logo.jpg" width="100%" alt="API Giphy logo"/>
@@ -57,6 +58,16 @@ you've just cloned!!
 > pm2 monit
 ```
 
+### Thanks To:
+```
+> Arugaz
+> tobz
+> badra
+> jojo
+> mhankbarbar
+> owner sasha bot
+```
+
 
 </p> 
  #sosial media
@@ -68,4 +79,8 @@ you've just cloned!!
 
 * [`Ada Bug? Klik Sini Buat Lapor `](https://wa.me/6281310253704)
 
-
+### Jika Terkena Banned
+```
+> Hapus session.data.json agar sc ini masih bisa digunakan [Scan Ulang]
+> Jangan Di Spam Biar Tidak Terbannedddd
+```
