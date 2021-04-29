@@ -58,6 +58,12 @@ you've just cloned!!
 > pm2 monit
 ```
 
+### Stop
+```
+> Jika pakai npm start silahkan klik tombol ctrl+c untuk menonaktifkan bot.
+> Jika pakai pm2 start run.js silahkan klik tombol ctrl+c lalu ketik pm2 kill untuk menonaktifkan bot.
+```
+
 ### Thanks To:
 ```
 > Arugaz
@@ -66,6 +72,7 @@ you've just cloned!!
 > jojo
 > mhankbarbar
 > owner sasha bot
+> Dan creator bot open wa lain nya yang udah gua colomg case nya :v
 ```
 
 
