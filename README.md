@@ -66,6 +66,17 @@ you've just cloned!!
 
 ### Thanks To:
 ```
+> Allah
+> Indihome
+> Telkomsel
+> Sinyal
+> Laptop lenovo ideapad 320
+> Git Cmd
+> Node js
+> Windows 10
+> WhatsApp
+> Android 9
+> Oppo A1K
 > Arugaz
 > tobz
 > badra
