@@ -52,7 +52,7 @@ const start = async (zfa = new Client()) => {
         zfa.onAnyMessage((fn) => messageLog(fn.fromMe, fn.type))
         // Force it to keep the current session
         zfa.onStateChanged((state) => {
-            console.log('[Client State]', state)
+            console.log('[Raisa State]', state)
             if (state === 'CONFLICT' || state === 'UNLAUNCHED') zfa.forceRefocus()
         })
         // listening on message
@@ -61,7 +61,7 @@ const start = async (zfa = new Client()) => {
         zfa.getAmountOfLoadedMessages() // Cut message Cache if cache more than 3K
             .then((msg) => {
                 if (msg >= 1000) {
-                    console.log('[CLIENT]', color(`Loaded Message Reach ${msg}, cuting message cache...`, 'yellow'))
+                    console.log('[RAISA]', color(`Loaded Message Reach ${msg}, cuting message cache...`, 'yellow'))
                     zfa.cutMsgCache()
                 }
             })
@@ -93,7 +93,7 @@ const start = async (zfa = new Client()) => {
                             zfa.leaveGroup(chat.id)
                         })
                     }else{
-                        if(!chat.isReadOnly) zfa.sendText(chat.id, 'Halo aku Raisa, Ketik #help Untuk Melihat List Command Ku...')
+                        if(!chat.isReadOnly) zfa.sendText(chat.id, 'Halo aku Raisa, Ketik .help Untuk Melihat List Command Ku...')
                     }
                 }
             }else{

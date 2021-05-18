@@ -138,7 +138,7 @@ let state = {
     }
 }
 
-prefix = '#'
+prefix = '.'
 var timeStart = Date.now() / 1000
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 
@@ -235,12 +235,12 @@ module.exports = zfa = async (zfa, message) => {
         }*/
 		
         // [BETA] Avoid Spam Message
-        if (isCmd && isFiltered(from) && !isGroupMsg) { return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
-        if (isCmd && isFiltered(from) && isGroupMsg) { return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle)) }
+        if (isCmd && isFiltered(from) && !isGroupMsg) { return console.log(color('[SPAM AJJIG]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'DARI', color(pushname)) }
+        if (isCmd && isFiltered(from) && isGroupMsg) { return console.log(color('[SPAM] AJJIG', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'DARI', color(pushname), 'DI GRUB', color(name || formattedTitle)) }
         // AKTIFKAN APABILA TIDAK INGIN TERKENA SPAM!!
         //addFilter(from)
-        if (isCmd && !isGroupMsg) {console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))}
-        if (isCmd && isGroupMsg) {console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle))}
+        if (isCmd && !isGroupMsg) {console.log(color('[DITERIMA]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'DARI', color(pushname))}
+        if (isCmd && isGroupMsg) {console.log(color('[DITERIMA]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'DARI', color(pushname), 'DI GRUB', color(name || formattedTitle))}
 
         // FUNCTION
         function waktu(seconds) { // TOBZ
@@ -423,7 +423,7 @@ module.exports = zfa = async (zfa, message) => {
 				
 
         const mess = {
-            wait: '[WAIT] Processing....',
+            wait: 'Bentar ya kak lagi Raisa proses nih mohon tunggu sebentar....',
             magernulissatu: 'Harap Tunggu, BOT Sedang Menulis Di Buku 1!',
             error: {
                 St: '[❗] Kirim gambar dengan caption *#sticker* atau tag gambar yang sudah dikirim',
@@ -709,11 +709,6 @@ module.exports = zfa = async (zfa, message) => {
 		if (args.includes('ngab')) { //Edit ae ngab
             zfa.reply(from, '🆖🆎', id)
         }
-		if (args.includes('zidan')){
-			//const bug = body.slice(5)
-             zfa.reply(from, 'HAYO LAGI NGOMONGIN OWNER YAA!! RAISA CEPUIN AH:D', id)
-             zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\nGroup : ${formattedTitle} isi pesannya : ${body.slice(6)}`, id)
-            }
 		if (args.includes('ngopi')) { //Edit sesuka hati kamu sayang
             zfa.reply(from, '🆖🅾️🅿️ℹ️', id)
         }
@@ -732,6 +727,15 @@ module.exports = zfa = async (zfa, message) => {
 		if (args.includes('assalamualaikum')) { //Edit sesuka hati kamu sayang
             zfa.reply(from, `_Waalaikumsalam *${pushname}*_ 💖`, id)
         }
+        /*if (args.includes('zidan')) {
+            const zid = body.slice(4)
+                    if(isGroupMsg){
+                        zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\nGroup : ${formattedTitle}\n\n${zid}`)
+                        zfa.reply(from, 'HAYOO LAGI NGOMONGIN OWNER YAH. RAISA CEPUIN AH :D' ,id)
+                    }else{
+                        zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\n\n${zid}`)
+                        zfa.reply(from, 'HAYOO LAGI NGOMONGIN OWNER YAH. RAISA CEPUIN AH :D', id)
+        }*/
                 if(body === '#mute' && isMuted(chatId) == true){
                     if(isGroupMsg) {
                         if (!isAdmin) return zfa.reply(from, 'Maaf, perintah ini hanya dapat dilakukan oleh admin Raisa!', id)
@@ -802,7 +806,17 @@ module.exports = zfa = async (zfa, message) => {
                     }
                 }
 				if(body === 'zidan') { //replace with your bot number
-                    zfa.reply(from, 'Hayoooo kakak lagi ngomongin owner yaaaa', id)
+                   // if (args.length === 1) return zfa.reply(from, '[❗] Kirim perintah *#bugreport [teks]*\ncontoh : *#bugreport Permisi Owner, Ada bug pada command #otakudesu, Tolong diperbaiki*')
+                    const zid = body.slice(4)
+                    if(!bug) return
+                    if(isGroupMsg){
+                        zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\nGroup : ${formattedTitle}\n\n${zid}`)
+                        zfa.reply(from, 'Masalah telah di laporkan ke owner BOT, laporan palsu/main2 tidak akan ditanggapi.' ,id)
+                    }else{
+                        zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\n\n${zid}`)
+                        zfa.reply(from, 'Masalah telah di laporkan ke owner BOT, laporan palsu/main2 tidak akan ditanggapi.', id)
+                    }
+
                 if (body === '#unbanchat') {
                     if (!isOwner) return zfa.reply(from, 'Maaf, perintah ini hanya dapat dilakukan oleh Owner Raisa!', id)
                     if(setting.banChats === false) return
@@ -847,8 +861,10 @@ module.exports = zfa = async (zfa, message) => {
                 zfa.reply(from, mess.error.Ad, id)
             }
             break
+	    
 	    case prefix+'hekel':
-		zfa.sendFileFromUrl(from, `https://api.vhtear.com/hacker_avatar?text=${encodeURIComponent(body.slice(5))}&spikey=ZidanGanzz`, 'hekel', `Subscribe ya kak ${pushname}`, id)
+		const hekel = await axios.get(`https://api.vhtear.com/hacker_avatar?text=${encodeURIComponent(body.slice(5))}&spikey=ZidanGanzz`)
+		zfa.sendFileFromUrl(from, hekel, id)
 		break
 		case prefix+'tobecontinue':
 		case prefix+'tobecontinued':
@@ -1269,7 +1285,7 @@ break
                 zfa.reply(from, 'Ada yang Error!', id)
             })
             break*/
-		case prefix+'pastebin': //BY VINZ
+		/*case prefix+'pastebin': //BY VINZ
             if(isReg(obj)) return
             if(cekumur(cekage)) return
             if (args.length == 1) return zfa.reply(from, `Ketik command ${prefix}pastebin [text]|[nama]\nContoh ${prefix}pastebin ini contohnya|tolll`, id)
@@ -1279,7 +1295,7 @@ break
 	    console.log(bdtrm[0])
 	    if (pstbn.data.status == false) return zfa.reply(from, pstbn.data.message ,id)
             await zfa.reply(from, pstbn.data.result, id) 
-            break
+            break*/
 		case '#mton':
 		                if (!isOwner) return zfa.reply(from, `Fitur ini hanya untuk Zidan tersayang :*`, id)
                         if(mtcState === true) return
@@ -1871,58 +1887,105 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
              zfa.sendText(ownerNumber, 'Error YTstalk : '+ err)
            }
           break
-		  case prefix+'ytmp3':
-		  if (!isOwner) return zfa.reply(from, 'Fitur ini sedang di perbaiki oleh owner....', id)
-		  if (args.length == 0) return zfa.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
-                zfa.reply(from, mess.wait, id)
-				const zfagans = await axios.get(`http://lolhuman.herokuapp.com/api/ytaudio?apikey=ZidanGanzz&url=${body.slice(6)}`)
-                .then(async(res) => {
-				await zfa.sendFileFromUrl(from, res.data.result.thumbnail, '', `「 *YOUTUBE MP3* 」\n\n*Title:* ${res.data.result.title}\n*Uploader:* ${res.data.result.uploader}\n*Duration:* ${res.data.result.duration} \n*Channel:* ${res.data.result.channel}\n*Likes:* ${res.data.result.like}\n*Dislikes:* ${res.data.result.dislike}\n*Views:* ${res.data.result.view}\n\n*_Waitt, lemme send that fuckin' audio_*`, id)
-				zfagans.ymp3(res.data.result.link)
-				.then(async(res) => {
-				//const bealink = await axios.get(`http://docs-jojo.herokuapp.com/api/shorturl-at?url=${res.dl_link}`)
-				//const linkbea = bealink.data.result
-				//if (!isAdmin) return zfa.reply(from, `Karena anda bukan user Premium, silahkan download menggunakan link\n\nLink: ${linkbea}`, id)
-				zfa.sendFileFromUrl(from, zfagans.data.result.link, '.mp3', '', id)
-                .catch(() => {
-				zfa.reply(from, `Error nich`,id)
-			 })
-				})
-			})
-			.catch(err => {
-				zfa.reply(from, 'error', id)
-			})
-    			break
-		case prefix+'ytmp33':
+		  case prefix+'ytmp4':
+		  case prefix+'yt':
+		  //  if(!isOwner) return zfa.reply(from, 'Fitur ini sedang di test oleh ownerku yang ganteng', id)
             if(isReg(obj)) return
             if(cekumur(cekage)) return
          //   if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}ytmp3 [ Link Yt ]*, untuk contoh silahkan kirim perintah *${prefix}readme*`, id)
-            let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-            if (!isLinks) return zfa.reply(from, mess.error.Iv, id)
-            try {
-                zfa.reply(from, mess.wait, id)
-                const vhtearyt3 = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=ZidanGanzz`)
-                if (!vhtearyt3.ok) throw new Error(`Error YTMP3 : ${vhtearyt3.statusText}`)
-                const vhtearyt33 = await vhtearyt3.json()
-                 if (vhtearyt33.status == false) {
-                    zfa.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
-                } else {
-                    if(Number(vhtearyt33.result.size.split(' MB')[0]) >= 10.00) return zfa.sendFileFromUrl(from, vhtearyt33.result.imgUrl, `thumb.jpg`, `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${vhtearyt33.result.title}\n• *Filesize* : ${vhtearyt33.result.size}\n\n_Maaf, Durasi audio melebihi 10 MB. Silahkan download audio melalui link dibawah_.\n${vhtearyt33.result.UrlMp3}`, id)
-                    const { title, ext, size, UrlMp3, status, imgUrl } = await vhtearyt33.result
-                    console.log(`VhTear Giliran ${ext}\n${size}\n${status}`)
-                    const captions = `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${title}\n• *Filesize* : ${size}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
-                    zfa.sendFileFromUrl(from, imgUrl, `thumb.jpg`, captions, id)
-                   // zfa.sendFileFromUrl(from, UrlMp3, `${title}.mp3`, '', id)
-                    await zfa.sendFileFromUrl(from, UrlMp3, `${title}.mp3`, '', id).catch(() => zfa.reply(from, mess.error.Yt4, id))
-                    await limitAdd(serial)
-                }
-            } catch (err) {
-                zfa.sendText(ownerNumber, 'Error ytmp3 : '+ err)
-                zfa.reply(from, 'Jangan download audio yang sama dengan sebelumnya!', id)
-            }
-            break
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#ytmp4 [ Link Yt ]*, untuk contoh silahkan kirim perintah *#readme*`, id)
+                   // let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+                    //if (!isLinks) return zfa.reply(from, mess.error.Iv, id)
+                    try {
+                        zfa.reply(from, mess.wait, id)
+                        const ytvh = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=ZidanGanzz`)
+                        if (!ytvh.ok) throw new Error(`Error ytmp4 4 : ${vhtearyt3.statusText}`)
+                        const ytvh2 = await ytvh.json()
+                        if (ytvh2.status == false) {
+                            zfa.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
+                             } else {
+                            if (Number(ytvh2.result.size.split(' MB')[0]) >= 50.00) return zfa.reply(from, 'Maaf durasi audio sudah melebihi batas maksimal 10 MB!', id)							
+                            const {
+                                title,
+                                ext,
+                                size,
+                                UrlVideo,
+                                status,
+                                imgUrl
+                            } = await ytvh2.result
+                            const captions = `*「 YOUTUBE MP4 」*\n\n➸ *Judul* : ${title}\n➸ *Filesize* : ${size}\n\n_*Untuk durasi lebih dari batas disajikan dalam bentuk link*._\n${UrlVideo}`
+                            zfa.sendFileFromUrl(from, imgUrl, `thumb.jpg`, captions, id)
+                            await zfa.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, `Jangan lupa donasi ya kak *${pushname}*. Jika berminat silahkan ketik *${prefix}donasi*`, id).catch(() => zfa.reply(from, mess.error.Yt4, id))
+                            await limitAdd(serial)
+                        }
+                    } catch (err) {
+                        zfa.sendText(ownerNumber, 'Error ytmp4 : ' + err)
+                        zfa.reply(from, mess.error.Yt4, id)
+                    }
+                    break
+		  case prefix+'ytmp3':
+		  //  if(!isOwner) return zfa.reply(from, 'Fitur ini sedang di test oleh ownerku yang ganteng', id)
+            if(isReg(obj)) return
+            if(cekumur(cekage)) return
+         //   if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+            if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#ytmp3 [ Link Yt ]*, untuk contoh silahkan kirim perintah *#readme*`, id)
+                   // let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+                    //if (!isLinks) return zfa.reply(from, mess.error.Iv, id)
+                    try {
+                        zfa.reply(from, mess.wait, id)
+                        const vhtearyt3 = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=ZidanGanzz`)
+                        if (!vhtearyt3.ok) throw new Error(`Error ytmp3 3 : ${vhtearyt3.statusText}`)
+                        const vhtearyt33 = await vhtearyt3.json()
+                        if (vhtearyt33.status == false) {
+                            zfa.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
+                             } else {
+                            if (Number(vhtearyt33.result.size.split(' MB')[0]) >= 50.00) return zfa.reply(from, 'Maaf durasi audio sudah melebihi batas maksimal 10 MB!', id)							
+                            const {
+                                title,
+                                ext,
+                                size,
+                                UrlMp3,
+                                status,
+                                imgUrl
+                            } = await vhtearyt33.result
+                            const captions = `*「 YOUTUBE MP3 」*\n\n➸ *Judul* : ${title}\n➸ *Filesize* : ${size}\n\n_*Untuk durasi lebih dari batas disajikan dalam bentuk link*._\n${UrlMp3}`
+                            zfa.sendFileFromUrl(from, imgUrl, `thumb.jpg`, captions, id)
+                            await zfa.sendFileFromUrl(from, UrlMp3, `${title}.mp3`, '', id).catch(() => zfa.reply(from, mess.error.Yt4, id))
+                            await limitAdd(serial)
+                        }
+                    } catch (err) {
+                        zfa.sendText(ownerNumber, 'Error ytmp3 : ' + err)
+                        zfa.reply(from, mess.error.Yt3, id)
+                    }
+                    break
+		/*case prefix+'ytmp32':
+		if (!isOwner) zfa.reply(from, 'Masih di test oleh owner', id)
+		const naycans = body.slice(8)
+		const zfagans = await fetch(`http://lolhuman.herokuapp.com/api/ytaudio2?apikey=ZidanGanzz&url=${naycans}`, id)
+		if (zfagans.ok) throw new Error(`Error ytmp32 : ${zfagans.statusText}`)
+		const yt33 = await zfagans.json()
+		if (yt33.status == false) {
+		zfa.reply(from, `*Error*`, id)
+		} else {
+		if (Number(yt33.result.size.split(' MB')[0]) >= 50.00) return zfa.reply(from, 'Maaf audio melebihi 10 mb!', id)
+			const {
+				title,
+				thumbnail,
+				size,
+				link
+			} = await yt33.result
+			const kepsenn = `*「 YOUTUBE MP3 」*\n\n➸ *Judul : ${title}\n*➸ *Filesize* : ${size}\n\n_*Untuk durasi lebih dari batas disajikan dalam bentuk link*._\n${link}`
+			zfa.sendFileFromUrl(from, thumbnail, `thumbnail.jpg`, kepsenn, id)
+            await zfa.sendFileFromUrl(from, link[1].link, `${title}.mp3`, '', id).catch(() => zfa.reply(from, mess.error.Yt4, id))
+			await limitAdd(serial)
+		    }
+		} catch (err) {
+			zfa.sendText(ownerNumber, 'Error ytmp32 : ' + err)
+			zfa.reply(from, mess.error.Yt3, id)
+		}
+		break*/
 		  case prefix+'playstore':
             if(isReg(obj)) return
             if(cekumur(cekage)) return
@@ -3299,6 +3362,55 @@ Nte owner?`, id)
             if (!bsk) zfa.reply(from, '⚠️ Format salah! Ketik *#menu* untuk penggunaan.')
             await zfa.sendText(from, `Pertanyaan: *${bsk}* \n\nJawaban: ${jbsk}`)
             break
+		case prefix+'verif':
+        case prefix+'verify':
+        case prefix+'register':
+        case prefix+'daftar':
+        case prefix+'verif':
+        case prefix+'verify':
+        case prefix+'register':
+        case prefix+'daftar':
+           // await sleep(2000)
+            const nonye = sender.id
+            const pporang = await zfa.getProfilePicFromServer(sender.id)
+            if (pporang === undefined) {
+            var pepe = ppdepresi
+            } else {
+            var pepe = pporang
+            }
+            var ceknya = nonye
+            var obj = pendaftar.some((val) => {
+            return val.id === ceknya
+            })
+            if (obj === true){
+            return 
+            } else {
+            const mentah = await zfa.checkNumberStatus(nonye)
+            const msg = (`\t\t*VERIFICATION SUCCES*
+
+Name : ${pushname}
+Serial : ${SN}
+Number : ${nonye.replace(/[@c.us]/g, '')}
+API : wa.me/${nonye.replace('@c.us', '')}
+Time : ${moment().format('DD/MM/YY HH:mm:ss')}
+Limit : ${limitCount}/Day
+
+Ketik ${prefix}menu untuk melihat daftar menu
+Total user terverifikasi: ${pendaftar.length}
+
+Subscribe t.me/iluser_BOT for more information about this bot`)
+            const hasil = mentah.canReceiveMessage ? msg : false
+            if (!hasil) return zfa.reply(message.from, 'Nomor WhatsApp tidak valid [ Tidak terdaftar di WhatsApp ]', id) 
+            {
+            const register = ({
+            id: mentah.id._serialized
+            })
+            pendaftar.push(register)
+            fs.writeFileSync('./lib/database/user.json', JSON.stringify(pendaftar))
+            zfa.sendFileFromUrl(message.from, pepe, 'ppnya.jpg', hasil, id)
+            }
+            }
+            break
 		case prefix+'owner':
         case prefix+'creator':
 		case '!owner':
@@ -3350,7 +3462,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
                             }
                         }
                     } else {
-                        await zfa.reply(from, `Format yang kamu masukkan salah, kirim ${prefix}kenalan |nama|umur\n\ncontoh format: ${prefix}kenalan |VabelCanzz|19\n\ncukup gunakan nama depan/panggilan saja`, id) //if user is not registered
+                        await zfa.reply(from, `Format yang kamu masukkan salah, kirim ${prefix}df |nama|umur\n\ncontoh format: ${prefix}df |VabelCanzz|19\n\ncukup gunakan nama depan/panggilan saja`, id) //if user is not registered
                     }
                 break
             case prefix+'dfulang':
@@ -3696,22 +3808,34 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 	    case prefix+'tik':
 		case prefix+'tiktok':
 		case prefix+'tiktoknowm':
+		case prefix+'tt':
 		    if(isReg(obj)) return
             if(cekumur(cekage)) return
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-		    if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#tiktok [linkTiktok]*\nContoh : *#tiktok https://vt.tiktok.com/yqyjPX/*', id)
-                            const tikUrl = body.slice(4)
-			    axios.get(`http://lolhuman.herokuapp.com/api/tiktok?apikey=ZidanGanzz&url=${tikUrl}`)
-			    .then(async(res) => {
-				await zfa.sendFileFromUrl(from, res.data.result[0].url, '', `*From: ${res.data.owner}*`, id)
-				.catch(err => {
-					zfa.reply(from, 'Error', id)
-				})
-				})
-				.catch(err => {
-					zfa.reply(from, 'Error', id)
-				})
-                                break
+		    if (args.length === 1) return zfa.reply(from, 'Kirim perintah *!tiktok [linkTiktok]*\nContoh : *!tiktok https://vt.tiktok.com/yqyjPX/*', id)
+                    try {
+                        zfa.reply(from, mess.wait, id)
+                        const resp = await axios.get('https://api.vhtear.com/tiktok_no_wm?link=' + body.slice(8) + '&apikey=' + vhtearkey)
+                        const {
+                            video,
+                            title,
+                            duration,
+                            image,
+                            desk,
+                            dibuat
+                        } = resp.data.result
+                        const capss = `*Video Ditemukan!*
+➸ Judul : ${title}
+➸ Deskripsi : ${desk}
+➸ Durasi : ${duration}
+➸ Dibuat : ${dibuat}`
+                        zfa.sendFileFromUrl(from, video, `tiktok.mp4`, capss, id)
+                    } catch (err) {
+                        console.error(err.message)
+                        await zfa.sendFileFromUrl(from, errorurl, 'error.png', '💔️ Maaf, Video tidak ditemukan')
+                        zfa.sendText(ownerNumber, 'Tiktok Error : ' + err)
+                    }
+                    break
 		case prefix+'gdrive':
             if(isReg(obj)) return
             if(cekumur(cekage)) return
@@ -3789,31 +3913,35 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             if(cekumur(cekage)) return
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1)  return zfa.reply(from, 'Kirim perintah *#resepmasakan [optional]*\nContoh *#resepmasakan rawon*', id)
-            argz= body.trim().split(' ')
-            console.log(...argz[1])
-            var slicedArgs = Array.prototype.slice.call(arg, 1);
-            console.log(slicedArgs)
-            const rmk = await slicedArgs.join(' ')
-            console.log(rmk)
-            try {
-            const resp = await axios.get('https://api.vhtear.com/resepmasakan?query=' + rmk + '&apikey=' + vhtearkey)
-            const { bahan, cara, image, title  } = resp.data.result
-            const rmk3 = `*Resep Ditemukan!*
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}resep [optional]*\nContoh *${prefix}resep ayam gerpek*`, id)
+                    argz= body.trim().split(' ')
+                    console.log(...arg[1])
+                    var slicedArgs = Array.prototype.slice.call(arg, 1);
+                    console.log(slicedArgs)
+                    const rmk = await slicedArgs.join(' ')
+                    console.log(rmk)
+                    try {
+                        const resp = await axios.get('https://api.vhtear.com/resepmasakan?query=' + rmk + '&apikey=' + vhtear)
+                        const {
+                            bahan,
+                            cara,
+                            image,
+                            title
+                        } = resp.data.result
+                        const rmk3 = `*Resep Ditemukan!*
 ➸ *Judul:* ${title}
 ➸ *Bahan:* ${bahan}
 ➸ *Cara:* ${cara}`
 
-            const pictk = await bent("buffer")(image)
-            const base64 = `data:image/jpg;base64,${pictk.toString("base64")}`
-            zfa.sendImage(from, base64, title, rmk3)
-            await limitAdd(serial)
-            } catch (err) {
-             console.error(err.message)
-             await zfa.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Resep tidak ditemukan')
-             zfa.sendText(ownerNumber, 'Resepmasakan Error : ' + err)
-           }
-           break
+                        const pictk = await bent("buffer")(image)
+                        const base64 = `data:image/jpg;base64,${pictk.toString("base64")}`
+                        zfa.sendImage(from, base64, title, rmk3)
+                    } catch (err) {
+                        console.error(err.message)
+                        await zfa.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Resep tidak ditemukan')
+                        zfa.sendText(ownerNumber, 'Resepmasakan Error : ' + err)
+                    }
+                    break
 		case prefix+'blackpink':
 		case prefix+'bp':
             if(isReg(obj)) return
@@ -3967,6 +4095,7 @@ Follow Me On instagram.com/_zidanfadilaharsa`, id)*/
 ➵ *${prefix}tobecontinue*
 ➵ *${prefix}thuglife*
 ➵ *${prefix}imgtopdf*
+➵ *${prefix}ytmp3* youtu.be/
 ➵ *${prefix}nobg*
 ➵ *${prefix}trash*
 ➵ *${prefix}pencil*
@@ -3980,13 +4109,12 @@ Follow Me On instagram.com/_zidanfadilaharsa`, id)*/
 ➵ *${prefix}lovemessage* New
 ➵ *${prefix}party* New
 ➵ *${prefix}heroml*
-➵ *${prefix}play* Error
+➵ *${prefix}play* Judul Lagu
 ➵ *${prefix}ytsearch* New
 ➵ *${prefix}wiki* New
 ➵ *${prefix}sspc* New
 ➵ *${prefix}ssphone* New
 ➵ *${prefix}berita* New
-➵ *${prefix}resep* Error
 ➵ *${prefix}blackpink* Text
 ➵ *${prefix}infogempa* New
 ➵ *${prefix}jadwalbola* New
@@ -4010,7 +4138,6 @@ Follow Me On instagram.com/_zidanfadilaharsa`, id)*/
 ➵ *${prefix}hug* New
 ➵ *${prefix}nye* New
 ➵ *${prefix}pat* New
-➵ *${prefix}pastebin*
 ➵ *${prefix}textmaker*
 ➵ *${prefix}quotemaker*
 ➵ *${prefix}hitung*
@@ -4018,7 +4145,7 @@ Follow Me On instagram.com/_zidanfadilaharsa`, id)*/
 ➵ *${prefix}waktu*
 ➵ *${prefix}cantik*
 ➵ *${prefix}ganteng*
-➵ *${prefix}sticker* Error :(
+➵ *${prefix}sticker* 
 ➵ *${prefix}stickergif*
 ➵ *${prefix}stickerlightning*
 ➵ *${prefix}stickerfire*
@@ -4044,9 +4171,7 @@ Follow Me On instagram.com/_zidanfadilaharsa`, id)*/
 ➵ *${prefix}cewe*
 ➵ *${prefix}maps*
 ➵ *${prefix}ig* 
-➵ *${prefix}tt* Error :(
 ➵ *${prefix}mark*
-➵ *${prefix}smule* Error :(
 ➵ *${prefix}antibadword*
 ➵ *${prefix}antisticker*
 ➵ *${prefix}lock*
@@ -4061,12 +4186,13 @@ Follow Me On instagram.com/_zidanfadilaharsa`, id)*/
 ➵ *${prefix}ping*
 
  ${pendaftar.length} User
-_JIKA ADA YANG ERROR SILAHKAN KETIK *#bugreport*_
+_JIKA ADA YANG ERROR SILAHKAN KETIK *${prefix}bug*_
  RAISA TELAH AKTIF SELAMA :
  ${cts}
 
-💝 *RAISA FARIZA* 💝`, id)       
-zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)    				
+💝 *RAISA FARIZA* 💝`, id)  
+zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${prefix}donasi* Jika kakak adalah orang yang baik.`, id)     
+//zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)    				
            // zfa.sendText(from, help(prefix, cts, pendaftar))
             break
         case prefix+'asupan2':
@@ -4138,6 +4264,10 @@ zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
             zfa.sendText(from, readme())
             break
         case prefix+'info':
+		case '!info':
+		case '#info':
+		case '$info':
+		case 'xinfo':
             zfa.sendText(from, info())
             break
         case prefix+'bahasa':
@@ -4162,8 +4292,36 @@ zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
                     zfa.sendFileFromUrl(from, ypfp, 'pfpy.jpg', `Support Raisa Dengan Cara Follow Ig: https://instagram.com/_zidanfadilaharsa Dan Subscribe Channel Yt https://youtube.com/zidanfadilaharsazfaa`)
                     break
 		case prefix+'play'://silahkan kalian custom sendiri jika ada yang ingin diubah
-           zfa.reply(from, 'Fitur ini di nonaktfkan oleh onwer', id)
-                        break
+           //zfa.reply(from, 'Fitur ini di nonaktfkan oleh onwer', id)
+		  if (args.length == 1) return zfa.reply(from, `Untuk mencari lagu from youtube\n\nPenggunaan: #play judul lagu`, id)
+                    try {
+                        zfa.reply(from, mess.wait, id)
+                        const serplay = body.slice(6)
+                        const webplay = await fetch(`https://api.vhtear.com/ytmp3?query=${serplay}&apikey=ZidanGanzz`)
+                        if (!webplay.ok) throw new Error(`Error Get Video : ${webplay.statusText}`)
+                        const webplay2 = await webplay.json()
+                        if (webplay2.status == false) {
+                            zfa.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
+                        } else {
+                            if (Number(webplay2.result.size.split(' MB')[0]) >= 10.00) return zfa.reply(from, 'Maaf durasi music sudah melebihi batas maksimal 10 MB!', id)
+                            const {
+                                image,
+                                mp3,
+                                size,
+                                ext,
+                                title,
+                                duration
+                            } = await webplay2.result
+                            const captplay = `*「 PLAY 」*\n\n➸ *Judul* : ${title}\n➸ *Durasi* : ${duration}\n➸ *Filesize* : ${size}\n➸ *Exp* : ${ext}\n\n_*Music Sedang Dikirim*_`
+                            zfa.sendFileFromUrl(from, image, `thumb.jpg`, captplay, id)
+                            await zfa.sendFileFromUrl(from, mp3, `${title}.mp3`, '', id).catch(() => zfa.reply(from, mess.error.Yt4, id))
+                            await limitAdd(serial)
+                        }
+                    } catch (err) {
+                        zfa.sendText(ownerNumber, 'Error Play : ' + err)
+                        zfa.reply(from, mess.error.Yt3, id)
+                    }
+                    break
 			case prefix+'video':
             if(isReg(obj)) return
             if(cekumur(cekage)) return
@@ -4458,7 +4616,7 @@ zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
             zfa.sendText(from, surl3, id)
             await limitAdd(serial)
             break
-		case prefix+'play':
+		/*case prefix+'play':
             if(isReg(obj)) return
             if(cekumur(cekage)) return
             if (!isAdmin) return zfa.reply(from, `Perintah ini hanya bisa di gunakan oleh Admin Elaina!`, id)
@@ -4485,7 +4643,7 @@ zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
                 zfa.sendText(ownerNumber, 'Error Play : '+ err)
                 zfa.reply(from, 'Jangan meminta lagu yang sama dengan sebelumnya!', id)
             }
-            break   
+            break*/  
 		case prefix+'loli':
             if(isReg(obj)) return
             if(cekumur(cekage)) return
@@ -4649,7 +4807,7 @@ zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
                     }
                     zfa.sendFileFromUrl(from, mpfp, 'pfpm.jpg', `Support Raisa Dengan Cara Follow Ig: https://instagram.com/_zidanfadilaharsa Dan Subscribe Channel Yt https://youtube.com/zidanfadilaharsazfaa`)
                     break
-		case '.menu':
+		case '#menu':
 		case '$menu':
 		case '%menu':
 		case '!menu':
@@ -4658,7 +4816,7 @@ zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
 		case '!help':
 		case 'xhelp':
 		case '=menu':
-		zfa.reply(from,`Mungkin yang kak ${pushname} maksud #menu`, id)
+		zfa.reply(from,`Yang kak ${pushname} maksud mungkin ${prefix}menu`, id)
 		        break
 		case prefix+'profile':
 		case prefix+'aku':
@@ -4770,8 +4928,8 @@ zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
             break
 			        default:
             //if (!isGroupMsg) return zfa.reply(from, 'Jika Ingin Menggunakan Bot Harap Masuk Ke Dalam Grup Raisa, Link Ada Di Bio atau Bisa Mengetik #raisagroup!\nJika Ingin Sewa Bot atau Bikin Bot Harap Ketik *#iklan*', id)
-            if (command.startsWith('#')) {
-                zfa.reply(from, `Maaf kak ${pushname}, Command *${args[0]}* Tidak Terdaftar Di Dalam *#menu*!`, id)
+            if (command.startsWith('.')) {
+                zfa.reply(from, `Maaf kak ${pushname}, Command *${args[0]}* Tidak Terdaftar Di Dalam *.menu*!`, id)
             }
 			/*if (command.startsWith('!')) {
                 zfa.reply(from, `Maaf kak ${pushname} Sayang, Raisa pake prefix # bukan *!* coba deh kakak ketik *#menu*`, id)
