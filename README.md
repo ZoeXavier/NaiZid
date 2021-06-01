@@ -45,8 +45,9 @@ you've just cloned!!
 ```
 > git clone https://github.com/ZidanGanzz/SeiZid 
 > cd SeiZid
-> npm install 
-> npm i pm2
+> npm install
+> npm i -g sharp                                                               
+> npm i -g pm2
 
 ```
 
