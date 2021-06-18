@@ -201,7 +201,7 @@ module.exports = zfa = async (zfa, message) => {
         //const Premium = premium.checkPremiumUser(sender.id, _premium)
         const serial = sender.id
         const isAdmin = adminNumber.includes(sender.id)
-        const ownerNumber = '6281310253704@c.us'
+        const ownerNumber = '19292146935@c.us'
         const isOwner = ownerNumber.includes(sender.id)
         //const isAfkOn = afk.checkAfkUser(sender.id, _afk)
         if (isGroupMsg && GroupLinkDetector && !isGroupAdmins && !isAdmin && !isOwner){
@@ -283,10 +283,6 @@ module.exports = zfa = async (zfa, message) => {
         var obj = pendaftar.some((val) => {
             return val.id === nmr
         })
-        var cekage = pendaftar.some((val) => {
-            return val.id === nmr && val.umur >= 7
-        })
-
         function monospace(string) {
             return '```' + string + '```'
         }
@@ -296,7 +292,7 @@ module.exports = zfa = async (zfa, message) => {
             if (obj === true){
                 return false
             } else {     
-                return zfa.reply(from, `Kakak Belum Terdaftar sebagai User Raisa, Yuk Daftar Dulu\nuntuk Daftar kirim ${prefix}df |nama|umur\n\ncontoh format: ${prefix}df |ZidanGanz|15\n\ncukup gunakan nama depan/panggilan saja ya kak`, id) //if user is not registered
+                return zfa.reply(from, `Kakak Belum Terverifikasi sebagai User Raisa, Yuk Verifikasi Dulu\nuntuk Verifikasi kirim *${prefix}verif* ya kak`, id) //if user is not registered
             }
         }
 
@@ -311,19 +307,22 @@ module.exports = zfa = async (zfa, message) => {
         const apakah = [
             'Ya',
             'Tidak',
-            'Coba Ulangi'
+            'Coba Ulangi',
+			'Yo ndak tau kok tanya saya'
             ]
 
         const bisakah = [
             'Bisa',
             'Tidak Bisa',
-            'Coba Ulangi'
+            'Coba Ulangi',
+			'Yo ndak tau kok tanya saya'
             ]
 
         const kapankah = [
             '1 Minggu lagi',
             '1 Bulan lagi',
-            '1 Tahun lagi'
+            '1 Tahun lagi',
+			'Yo ndak tau kok tanya saya'
             ]
 
  const jwb = [
@@ -426,8 +425,8 @@ module.exports = zfa = async (zfa, message) => {
             wait: 'Bentar ya kak lagi Raisa proses nih mohon tunggu sebentar....',
             magernulissatu: 'Harap Tunggu, BOT Sedang Menulis Di Buku 1!',
             error: {
-                St: '[❗] Kirim gambar dengan caption *#sticker* atau tag gambar yang sudah dikirim',
-                Ti: '[❗] Replay sticker dengan caption *#stickertoimg* atau tag sticker yang sudah dikirim',
+                St: '[❗] Kirim gambar dengan caption *.sticker* atau tag gambar yang sudah dikirim',
+                Ti: '[❗] Replay sticker dengan caption *.stickertoimg* atau tag sticker yang sudah dikirim',
                 Qm: '[❗] Terjadi kesalahan, mungkin themenya tidak tersedia!',
                 Yt3: '[❗] Terjadi kesalahan, tidak dapat meng konversi ke mp3!',
                 Yt4: '[❗] Terjadi kesalahan, mungkin error di sebabkan oleh sistem.',
@@ -863,7 +862,7 @@ module.exports = zfa = async (zfa, message) => {
             break
 	    
 	    case prefix+'hekel':
-		const hekel = await axios.get(`https://api.vhtear.com/hacker_avatar?text=${encodeURIComponent(body.slice(5))}&spikey=ZidanGanzz`)
+		const hekel = await axios.get(`https://api.vhtear.com/hacker_avatar?text=${encodeURIComponent(body.slice(5))}&spikey=NaisaZidan`)
 		zfa.sendFileFromUrl(from, hekel, id)
 		break
 		case prefix+'tobecontinue':
@@ -888,7 +887,7 @@ module.exports = zfa = async (zfa, message) => {
 						const skript = isQuotedImage ? quotedMsg : message
 						const mediaData = await decryptMedia(skript, uaOverride)
 						const linksx = await uploadImages(mediaData, `${sender.id}_img`)
-						await zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/convert/imgtopdf?apikey=ZidanGanzz&img=${linksx}`, `${sender.id}`, '', id)
+						await zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/convert/imgtopdf?apikey=NaisaZidan&img=${linksx}`, `${sender.id}`, '', id)
 					} else {
 						zfa.reply(from, 'Format pesan salah', id)
 					}
@@ -899,8 +898,8 @@ module.exports = zfa = async (zfa, message) => {
                                 const encryptMedia = isQuotedImage ? quotedMsg : message
                                 const mediaData = await decryptMedia(encryptMedia, uaOverride)
 						const jadimg = await uploadImages(mediaData, `${sender.id}_img`)
-						zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/removebg?apikey=ZidanGanzz&img=${jadimg}`, 'trash.jpeg', `Subscribe ya kak ${pushname} youtube.com/zidanfadilaharsazfaa`, id)
-						zfa.sendImageAsSticker(from, `http://lolhuman.herokuapp.com/api/removebg?apikey=ZidanGanzz&img=${jadimg}`, StickerMetadata)
+						zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/removebg?apikey=NaisaZidan&img=${jadimg}`, 'trash.jpeg', `Subscribe ya kak ${pushname} youtube.com/zidanfadilaharsazfaa`, id)
+						zfa.sendImageAsSticker(from, `http://lolhuman.herokuapp.com/api/removebg?apikey=NaisaZidan&img=${jadimg}`, StickerMetadata)
 					} else {
 						zfa.reply(from, 'Hanya bisa menggunakan foto', id)
 					}
@@ -953,7 +952,7 @@ module.exports = zfa = async (zfa, message) => {
 		break
 		case prefix+'santet':
 		if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
                         if (mentionedJidList.length === 0) return zfa.reply(from, 'Tag member yang mau disantet\n\nContoh : /santet @tag | kalo berak kaga di siram', id)
                         if (args.length === 1) return zfa.reply(from, 'Masukkan alasan kenapa menyantet dia!!\n\nContoh : /santet @tag | kalo berak kaga di siram', id)
@@ -964,7 +963,7 @@ module.exports = zfa = async (zfa, message) => {
                     break
 		case prefix+'kutuk':
 		if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
                         if (mentionedJidList.length === 0) return zfa.reply(from, 'Tag member yang mau dikutuk\n\nContoh : /kutuk @tag | kalo berak kaga di siram', id)
                         if (args.length === 1) return zfa.reply(from, 'Masukkan alasan kenapa menyantet dia!!\n\nContoh : /kutuk @tag | kalo berak kaga di siram', id)
@@ -975,7 +974,7 @@ module.exports = zfa = async (zfa, message) => {
                     break
 		case prefix+'hitung':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, '[❗] Kirim perintah *#hitung [ Angka ]*\nContoh : #hitung 12*12\n*NOTE* :\n- Untuk Perkalian Menggunakan *\n- Untuk Pertambahan Menggunakan +\n- Untuk Pengurangan Mennggunakan -\n- Untuk Pembagian Menggunakan /')
@@ -989,7 +988,7 @@ module.exports = zfa = async (zfa, message) => {
         break
 		/*case prefix+'afk': // by Slavyan
                  if(isReg(obj)) return
-                 if(cekumur(cekage)) return
+                
                 if (!isGroupMsg) return await zfa.reply(from, 'Fitur ini hanya untuk di grub', id)
                 if (isAfkOn) return await zfa.reply(from, ind.afkOnAlready(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
@@ -1127,7 +1126,7 @@ break
         case prefix+'stiker':
 		case prefix+'s':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
              if (isMedia && type === 'image') {
                 const mediaData = await decryptMedia(message, uaOverride)
                 const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
@@ -1187,7 +1186,7 @@ break
             case prefix+'stikerp':
 			case prefix+'srp':
                     if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
              if (isMedia && type === 'image') {
                     const encryptMedia = isQuotedImage ? quotedMsg : message
                     const mediaData = await decryptMedia(encryptMedia, uaOverride)
@@ -1224,7 +1223,7 @@ break
             break
 		case prefix+'google':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             zfa.reply(from, mess.wait, id)
@@ -1244,7 +1243,7 @@ break
             break
 		case prefix+'bass':
                 if(isReg(obj)) return
-                if(cekumur(cekage)) return
+              
                 if (isMedia && isAudio || isQuotedAudio || isVoice || isQuotedVoice) {
                     if (args.length !== 1) return await zfa.reply(from, 'Reply Audio Nya Kakak', id)
                     await zfa.reply(from, 'Bentar kak', id)
@@ -1287,7 +1286,7 @@ break
             break*/
 		/*case prefix+'pastebin': //BY VINZ
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (args.length == 1) return zfa.reply(from, `Ketik command ${prefix}pastebin [text]|[nama]\nContoh ${prefix}pastebin ini contohnya|tolll`, id)
             await zfa.reply(from, mess.wait, id)
             var bdtrm = body.slice(10).trim().split('|')
@@ -1312,7 +1311,7 @@ break
                         break
 		case prefix+'ttp':
                 if(isReg(obj)) return
-                if(cekumur(cekage)) return
+              
                 if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', message.id)
                 try
                 {
@@ -1356,7 +1355,7 @@ break
             break
 		case prefix+'nightcore':
                 if(isReg(obj)) return
-                if(cekumur(cekage)) return
+               
                 if (isMedia && isAudio || isQuotedAudio || isVoice || isQuotedVoice) {
                     await zfa.reply(from, 'Bentar ya kak lagi Raisa proses nih, mohon tunggu sebentar....', id)
                     const encryptMedia = isQuotedAudio || isQuotedVoice ? quotedMsg : message
@@ -1389,9 +1388,8 @@ break
                 }
             break
         case prefix+'translate':
-		//case prefix+'tr':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if(args[1] == undefined || args[2] == undefined) return
@@ -1399,25 +1397,16 @@ break
                 var codelang = args[1]
                 var textai = body.slice(11+codelang.length);
                 translatte(textai, {to: codelang}).then(res => {
-                    zfa.sendText(from,res.text);
+                    zfa.reply(from,res.text, id);
                     limitAdd(serial)
                 }).catch(err => {
                      zfa.sendText(from,`[ERROR] Teks tidak ada, atau kode bahasa ${codelang} tidak support\n~> *${prefix}bahasa* untuk melihat list kode bahasa`);
                 });
             }
             break
-		case prefix+'tr':
-		if (args.length == 0) return zfa.reply(from, `Kirim perintah ${prefix}tr [kodebahasa] [reply caption]\n\ncontoh : ${prefix}tr id [reply caption}`, id)
-		const suwayy0 = arg.split('|')[0]
-		const suwayy00 = quotedMsg.type == 'chat' ? quotedMsg.body : quotedMsg.type == 'image' ? quotedMsg.caption : ''
-		axios.get(`https://amm-api-translate.herokuapp.com/translate?engine=google&text=${suwayy00}&to=${suwayy0}`).then(res => {
-		const trans = res.data.data.result
-		zfa.reply(from, trans, id)
-		})
-		break
 		case prefix+'left':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (!isGroupAdmins) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Admin group!', id)
             if (args.length === 1) return zfa.reply(from, 'Pilih enable atau disable!', id)
@@ -1435,7 +1424,7 @@ break
             break
         case prefix+'welcome':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+        
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (!isGroupAdmins) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Admin group!', id)
             if (args.length === 1) return zfa.reply(from, 'Pilih enable atau disable!', id)
@@ -1453,7 +1442,7 @@ break
             break
 		case '#lock':
 			if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (!isGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan oleh Admin group!`, id)
             if (!isBotGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan jika Bot menjadi Admin!`, id)
@@ -1468,7 +1457,7 @@ break
 			break
 		/*case prefix+'fflogo': // By: VideFrelan
                 if(isReg(obj)) return
-                if(cekumur(cekage)) return
+              
                 if (!q.includes('|')) return zfa.reply(from, 'Contoh: #fflogo Seivabel|Zidan', id)
                 console.log('Creating FF logo...')
                 const karakter = q.substring(0, q.indexOf('|') - 1)
@@ -1480,7 +1469,7 @@ break
 		case prefix+'bct':
 		case prefix+'bacot':
 		       if(isReg(obj)) return
-                if(cekumur(cekage)) return
+              
 		            const doto = fs.readFileSync('./lib/say.json')
                     const dotoJson = JSON.parse(doto)
                     const rondIndox = Math.floor(Math.random() * dotoJson.length)
@@ -1532,7 +1521,7 @@ break
                     break
 		case prefix+'cuaca':
 		    if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
 		    if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#cuaca [tempat]*\nContoh : *#cuaca jakarta utara', id)
                     const tempat = body.slice(7)
                     const weather = await get.get(`https://mhankbarbars.herokuapp.com/api/cuaca?q=${tempat}&apiKey=${apiKey}`).json()
@@ -1568,7 +1557,7 @@ break
                     break
 		 case prefix+'quran':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah Surah Quran kamu dengan cara ketik perintah :\n*#quran* [ Urutan Surat ]\nContoh :\n*#quran 1*`, id)
@@ -1581,7 +1570,7 @@ break
             break
         case prefix+'listsurah': // ARUGAZ
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             try {
                 axios.get('https://raw.githubusercontent.com/ArugaZ/scraper-results/main/islam/surah.json')
@@ -1621,7 +1610,7 @@ break
             break
 		case prefix+'nhder':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (!isNsfw) return zfa.reply(from, 'command/Perintah NSFW belum di aktifkan di group ini!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
@@ -1808,14 +1797,14 @@ break
 					
 		case prefix+'ytsearch':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}ytsearch [ Query ]*, Contoh : #ytsearch alan walker alone`)
             const ytsher = body.slice(10)
             zfa.reply(from, mess.wait, id)
             try {
-                const response2 = await fetch(`https://api.vhtear.com/youtube?query=${ytsher}&apikey=ZidanGanzz`)
+                const response2 = await fetch(`https://api.vhtear.com/youtube?query=${ytsher}&apikey=NaisaZidan`)
                 if (!response2.ok) throw new Error(`unexpected response ${response2.statusText}`)
                 const jsonserc = await response2.json()
                 const { result } = await jsonserc
@@ -1835,7 +1824,7 @@ break
 		case prefix+'igstalk':
 		case prefix+'stalkig':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             //if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1)  return zfa.reply(from, 'Kirim perintah #tiktokstalk @username\nContoh #tiktokstalk @duar_amjay', id)
@@ -1846,7 +1835,7 @@ break
             const igstalk = await slicedArgs.join(' ')
             console.log(igstalk)
             try {                                   // 'http://api.lolhuman.xyz/api/stalkig/username?=' + igstalk + 'apikey=7ae631348bca4b16425b40a0'
-            const igstalk2 = await axios.get('http://api.lolhuman.xyz/api/stalkig/username?=' + igstalk + 'apikey=ZidanGanzz')
+            const igstalk2 = await axios.get('http://api.lolhuman.xyz/api/stalkig/username?=' + igstalk + 'apikey=NaisaZidan')
             const { Name, Username, Jumlah_Followers, Jumlah_Following,  Jumlah_Post,  Biodata, Profile_pic } = igstalk2.data.result
             const igeh = `User Ditemukan!
 ➸ Nama : ${Name}
@@ -1870,7 +1859,7 @@ break
             if(isReg(obj)) return
             if (isLimit(serial)) return 
             try {
-            const ytstalk2 = await axios.get(`http://lolhuman.herokuapp.com/api/ytchannel?apikey=ZidanGanzz&query=${body.slice(9)}`)
+            const ytstalk2 = await axios.get(`http://lolhuman.herokuapp.com/api/ytchannel?apikey=NaisaZidan&query=${body.slice(9)}`)
             const nzcocok =
             `Channel Ditemukan
             
@@ -1891,7 +1880,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		  case prefix+'yt':
 		  //  if(!isOwner) return zfa.reply(from, 'Fitur ini sedang di test oleh ownerku yang ganteng', id)
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
          //   if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#ytmp4 [ Link Yt ]*, untuk contoh silahkan kirim perintah *#readme*`, id)
@@ -1899,7 +1888,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                     //if (!isLinks) return zfa.reply(from, mess.error.Iv, id)
                     try {
                         zfa.reply(from, mess.wait, id)
-                        const ytvh = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=ZidanGanzz`)
+                        const ytvh = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=NaisaZidan`)
                         if (!ytvh.ok) throw new Error(`Error ytmp4 4 : ${vhtearyt3.statusText}`)
                         const ytvh2 = await ytvh.json()
                         if (ytvh2.status == false) {
@@ -1924,46 +1913,60 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                         zfa.reply(from, mess.error.Yt4, id)
                     }
                     break
-		  case prefix+'ytmp3':
-		  //  if(!isOwner) return zfa.reply(from, 'Fitur ini sedang di test oleh ownerku yang ganteng', id)
-            if(isReg(obj)) return
+		case prefix+'ytmp3':
+		 try{
+		//if (!isOwner) zfa.reply(from, 'Masih di test oleh owner', id)
+		const naycans = body.slice(8)
+		const zfagans = await axios.get(`http://lolhuman.herokuapp.com/api/ytaudio?apikey=NaisaZidan&url=${naycans}`, id)
+		const {
+				title,
+				thumbnail,
+				size,
+				link
+			} = await zfagans.data.result
+			const kepsenn = `「 YOUTUBE MP3 」\n\n➸ Judul : ${title}\n➸ Filesize : ${size}\n\n_Untuk durasi lebih dari batas disajikan dalam bentuk link._\n${link}`
+			zfa.sendFileFromUrl(from, thumbnail, `thumbnail.jpg`, kepsenn, id)
+            await zfa.sendFileFromUrl(from, link[1].link, `${title}.mp3`, '', id).catch(() => zfa.reply(from, mess.error.Yt4, id))
+			await limitAdd(serial)
+		} catch (err) {
+			zfa.sendText(ownerNumber, 'Error ytmp3 : ' + err)
+			zfa.reply(from, mess.error.Yt3, id)
+		}
+		break
+		case prefix+'ytmp32':
+		if(isReg(obj)) return
             if(cekumur(cekage)) return
-         //   if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+            if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#ytmp3 [ Link Yt ]*, untuk contoh silahkan kirim perintah *#readme*`, id)
-                   // let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                    //if (!isLinks) return zfa.reply(from, mess.error.Iv, id)
-                    try {
-                        zfa.reply(from, mess.wait, id)
-                        const vhtearyt3 = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=ZidanGanzz`)
-                        if (!vhtearyt3.ok) throw new Error(`Error ytmp3 3 : ${vhtearyt3.statusText}`)
-                        const vhtearyt33 = await vhtearyt3.json()
-                        if (vhtearyt33.status == false) {
-                            zfa.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
-                             } else {
-                            if (Number(vhtearyt33.result.size.split(' MB')[0]) >= 50.00) return zfa.reply(from, 'Maaf durasi audio sudah melebihi batas maksimal 10 MB!', id)							
-                            const {
-                                title,
-                                ext,
-                                size,
-                                UrlMp3,
-                                status,
-                                imgUrl
-                            } = await vhtearyt33.result
-                            const captions = `*「 YOUTUBE MP3 」*\n\n➸ *Judul* : ${title}\n➸ *Filesize* : ${size}\n\n_*Untuk durasi lebih dari batas disajikan dalam bentuk link*._\n${UrlMp3}`
-                            zfa.sendFileFromUrl(from, imgUrl, `thumb.jpg`, captions, id)
-                            await zfa.sendFileFromUrl(from, UrlMp3, `${title}.mp3`, '', id).catch(() => zfa.reply(from, mess.error.Yt4, id))
-                            await limitAdd(serial)
-                        }
-                    } catch (err) {
-                        zfa.sendText(ownerNumber, 'Error ytmp3 : ' + err)
-                        zfa.reply(from, mess.error.Yt3, id)
-                    }
-                    break
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}ytmp3 [ Link Yt ]*, untuk contoh silahkan kirim perintah *${prefix}readme*`, id)
+            let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+            if (!isLinks) return zfa.reply(from, mess.error.Iv, id)
+            try {
+                zfa.reply(from, mess.wait, id)
+                const vhtearyt3 = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=${vhtearkey}`)
+             //   if (!vhtearyt3.ok) throw new Error(`Error YTMP3 : ${vhtearyt3.statusText}`)
+                const vhtearyt33 = await vhtearyt3.json()
+                 if (vhtearyt33.status == false) {
+                    zfa.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
+                } else {
+               //     if(Number(vhtearyt33.result.size.split(' MB')[0]) >= 10.00) return zfa.sendFileFromUrl(from, vhtearyt33.result.imgUrl, `thumb.jpg`, `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${vhtearyt33.result.title}\n• *Filesize* : ${vhtearyt33.result.size}\n\n_Maaf, Durasi audio melebihi 10 MB. Silahkan download audio melalui link dibawah_.\n${vhtearyt33.result.UrlMp3}`, id)
+                    const { title, ext, size, UrlMp3, status, imgUrl } = await vhtearyt33.result
+                    //console.log(`VhTear Giliran ${ext}\n${size}\n${status}`)
+                    const captions = `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${title}\n• *Filesize* : ${size}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
+                    zfa.sendFileFromUrl(from, imgUrl, `thumb.jpg`, captions, id)
+                    //await zfa.sendFile(from, UrlMp3, `${title}.mp3`, '', id)
+                    await zfa.sendFileFromUrl(from, UrlMp3, `${title}.mp3`, '', id).catch(() => zfa.reply(from, mess.error.Yt4, id))
+                    await limitAdd(serial)
+                }
+            } catch (err) {
+                zfa.sendText(ownerNumber, 'Error ytmp3 : '+ err)
+                zfa.reply(from, 'Jangan download audio yang sama dengan sebelumnya!', id)
+            }
+            break
 		/*case prefix+'ytmp32':
 		if (!isOwner) zfa.reply(from, 'Masih di test oleh owner', id)
 		const naycans = body.slice(8)
-		const zfagans = await fetch(`http://lolhuman.herokuapp.com/api/ytaudio2?apikey=ZidanGanzz&url=${naycans}`, id)
+		const zfagans = await fetch(`http://lolhuman.herokuapp.com/api/ytaudio2?apikey=NaisaZidan&url=${naycans}`, id)
 		if (zfagans.ok) throw new Error(`Error ytmp32 : ${zfagans.statusText}`)
 		const yt33 = await zfagans.json()
 		if (yt33.status == false) {
@@ -1988,7 +1991,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		break*/
 		  case prefix+'playstore':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}playstore [ Query ]*, Contoh : *${prefix}playstore Mobile Legends*`)
@@ -2010,7 +2013,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		  case prefix+'shopee':
 		  case prefix+'sopi':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}shopee [ Query ]*, Contoh : *${prefix}shopee HP Samsul a20*`)
@@ -2031,7 +2034,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'tahta':
              if(isReg(obj)) return
-             if(cekumur(cekage)) return
+           
              if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
              if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
              const jreng = body.slice(7)
@@ -2043,7 +2046,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
              break
 		case prefix+'chord':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#chord [query]*, contoh *#chord aku bukan boneka*', id)
@@ -2055,7 +2058,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'bitly':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#bitly [linkWeb]*\nContoh : *#bitly https://zidanzfa.com*', id)
@@ -2069,7 +2072,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'thunder':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#thunder [ Teks ]*, contoh *#thunder Jeager*`, id)
             zfa.reply(from, mess.wait, id)
@@ -2079,7 +2082,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'glitch':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#glitch [ |Teks1|Teks2 ]*, contoh *#glitch |Jeager|Dev Jarvis*`, id)
             argz = body.trim().split('|')
@@ -2098,7 +2101,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		case prefix+'pornhub':
 		case prefix+'ph':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#pornhub [ |Teks1|Teks2 ]*, contoh *#pornhub |Jeager|Dev Jarvis*`, id)
             argz = body.trim().split('|')
@@ -2130,7 +2133,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'textmaker':
                 if(isReg(obj)) return
-                if(cekumur(cekage)) return
+               
                 if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
                 if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
                 argz = body.trim().split('|')
@@ -2150,7 +2153,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                 break
         case prefix+'quotemaker':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             argz = body.trim().split('|')
@@ -2261,7 +2264,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'ping':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             const loadedMsg = await zfa.getAmountOfLoadedMessages()
             const botadmins = await zfa.iAmAdmin()
             const blockedd = await zfa.getBlockedIds()
@@ -2427,7 +2430,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		case prefix+'stickertoimg':
 		case prefix+'toimg':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (quotedMsg && quotedMsg.type == 'sticker') {
                 const mediaData = await decryptMedia(quotedMsg)
                 zfa.reply(from, `Bentar ya kak lagi Raisa proses nih mohon tunggu sebentar....`, id)
@@ -2456,7 +2459,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		case prefix+'jadwalshalat':
         case prefix+'jadwalsholat':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `[❗] Kirim perintah *#jadwalShalat [ Daerah ]*\ncontoh : *#jadwalShalat Tangerang*\nUntuk list daerah kirim perintah *#listDaerah*`)
@@ -2473,7 +2476,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'tebakgambar':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             try {
@@ -2497,7 +2500,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
            break
 		case prefix+'artimimpi':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#artimimpi [mimpi]*\nContoh : *#artimimpi ular*', id)
@@ -2515,7 +2518,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'wiki':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#wiki [ Query ]*\nContoh : *#wiki asu*`, id)
@@ -2530,7 +2533,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		break
 	    case prefix+'nomorhoki':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#nomorhoki [no hp kamu]*\nContoh : *#nomorhoki 0895384009405*', id)
@@ -2548,7 +2551,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'heroml':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#heroml [nama hero]*\nContoh : *#heroml akai*', id)
@@ -2567,7 +2570,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		case prefix+'stickerlightning':
         case prefix+'slightning':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             zfa.reply(from, `Bentar ya kak lagi Raisa proses nih mohon tunggu sebentar....`, id)
             if (isMedia && type === 'image') {
                 const mediaData = await decryptMedia(message, uaOverride)
@@ -2588,7 +2591,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		case prefix+'jadian':
 		case prefix+'cie':
 		            if(isReg(obj)) return
-                    if(cekumur(cekage)) return
+                   
                     if (!isGroupMsg) return zfa.reply(from, 'perintah ini hanya dapat digunakan di dalam grup', id)
                     const mem = groupMembers
                     const aku = mem[Math.floor(Math.random() * mem.length)];
@@ -2599,7 +2602,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
         case prefix+'stickerfire':
         case prefix+'sfire':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             zfa.reply(from, `Bentar ya kak lagi Raisa proses nih mohon tunggu sebentar....`, id)
             if (isMedia && type === 'image') {
                 const mediaData = await decryptMedia(message, uaOverride)
@@ -2634,7 +2637,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
 		case prefix+'resetbadword':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+        
                     if(isLimit(serial)) return
                     if (!isGroupAdmins) return zfa.reply(from, 'Command ini hanya dapat digunakan oleh admin grup')  
                     if (!args.length === 1) return zfa.reply(from, 'Masukkan nomornya, *GUNAKAN AWALAN 62*\ncontoh: #resetbadword 6285112554122 / #resetbadword @member') 
@@ -2698,7 +2701,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
         case prefix+'limit':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             var found = false
             const limidat = JSON.parse(fs.readFileSync('./lib/database/limit.json'))
@@ -2769,7 +2772,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		case prefix+'nulis':
 		case prefix+'raisanulis':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (args.length === 1) return await zfa.reply(from, 'Kirim perintah *prefix+magernulis1 [teks]*', id)  // BY MFARELS
             const farel = body.slice(13)  // YOUTUBE : MFARELS CH
             await zfa.reply(from, mess.magernulissatu, id)  // INSTAGRAM : @mfarelsyahtiawan
@@ -2821,7 +2824,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                 '-annotate',
                 '+1010+1010',
                 farelzahra,
-                './mager/magernulis√/magernulis1√.jpg'
+                './mager/magernuliss/magernulis1√.jpg'
             ])
             .on('error', () => zfa.reply(from, 'Error Bjeer', id))
             .on('exit', () => {
@@ -2897,7 +2900,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
     case '#unlock':
 	if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (!isGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan oleh Admin group!`, id)
             if (!isBotGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan jika Bot menjadi Admin!`, id)
@@ -2906,7 +2909,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
 		// ON OFF
         case prefix+'antilink':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (!isGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan oleh Admin group!`, id)
             if (!isBotGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan jika Bot menjadi Admin!`, id)
@@ -2973,7 +2976,7 @@ Nte owner?`, id)
             break			
         case prefix+'antisticker':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (!isGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan oleh Admin group!`, id)
             if (!isBotGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan jika Bot menjadi Admin!`, id)
@@ -3003,7 +3006,7 @@ Nte owner?`, id)
             break
 		case prefix+'malanime':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const keyword = message.body.replace('#malanime', '')
@@ -3036,7 +3039,7 @@ Nte owner?`, id)
           break
 		case prefix+'malcharacter':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const keywords = message.body.replace('#malcharacter', '')
@@ -3067,7 +3070,7 @@ Nte owner?`, id)
           break
 		case prefix+'lirik':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length == 1) return zfa.reply(from, 'Kirim perintah *#lirik [optional]*, contoh *#lirik sesuatu di jogja*', id)
@@ -3078,7 +3081,7 @@ Nte owner?`, id)
             break
 		case prefix+'tts':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+       
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             try {
@@ -3100,7 +3103,7 @@ Nte owner?`, id)
             break
 		case prefix+'maluser':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const username = body.slice(18)
@@ -3141,7 +3144,7 @@ Nte owner?`, id)
             break
 		case prefix+'quoteanime':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
                         if(args[1]){
@@ -3191,7 +3194,7 @@ Nte owner?`, id)
             break
 		case prefix+'shota':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const imageToBase64 = require('image-to-base64')
@@ -3217,7 +3220,7 @@ Nte owner?`, id)
             break
         case prefix+'antibadword':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (!isGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan oleh Admin group!`, id)
             if (!isBotGroupAdmins) return zfa.reply(from, `Perintah ini hanya bisa di gunakan jika Bot menjadi Admin!`, id)
@@ -3246,9 +3249,9 @@ Nte owner?`, id)
             break   
         case prefix+'nsfw':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (!isGroupAdmins) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Admin group!', id)
             if (args.length === 1) return zfa.reply(from, 'Pilih enable atau disable!', id)
@@ -3274,10 +3277,10 @@ Nte owner?`, id)
                 zfa.reply(from, 'Pilih enable atau disable kak', id)
             }
             break
-		case '#asupan':
+		case prefix+'asupan':
 		 if(isReg(obj)) return
-         if(cekumur(cekage)) return
-		 if(!isOwner) return zfa.sendTextWithMentions(from, `Fitur ini dinonaktifkan oleh @6281310253704 Karena sekarang bulan Ramadhan.`, id) 
+      
+	//	 if(!isOwner) return zfa.sendTextWithMentions(from, `Fitur ini dinonaktifkan oleh @6281310253704 Karena sekarang bulan Ramadhan.`, id) 
 		  zfa.reply(from, `Bentar ya kak, Lagi Raisa proses nih mohon tunggu sebentar`, id)
 		  const asupa = JSON.parse(fs.readFileSync('./lib/asupan.json')) 
 		  let asupan = asupa[Math.floor(Math.random() * asupa.length)]
@@ -3285,7 +3288,7 @@ Nte owner?`, id)
 		  break
 		case prefix+'bug':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (args.length === 1) return zfa.reply(from, '[❗] Kirim perintah *#bugreport [teks]*\ncontoh : *#bugreport Permisi Owner, Ada bug pada command #otakudesu, Tolong diperbaiki*')
             const bug = body.slice(4)
             if(!bug) return
@@ -3299,7 +3302,7 @@ Nte owner?`, id)
             break
         case prefix+'simi':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return tzfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
        //     if (!isAdmin) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Admin Raisa!', id) // Hanya Admin yang bisa mengaktifkan
             if (args.length === 1) return zfa.reply(from, 'Pilih enable atau disable!', id)
@@ -3327,7 +3330,7 @@ Nte owner?`, id)
             break
 		case prefix+'kapankah':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             const when = args.join(' ')
             const ans = kapankah[Math.floor(Math.random() * (kapankah.length))]
@@ -3337,7 +3340,7 @@ Nte owner?`, id)
         case prefix+'nilai':
         case prefix+'rate':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             const rating = args.join(' ')
             const awr = rate[Math.floor(Math.random() * (rate.length))]
@@ -3346,7 +3349,7 @@ Nte owner?`, id)
             break
         case prefix+'apakah':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             const nanya = args.join(' ')
             const jawab = apakah[Math.floor(Math.random() * (apakah.length))]
@@ -3355,35 +3358,53 @@ Nte owner?`, id)
             break
          case prefix+'bisakah':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             const bsk = args.join(' ')
             const jbsk = bisakah[Math.floor(Math.random() * (bisakah.length))]
             if (!bsk) zfa.reply(from, '⚠️ Format salah! Ketik *#menu* untuk penggunaan.')
             await zfa.sendText(from, `Pertanyaan: *${bsk}* \n\nJawaban: ${jbsk}`)
             break
+		case prefix+'owner':
+        case prefix+'creator':
+		case '!owner':
+		case '/owner':
+		case '$owner':
+		case 'xowner':
+		case 'zowner':
+           // zfa.sendContact(chatId, `6281310253704@c.us`)
+            //zfa.reply(from, 'Itu nomor Pacar ku, eh maksudnya Owner ku', id)
+			zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
+            break
 		case prefix+'verif':
-        case prefix+'verify':
-        case prefix+'register':
-        case prefix+'daftar':
-        case prefix+'verif':
-        case prefix+'verify':
-        case prefix+'register':
-        case prefix+'daftar':
-           // await sleep(2000)
-            const nonye = sender.id
-            const pporang = await zfa.getProfilePicFromServer(sender.id)
-            if (pporang === undefined) {
-            var pepe = ppdepresi
-            } else {
-            var pepe = pporang
-            }
+		case prefix+'verifikasi':
+		case prefix+'daftar':
+		case '#daftar':
+		case '!daftar':
+		case '#verif':
+		case '!verif':
+		case '/verif':
+		case '/daftar':
+		case '$daftar':
+		case '$verif':
+const nonye = sender.id
+            const dpd = await zfa.getProfilePicFromServer(author)
+                    if (dpd == undefined) {
+                        var pfp = errorurl
+                        } else {
+                            var pfp = dpd
+              }
             var ceknya = nonye
             var obj = pendaftar.some((val) => {
             return val.id === ceknya
             })
-            if (obj === true){
-            return 
+			argz = body.trim().split('|')
+			const nimii = arg[1]
+            const nimire = arg[2]
+            const textss = nimire.replace(/[-\s+]/g, '') + '@c.us'
+                    var cekk = pendaftar.includes(textss);
+                    if (cekk) {
+                        return zfa.reply(from, 'Nomor sudah ada di database', id) //if number already exists on database
             } else {
             const mentah = await zfa.checkNumberStatus(nonye)
             const msg = (`\t\t*VERIFICATION SUCCES*
@@ -3400,71 +3421,17 @@ Total user terverifikasi: ${pendaftar.length}
 
 Subscribe t.me/iluser_BOT for more information about this bot`)
             const hasil = mentah.canReceiveMessage ? msg : false
-            if (!hasil) return zfa.reply(message.from, 'Nomor WhatsApp tidak valid [ Tidak terdaftar di WhatsApp ]', id) 
+            if (!hasil) return zfa.reply(from, 'Nomor WhatsApp tidak valid [ Tidak terdaftar di WhatsApp ]', id) 
             {
             const register = ({
             id: mentah.id._serialized
             })
             pendaftar.push(register)
-            fs.writeFileSync('./lib/database/user.json', JSON.stringify(pendaftar))
-            zfa.sendFileFromUrl(message.from, pepe, 'ppnya.jpg', hasil, id)
+            fs.writeFileSync('./lib/database/user.json', JSON.stringify(pendaftar)) // DATABAS
+            zfa.sendFileFromUrl(from, pfp, 'ppnya.jpg', hasil, id)
             }
             }
             break
-		case prefix+'owner':
-        case prefix+'creator':
-		case '!owner':
-		case '/owner':
-		case '$owner':
-		case 'xowner':
-		case 'zowner':
-           // zfa.sendContact(chatId, `6281310253704@c.us`)
-            //zfa.reply(from, 'Itu nomor Pacar ku, eh maksudnya Owner ku', id)
-			zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)
-            break
-		case prefix+'df':  // NAMBAHIN NOMOR DI DATABASE
-		case prefix+'daftar':
-                argz = body.trim().split('|')
-                if (argz.length >= 2) {
-                const nonye = sender.id
-                const namanye = argz[1]
-                const umurnye = argz[2]
-                    if(isNaN(umurnye)) return await zfa.reply(from, 'Umur harus berupa angka!!', id)
-                    if(umurnye >= 80) return await zfa.reply(from, 'Kamu terlalu tua, kembali lagi ke masa muda untuk menggunakan Raisa', id)
-                    const jenenge = namanye.replace(' ','')
-                    var ceknya = nonye
-                        var obj = pendaftar.some((val) => {
-                            return val.id === ceknya
-                        })
-                        if (obj === true){
-                            return zfa.reply(from, 'kamu sudah aku kenal sayang :*', id) // BAKAL RESPON JIKA NO UDAH ADA
-                        } else {
-                            const mentah = await zfa.checkNumberStatus(nonye) // PENDAFTARAN
-                            const msg = monospace(`Pendaftaran berhasil dengan SN: ${SN} pada ${moment().format('DD/MM/YY HH:mm:ss')}
-₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋
-[Nama]: ${jenenge} [@${nonye.replace(/[@c.us]/g, '')}]
-[Nomor]: wa.me/${nonye.replace('@c.us', '')}
-[Umur]: ${umurnye}
-⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻
-Untuk menggunakan bot silahkan kirim ${prefix}menu
-Total Pengguna yang telah terdaftar ${pendaftar.length}`)
-                            const hasil = mentah.canReceiveMessage ? msg : false
-                            if (!hasil) return zfa.reply(from, 'Nomor WhatsApp tidak valid [ Tidak terdaftar di WhatsApp ]', id) 
-                            {
-                            const register = ({
-                                id: mentah.id._serialized,
-                                nama: jenenge,
-                                umur: umurnye
-                            })
-                            pendaftar.push(register)
-                            fs.writeFileSync('./lib/database/user.json', JSON.stringify(pendaftar)) // DATABASE
-                                zfa.sendTextWithMentions(from, hasil)
-                            }
-                        }
-                    } else {
-                        await zfa.reply(from, `Format yang kamu masukkan salah, kirim ${prefix}df |nama|umur\n\ncontoh format: ${prefix}df |VabelCanzz|19\n\ncukup gunakan nama depan/panggilan saja`, id) //if user is not registered
-                    }
-                break
             case prefix+'dfulang':
                     if (!isAdmin) return zfa.reply(from, 'Command ini hanya dapat digunakan oleh admin Raisa', id)  
                     const nomernya = args[1]
@@ -3497,7 +3464,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
                 break
 		case prefix+'brainly':
 		if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (args.length >= 2){
                 const BrainlySearch = require('./lib/brainly')
                 let tanya = body.slice(9)
@@ -3522,7 +3489,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (!isSimi) return zfa.reply(from, 'command/Perintah Simi belum di aktifkan di group ini!', id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *# [teks]*\nContoh : *# halo*')
@@ -3534,7 +3501,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'puisi': // ARUGAZ
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
@@ -3543,7 +3510,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
         case prefix+'puisi2': // ARUGAZ
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const puisi2 = await get.get('https://arugaz.herokuapp.com/api/puisi2').json()
@@ -3551,7 +3518,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
         case prefix+'puisi3': // ARUGAZ
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const puisi3 = await get.get('https://arugaz.herokuapp.com/api/puisi3').json()
@@ -3559,7 +3526,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'waktu':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             await zfa.sendText(from, `Waktu Indonesia Barat: *${moment().utcOffset('+0700').format('HH:mm')}* WIB \nWaktu Indonesia Tengah: *${moment().utcOffset('+0800').format('HH:mm')}* WITA \nWaktu Indonesia Timur: *${moment().utcOffset('+0900').format('HH:mm')}* WIT`)
             await limitAdd(serial)
@@ -3568,7 +3535,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'tik':
 		case prefix+'tt':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#tiktok [linkTiktok]*\nContoh : *#tiktok https://vt.tiktok.com/yqyjPX/*', id)
@@ -3586,7 +3553,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break */
         case prefix+'smule':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#smule [linkSmule]*\nContoh : *#smule https://www.smule.com/p/767512225_3062360163*', id)
@@ -3604,7 +3571,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'twitter':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#twitter [ Link Twitter ]* untuk contoh silahkan kirim perintah *#readme*`)
@@ -3621,7 +3588,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
         case prefix+'maps':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#maps [optional]*, Contoh : *#maps Jakarta*')
@@ -3647,7 +3614,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'checkip':
 		case prefix+'cekip':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#checkip [ipaddress]*\nContoh : *#checkip 182.0.144.145*', id)
@@ -3707,17 +3674,17 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'cewecantik':
 		case prefix+'cewek':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            const pptl = ["http://lolhuman.herokuapp.com/api/random/cecan?apikey=ZidanGanzz"]
+            const pptl = ["http://lolhuman.herokuapp.com/api/random/cecan?apikey=NaisaZidan"]
             let pep = pptl[Math.floor(Math.random() * pptl.length)]
             zfa.sendFileFromUrl(from, pep, 'pptl.jpg', 'Suppor Raisa Dengan Cara Follow IG: https://instagram.com/_zidanfadilaharsa Dan Subscribe YT: https://youtube.com/zidanfadilaharsazfaa', message.id)
             await limitAdd(serial)
             break
         case prefix+'neko':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             q2 = Math.floor(Math.random() * 900) + 300;
@@ -3727,20 +3694,20 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'animneko':
 		    if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            const pptll = ["http://lolhuman.herokuapp.com/api/random/neko?apikey=ZidanGanzz"]
+            const pptll = ["http://lolhuman.herokuapp.com/api/random/neko?apikey=NaisaZidan"]
             let pepp = pptll[Math.floor(Math.random() * pptll.length)]
             zfa.sendFileFromUrl(from, pepp, 'pptll.jpg', 'Suppor Raisa Dengan Cara Follow IG: https://instagram.com/_zidanfadilaharsa Dan Subscribe YT: https://youtube.com/zidanfadilaharsazfaa', message.id)
             await limitAdd(serial)
             break
 		case prefix+'bts':
 		    if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            const ppttll = ["http://lolhuman.herokuapp.com/api/random/bts?apikey=ZidanGanzz"]
+            const ppttll = ["http://lolhuman.herokuapp.com/api/random/bts?apikey=NaisaZidan"]
             let peep = ppttll[Math.floor(Math.random() * ppttll.length)]
             zfa.sendFileFromUrl(from, peep, 'ppttl.jpg', 'Suppor Raisa Dengan Cara Follow IG: https://instagram.com/_zidanfadilaharsa Dan Subscribe YT: https://youtube.com/zidanfadilaharsazfaa', message.id)
             await limitAdd(serial)
@@ -3749,10 +3716,10 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'cowok':
 		case prefix+'cogan':
 		    if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            const cwo = ["http://lolhuman.herokuapp.com/api/random/cogan?apikey=ZidanGanzz"]
+            const cwo = ["http://lolhuman.herokuapp.com/api/random/cogan?apikey=NaisaZidan"]
             let ppep = cwo[Math.floor(Math.random() * cwo.length)]
             zfa.sendFileFromUrl(from, ppep, 'cwo.jpg', 'Suppor Raisa Dengan Cara Follow IG: https://instagram.com/_zidanfadilaharsa Dan Subscribe YT: https://youtube.com/zidanfadilaharsazfaa', message.id)
             await limitAdd(serial)
@@ -3760,7 +3727,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'images':
 		case prefix+'gambar':
 		if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
 			if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
 		     await limitAdd(serial)
                     if (args.length === 1) return zfa.reply(from, `Untuk mencari gambar di pinterest\nketik: !images [search]\ncontoh: !images naruto`, id)
@@ -3774,7 +3741,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'fb':
 		case prefix+'mark':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+        
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#fb [ Link Fb ]*\nContoh : *#fb https://www.facebook.com/24609282673/posts/10158628585367674/*`, id)
@@ -3810,7 +3777,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'tiktoknowm':
 		case prefix+'tt':
 		    if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
 		    if (args.length === 1) return zfa.reply(from, 'Kirim perintah *!tiktok [linkTiktok]*\nContoh : *!tiktok https://vt.tiktok.com/yqyjPX/*', id)
                     try {
@@ -3838,7 +3805,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
                     break
 		case prefix+'gdrive':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const regex = new RegExp("\/d\/(.+)\/", 'gi')
@@ -3910,7 +3877,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'resepmasakan':
 		case prefix+'resep':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+       
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}resep [optional]*\nContoh *${prefix}resep ayam gerpek*`, id)
@@ -3945,7 +3912,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'blackpink':
 		case prefix+'bp':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+      
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#blackpink [ Teks ]*, contoh *#blackpink Raisa*`, id)
             zfa.reply(from, mess.wait, id)
@@ -3956,7 +3923,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		 case prefix+'pornhub':
 		 case prefix+'ph':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#pornhub [ |Teks1|Teks2 ]*, contoh *#ph|Zidan|Dev Raisa*`, id)
             argz = body.trim().split('|')
@@ -3975,7 +3942,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'pinterest':
 		case prefix+'pin':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#pinterest [query]*\nContoh : *#pinterest Elaina*', id)
@@ -3993,26 +3960,26 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'sspc':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#sspc [linkWeb]*\nContoh : *#sspc https://neonime.vip*', id)
             const sspc = body.slice(6)
-            zfa.sendFileFromUrl(from, `https://api.vhtear.com/ssweb?link=${sspc}&type=pc&apikey=ZidanGanzz`, 'sspc.jpg', `Subscribe ya kak ${pushname} youtube.com/zidanfadilaharsazfaa`, id)
+            zfa.sendFileFromUrl(from, `https://api.vhtear.com/ssweb?link=${sspc}&type=pc&apikey=NaisaZidan`, 'sspc.jpg', `Subscribe ya kak ${pushname} youtube.com/zidanfadilaharsazfaa`, id)
             await limitAdd(serial)
             break
 		case prefix+'ssphone':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#ssphone [linkWeb]*\nContoh : *#ssphone https://neonime.vip*', id)
             const ssphone = body.slice(9)
-            zfa.sendFileFromUrl(from, `https://api.vhtear.com/ssweb?link=${ssphone}&type=phone&apikey=ZidanGanzz`, 'ssphone.jpg', `Subscribe ya kak ${pushname} youtube.com/zidanfadilaharsazfaa`, id)
+            zfa.sendFileFromUrl(from, `https://api.vhtear.com/ssweb?link=${ssphone}&type=phone&apikey=NaisaZidan`, 'ssphone.jpg', `Subscribe ya kak ${pushname} youtube.com/zidanfadilaharsazfaa`, id)
             await limitAdd(serial)
             break
 		case prefix+'infogempa':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             const bmkg = await axios.get('http://tobz-api.herokuapp.com/api/infogempa?apikey=' + tobzkey)
@@ -4024,7 +3991,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 		case prefix+'news':
 		case prefix+'berita':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             zfa.reply(from, mess.wait, id)
@@ -4047,7 +4014,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'jadwalbola':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             zfa.reply(from, mess.wait, id)
@@ -4075,117 +4042,43 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
                     break
 	    case prefix+'linkjarvis':
 		   if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
 			zfa.sendText(from, 'This is my WhatsApp number link, sir https://wa.me/447537102515 dont forget to share it with your friends', id)
 			break
 		case prefix+'menu':
         case prefix+'help':
 		case prefix+'raisamenu':
 		    if(isReg(obj)) return
-            if(cekumur(cekage)) return
+        
 			/*if (!isOwner) return zfa.reply(from, `Pengen lihat menu? tebak aja
 menu nya masih sama seperti dulu ga ada yang berubah seperti rasaku padamu.
 Follow Me On instagram.com/_zidanfadilaharsa`, id)*/
-             var pic = await zfa.getProfilePicFromServer(author)
+             //var pic = await zfa.getProfilePicFromServer(author)
           //  zfa.sendFileFromUrl(from, pic, 'ZidanGanzz.jpg', 
-		  zfa.reply(from,`Hallo kak *${pushname}*💝 Ini adalah list fitur ku
-		  
-➵ *${prefix}join* Link Grub
-➵ *${prefix}brainly*
-➵ *${prefix}tobecontinue*
-➵ *${prefix}thuglife*
-➵ *${prefix}imgtopdf*
-➵ *${prefix}ytmp3* youtu.be/
-➵ *${prefix}nobg*
-➵ *${prefix}trash*
-➵ *${prefix}pencil*
-➵ *${prefix}ytstalk* nama Cenel
-➵ *${prefix}loli*
-➵ *${prefix}nomorhoki* Nomo HaPe
-➵ *${prefix}drakor* Judul
-➵ *${prefix}lk21* Judul
-➵ *${prefix}nhder* Kode Nuclear
-➵ *${prefix}quran* New
-➵ *${prefix}lovemessage* New
-➵ *${prefix}party* New
-➵ *${prefix}heroml*
-➵ *${prefix}play* Judul Lagu
-➵ *${prefix}ytsearch* New
-➵ *${prefix}wiki* New
-➵ *${prefix}sspc* New
-➵ *${prefix}ssphone* New
-➵ *${prefix}berita* New
-➵ *${prefix}blackpink* Text
-➵ *${prefix}infogempa* New
-➵ *${prefix}jadwalbola* New
-➵ *${prefix}pinterest* New
-➵ *${prefix}pornhub* New |Text1|Text2
-➵ *${prefix}ramalpasangan* New
-➵ *${prefix}artimimpi* New
-➵ *${prefix}jadwalsholat* New
-➵ *${prefix}cewe*
-➵ *${prefix}cowo*
-➵ *${prefix}bts*
-➵ *${prefix}thunder*
-➵ *${prefix}glitch* |text1|text2|
-➵ *${prefix}playstore*
-➵ *${prefix}sticker*
-➵ *${prefix}take* |tek1|tek2
-➵ *${prefix}lirik*
-➵ *${prefix}tts*
-➵ *${prefix}ttp*
-➵ *${prefix}slap* New
-➵ *${prefix}hug* New
-➵ *${prefix}nye* New
-➵ *${prefix}pat* New
-➵ *${prefix}textmaker*
-➵ *${prefix}quotemaker*
-➵ *${prefix}hitung*
-➵ *${prefix}cekip*
-➵ *${prefix}waktu*
-➵ *${prefix}cantik*
-➵ *${prefix}ganteng*
-➵ *${prefix}sticker* 
-➵ *${prefix}stickergif*
-➵ *${prefix}stickerlightning*
-➵ *${prefix}stickerfire*
-➵ *${prefix}toimg*
-➵ *${prefix}shota*
-➵ *${prefix}wallanime*
-➵ *${prefix}quoteanime*
-➵ *${prefix}malanime*
-➵ *${prefix}maluser*
-➵ *${prefix}malcharacter*
-➵ *${prefix}meme*
-➵ *${prefix}jelek*
-➵ *${prefix}mypic*
-➵ *${prefix}yourpic*
-➵ *${prefix}google*
-➵ *${prefix}translate*
-➵ *${prefix}apakah*
-➵ *${prefix}kapankah*
-➵ *${prefix}nilai*
-➵ *${prefix}bisakah*
-➵ *${prefix}gdrive*
-➵ *${prefix}neko*
-➵ *${prefix}cewe*
-➵ *${prefix}maps*
-➵ *${prefix}ig* 
-➵ *${prefix}mark*
-➵ *${prefix}antibadword*
-➵ *${prefix}antisticker*
-➵ *${prefix}lock*
-➵ *${prefix}unlock*
-➵ *${prefix}add*
-➵ *${prefix}kick*
-➵ *${prefix}tagall*
-➵ *${prefix}promote*
-➵ *${prefix}demote*
-➵ *${prefix}setgcname*
-➵ *${prefix}setgcpp*
-➵ *${prefix}ping*
+		  /*zfa.reply(from,`Hallo kak *${pushname}*💝 Ini adalah list fitur ku
+		
+*${prefix}join* Link grub wa
+-> Undang bot ke Grub nte (Gratis)
+		
+*${prefix}grub*
+-> menu admin grub
 
- ${pendaftar.length} User
+*${prefix}tools*
+-> menu alat
+
+*${prefix}media*
+-> Tempat donlot & ntah gua lupa kwkw liat aja sendiri nte punya mata kan.
+
+*${prefix}random*
+-> random pict & text
+
+*${prefix}maker*
+-> Tempat nte jadi editor bergelas
+
+*${prefix}pendidikan*
+-> Tempat nte cari ilmu biar pinter kayak Zidan
+
+ Total User ${pendaftar.length} Orang
 _JIKA ADA YANG ERROR SILAHKAN KETIK *${prefix}bug*_
  RAISA TELAH AKTIF SELAMA :
  ${cts}
@@ -4193,13 +4086,102 @@ _JIKA ADA YANG ERROR SILAHKAN KETIK *${prefix}bug*_
 💝 *RAISA FARIZA* 💝`, id)  
 zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${prefix}donasi* Jika kakak adalah orang yang baik.`, id)     
 //zfa.sendTextWithMentions(from, 'Ownerku yang ganteng @6281310253704@c.us', id)    				
-           // zfa.sendText(from, help(prefix, cts, pendaftar))
+           // zfa.sendText(from, help(prefix, cts, pendaftar)) */
+zfa.reply(from, `Hallo kak *${pushname}*💝 Ini adalah list fitur ku
+
+*${prefix}join* linkgrub (gratis)
+-> Buat masukin bot ke grub 
+*${prefix}jadian*
+-> Gatau gimana jelasinnya
+*${prefix}tahta*
+-> Harta Tahta NAY
+*${prefix}asupan*
+-> Goyang TikTodd
+*${prefix}sticker*
+-> Nte pasti tau ini buat apa
+*${prefix}stickergift*
+-> Nte pasti tau ini buat apa
+*${prefix}play*
+-> Buat denger jedag jedug
+*${prefix}ytsearch*
+-> Buat sercing yutub
+*${prefix}addvn*
+-> Buat ngisi list vn
+*${prefix}listvn*
+-> Buat lihat daftar vn
+*${prefix}delvn*
+-> Buat hapus vn
+*${prefix}take* |teks1|teks2
+-> Buat ngasih/timpa watermark zuckerberg stiker
+*${prefix}donasi*
+-> Buat Dapetin pahala
+*${prefix}apakah*
+-> Nte pasti tau ini buat apa
+*${prefix}kapankah*
+-> Nte pasti tau ini buat apa
+*${prefix}bisakah*
+-> Nte pasti tau ini buat apa
+*${prefix}loli*
+-> Nte pasti tau ini buat apa
+*${prefix}cewe*
+-> Nte pasti tau ini buat apa
+*${prefix}google*
+-> Sercing Gugel
+*${prefix}brainly*
+-> Ngerjain PR sekolah
+*${prefix}linkgc*
+-> Nte pasti tau ini buat apa
+*${prefix}info*
+-> Info Bot
+
+
+Total User ${pendaftar.length} Orang
+_JIKA ADA YANG ERROR SILAHKAN KETIK *${prefix}bug*_
+ RAISA TELAH AKTIF SELAMA :
+ ${cts}
+
+💝 *RAISA FARIZA* 💝`, id)
+
+zfa.reply (from,`
+Pengen nomor luar negri kaya bot? nih nomor seller nyah: 
+wa.me/441400222229
+Ada banyak pilihan nomor loh....
+` ,id)
             break
+case prefix+'menuen':
+zfa.reply (from,`Hello *${pushname}*💝 This is my feature list
+
+*${prefix}join* grub link wa
+-> Invite bots to your Grub (Free)
+
+*${prefix}grub*
+-> group admin menu
+
+*${prefix}tools*
+-> tools menu
+
+*${prefix}media*
+-> Where to download & I don't know if I forgot, I just saw it myself, you have eyes, right?
+
+*${prefix}random*
+-> random pic & text
+
+*${prefix}maker*
+-> Where you become an editor
+
+*${prefix}education*
+-> The place to find knowledge to be smart like Albert Einstein
+
+ Total User ${pendaftar.length} Person
+_IF ANY ERROR PLEASE TYPE *${prefix}bug*_
+
+*RAISA FARIZA*`, id)
+break
         case prefix+'asupan2':
 		zfa.reply(from, 'Fitur ini dinonaktifkan karena sekarang bulan puasa. Tobat woy ngentuy', id)
                                /* if (!isGroupMsg) return await zfa.reply(from, 'Fitur ini hanya bisa digunakan didalam grup!', id)
                                 await zfa.reply(from, mess.wait, id)
-                                axios.get(`http://lolhuman.herokuapp.com/api/asupan?apikey=ZidanGanzz`)
+                                axios.get(`http://lolhuman.herokuapp.com/api/asupan?apikey=NaisaZidan`)
                                     .then(async (res) => {
                                      zfa.sendFileFromUrl(from, res.data.result, 'asupan.mp4', `nehh asupan ${pushname}`, id)
 									 .catch(() => {
@@ -4249,9 +4231,40 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             })
         }
     break
+	    case prefix+'grub':
+		if(isReg(obj)) return
+		if (!isGroupMsg) return zfa.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', id)
+        if (!isGroupAdmins) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh admin group', id)
+		zfa.sendText(from, admincmd(prefix))
+            break
+		case prefix+'fun':
+		if(isReg(obj)) return
+		zfa.sendText(from, funcmd(prefix))
+            break
+		case prefix+'media':
+		if(isReg(obj)) return
+		zfa.sendText(from, mediacmd(prefix))
+            break
+		case prefix+'tools':
+		if(isReg(obj)) return
+		zfa.sendText(from, animecmd(prefix))
+            break
+		case prefix+'maker':
+		if(isReg(obj)) return
+		zfa.sendText(from, kerangcmd(prefix))
+            break
+		case prefix+'random':
+		if(isReg(obj)) return
+		zfa.sendText(from, downloadcmd(prefix))
+            break
 		case prefix+'changelog':
+		if(isReg(obj)) return
 		    zfa.reply(from, groupcmd(prefix))
 			break
+		case prefix+'pendidikan':
+		if(isReg(obj)) return
+		zfa.sendText(from, othercmd(prefix))
+            break
 		case prefix+'runtime':
             zfa.reply(from, `Raisa telah aktif selama :\n${cts}`, id)
             break
@@ -4280,7 +4293,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
 	    case prefix+'yourpic':
 		case prefix+'pplu':
                     if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
                     for (let i = 0; i < mentionedJidList.length; i++) {
                         var ypic = await zfa.getProfilePicFromServer(mentionedJidList[i])
                         if (ypic === undefined) {
@@ -4297,7 +4310,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
                     try {
                         zfa.reply(from, mess.wait, id)
                         const serplay = body.slice(6)
-                        const webplay = await fetch(`https://api.vhtear.com/ytmp3?query=${serplay}&apikey=ZidanGanzz`)
+                        const webplay = await fetch(`https://api.vhtear.com/ytmp3?query=${serplay}&apikey=NaisaZidan`)
                         if (!webplay.ok) throw new Error(`Error Get Video : ${webplay.statusText}`)
                         const webplay2 = await webplay.json()
                         if (webplay2.status == false) {
@@ -4324,7 +4337,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
                     break
 			case prefix+'video':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}video* [ Video ]`)
@@ -4352,7 +4365,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break
 			case prefix+'getvideo':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}getvideo* [ Id Download ], untuk contoh silahkan kirim perintah *${prefix}readme*`, id)
@@ -4405,7 +4418,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
 		case prefix+'music':
 		case prefix+'musik':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
 	    if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}musik* [ Lagu ]`)
@@ -4435,7 +4448,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break
 		case prefix+'ramalpasangan':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#ramalpasangan [kamu|pasangan]*\nContoh : *#ramalpasangan Naisa|Zidan*', id)
@@ -4459,7 +4472,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break
 		case prefix+'zodiak':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#zodiak [zodiak kamu]*\nContoh : *#zodiak scorpio*', id)
@@ -4477,7 +4490,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
            break
 		 case prefix+'family100':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             try {
@@ -4502,7 +4515,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
            break
 		case prefix+'caklontong':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             try {
@@ -4527,7 +4540,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
            break
 		case prefix+'artinama':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
                 if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}artinama [ Query ]*\nContoh : *${prefix}artinama Tobz*`, id)
@@ -4546,7 +4559,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
 		case prefix+'getmusik':
         case prefix+'getmusic':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             try {
@@ -4604,7 +4617,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break
 		case prefix+'tinyurl':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#shorturl [linkWeb]*\nContoh : *#shorturl https://neonime.vip*', id)
@@ -4618,7 +4631,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break
 		/*case prefix+'play':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isAdmin) return zfa.reply(from, `Perintah ini hanya bisa di gunakan oleh Admin Elaina!`, id)
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik #ceklimit Untuk Mengecek Kuota Limit Kamu`, id)
@@ -4646,17 +4659,17 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break*/  
 		case prefix+'loli':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            const loli = await axios.get(`https://api.vhtear.com/randomloli&apikey=ZidanGanzz`)
+            const loli = await axios.get(`https://api.vhtear.com/randomloli&apikey=NaisaZidan`)
             const loly = loli.data.result
             zfa.sendFileFromUrl(from, loly.result, 'loli.jpeg', `Subscribe ya ka ${pushname} youtube.com/zidanfadilaharsazfaa`, id)
             await limitAdd(serial)
             break
 	    case prefix+'ttg':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             try {
@@ -4675,17 +4688,17 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break
 		case prefix+'ttp2':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+            
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *#ttp2 [ Teks ]*, contoh *#ttp2 Elaina*`, id)
             const ttp2t = body.slice(6)
             const lttp2 = ["Orange","White","Green","Black","Purple","Red","Yellow","Blue","Navy","Grey","Magenta","Brown","Gold"]
             const rttp2 = lttp2[Math.floor(Math.random() * (lttp2.length))]
-            await zfa.sendStickerfromUrl(from, `https://api.vhtear.com/textmaker?text=${ttp2t}&warna=${rttp2}&apikey=ZidanGanzz`)
+            await zfa.sendStickerfromUrl(from, `https://api.vhtear.com/textmaker?text=${ttp2t}&warna=${rttp2}&apikey=NaisaZidan`)
             break
 	    case prefix+'lovemessage':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}lovemessage [ Teks ]*, contoh *${prefix}lovemessage Tobz*`, id)
             zfa.reply(from, mess.wait, id)
@@ -4695,7 +4708,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break
 	    case prefix+'party':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+         
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}party [ Teks ]*, contoh *${prefix}party ZidanGanzz*`, id)
             zfa.reply(from, mess.wait, id)
@@ -4705,7 +4718,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
             break
 		case prefix+'romance':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}romance [ Teks ]*, contoh *${prefix}romance ZidanGanzz*`, id)
             zfa.reply(from, mess.wait, id)
@@ -4716,7 +4729,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
 		case prefix+'resepmasakan':
 		case prefix+'resep':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1)  return zfa.reply(from, 'Kirim perintah *#resepmasakan [optional]*\nContoh *#resepmasakan rawon*', id)
@@ -4746,7 +4759,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
            break
 		case prefix+'artinama':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
                 if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}artinama [ Query ]*\nContoh : *${prefix}artinama Tobz*`, id)
@@ -4765,7 +4778,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
         case prefix+'stickermeme':
         case prefix+'stcmeme':
                 if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (isMedia && type === 'image') {
                     const top = argz[1]
                     const bottom = argz[2]
@@ -4798,7 +4811,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
         case prefix+'mypic':
 		case prefix+'ppgua':  
 		    if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
                     const mpic = await zfa.getProfilePicFromServer(author)
                     if (mpic === undefined) {
                         var mpfp = errorurl
@@ -4821,7 +4834,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
 		case prefix+'profile':
 		case prefix+'aku':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (isGroupMsg) {
                 if (!quotedMsg) {
                     var block = blockNumber.includes(author)
@@ -4907,7 +4920,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
 		case prefix+'request':
 		case prefix+'req':
             if(isReg(obj)) return
-            if(cekumur(cekage)) return
+           
             if (args.length === 1) return zfa.reply(from, '[❗] Kirim perintah *#request [teks]*\ncontoh : *#request Hallo ZidanGanz Aku Mau Request Fitur takesticker kak tolong dibuatkan yah kakak*')
             const req = body.slice(11)
             if(!bug) return
@@ -4923,7 +4936,7 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
         case prefix+'wa.me':
         case prefix+'wame':
 		    if(isReg(obj)) return
-            if(cekumur(cekage)) return
+          
             await zfa.reply(from, `*Neh Mhank Link Nomor Wa Lu ${pushname}*\n\n*wa.me/${sender.id.replace(/[@c.us]/g, '')}*\n\n*Atau*\n\n*api.whatsapp.com/send?phone=${sender.id.replace(/[@c.us]/g, '')}*`)
             break
 			        default:
