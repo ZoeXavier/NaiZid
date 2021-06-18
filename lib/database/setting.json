@@ -1,13 +1,14 @@
 {
-  "limitCount": 1e+41,
+  "limitCount": 30,
   "memberLimit": 5,
   "groupLimit": 50,
   "melodickey": "YOUR_APIKEY",
-  "vhtearkey": "YOUR_APIKEY",
+  "vhtearkey": "NaisaZidan",
   "tobzkey": "YOUR_APIKEY",
   "mtc": false,
   "restartState": false,
   "restartId": "undefined",
   "banChats": false,
-  "Rest": true
+  "Rest": true,
+  "mtc": false
 }
