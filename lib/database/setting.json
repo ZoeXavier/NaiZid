@@ -1,6 +1,6 @@
 {
-  "limitCount": 30,
-  "memberLimit": 5,
+  "limitCount": 10,
+  "memberLimit": 2,
   "groupLimit": 50,
   "melodickey": "YOUR_APIKEY",
   "vhtearkey": "NaisaZidan",
