@@ -31,7 +31,7 @@
 </p>
 
 <p align="center">
-   <img src="https://github-readme-streak-stats.herokuapp.com/?user=ZidanGanzz" />
+   <img src="https://github-readme-streak-stats.herokuapp.com/?user=ZidanSinaga" />
 </p>
 
 <p align="center">
@@ -43,7 +43,7 @@ Before running the below command, make sure you're in the project directory that
 you've just cloned!!
 
 ```
-> git clone https://github.com/ZidanGanzz/SeiZid 
+> git clone https://github.com/ZidanSinaga/SeiZid 
 > cd SeiZid
 > npm install
 > npm i -g sharp                                                               
