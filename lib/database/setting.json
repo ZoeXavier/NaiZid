@@ -8,7 +8,6 @@
   "mtc": false,
   "restartState": false,
   "restartId": "undefined",
-  "banChats": false,
-  "Rest": true,
-  "mtc": false
+  "banChats": true,
+  "Rest": true
 }
