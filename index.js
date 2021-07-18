@@ -49,12 +49,14 @@ const start = async (zfa = new Client()) => {
         console.log('------------------------------------------------')
         lolcatjs.fromString('[DEV] ZIDANGANZ')
         lolcatjs.fromString('[SERVER] Server Started!')
-        zfa.onAnyMessage((fn) => messageLog(fn.fromMe, fn.type))
+      //  zfa.onAnyMessage((fn) => MessageLog(fn.fromMe, fn.type))
         // Force it to keep the current session
         zfa.onStateChanged((state) => {
             console.log('[Raisa State]', state)
             if (state === 'CONFLICT' || state === 'UNLAUNCHED') zfa.forceRefocus()
         })
+	const ownerNumber = '6281310253704@c.us'
+	zfa.sendText(ownerNumber, `✅ Hallo Zidan Baik dan Tampan. Raisa berhasil di aktifkan!`)
         // listening on message
         zfa.onMessage((async (message) => {
 
@@ -65,6 +67,7 @@ const start = async (zfa = new Client()) => {
                     zfa.cutMsgCache()
                 }
             })
+			
         // msgHndlr(zfa, message)
         // Message Handler (Loaded from recent cache)
         require('./zfa.js')(zfa, message)
