@@ -3392,12 +3392,12 @@ Nte owner?`, id)
 		case '$daftar':
 		case '$verif':
 const nonye = sender.id
-            const dpd = await zfa.getProfilePicFromServer(author)
+           /* const dpd = await zfa.getProfilePicFromServer(author)
                     if (dpd == undefined) {
                         var pfp = errorurl
                         } else {
                             var pfp = dpd
-              }
+              }*/
             var ceknya = nonye
             var obj = pendaftar.some((val) => {
             return val.id === ceknya
@@ -3432,10 +3432,21 @@ Subscribe t.me/iluser_BOT for more information about this bot`)
             })
             pendaftar.push(register)
             fs.writeFileSync('./lib/database/user.json', JSON.stringify(pendaftar)) // DATABAS
-            zfa.sendFileFromUrl(from, pfp, hasil, id)
+            zfa.sendText(from, hasil, id)
             }
             }
             break
+			case prefix+'ss':
+			if (args.length === 0) return zfa.reply(from, `Screenshot website atau search Google. ${prefix}ssweb <url> atau ${prefix}gs <query>`, id)
+                    zfa.sendText(from, 'Bentar ya kak lagi Raisa proses nih mohon tunggu sebentar', id)
+                    let urlzz = ''
+                    if (!isUrl(arg)) urlzz = `https://www.google.com/search?q=${encodeURIComponent(arg)}`
+                    else urlzz = arg
+                    const path = './media/ssweb.png'
+                    scraper.ssweb(browser, path, urlzz).then(async res => {
+                        if (res === true) await zfa.sendImage(from, path, 'ssweb.png', `Captured from ${urlzz}`, id).catch(e => { return printError(e) })
+                    }).catch(e => { return printError(e) })
+                    break
             case prefix+'dfulang':
                     if (!isAdmin) return zfa.reply(from, 'Command ini hanya dapat digunakan oleh admin Raisa', id)  
                     const nomernya = args[1]
@@ -4095,15 +4106,13 @@ zfa.reply(from, `Hallo kak *${pushname}*💝 Ini adalah list fitur ku
 
 *${prefix}join* linkgrub (gratis)
 -> Buat masukin bot ke grub 
-*${prefix}asupan2*
--> Goyang Tiktod Mbak Cantik
-*${prefix}puisi*
--> 
-*${prefix}antisticker
--> Aing teu bisa nga jelaskeun
+*${prefix}ytmp3*
+-> Download Lagu YouTube
+*${prefix}ytmp4*
+-> Download Video YouTube
 *${prefix}lirik* judul lagu
 -> Lirik lagu
-*${prefix}tomp3*
+*${prefix}tomp3* <Error>
 -> mp4 to mp3
 *${prefix}waktu*
 -> Jam indonesia
@@ -4121,18 +4130,10 @@ zfa.reply(from, `Hallo kak *${pushname}*💝 Ini adalah list fitur ku
 -> Buat Mengurangi beban Grub
 *${prefix}tagall* Pesan
 -> Tag semua member gc
-*${prefix}tahta*
--> Harta Tahta NAY
-*${prefix}asupan*
--> Goyang TikTodd
 *${prefix}sticker*
 -> Nte pasti tau ini buat apa
 *${prefix}stickergift*
 -> Buat bikin stiker gip
-*${prefix}play*
--> Buat denger jedag jedug
-*${prefix}ytsearch*
--> Buat sercing yutub
 *${prefix}addvn*
 -> Buat ngisi list vn
 *${prefix}listvn*
@@ -4149,10 +4150,6 @@ zfa.reply(from, `Hallo kak *${pushname}*💝 Ini adalah list fitur ku
 -> Nte pasti tau ini buat apa
 *${prefix}bisakah*
 -> Nte pasti tau ini buat apa
-*${prefix}loli*
--> Nte pasti tau ini buat apa
-*${prefix}cewe*
--> Gacha cewek bening
 *${prefix}google*
 -> Sercing Gugel
 *${prefix}brainly*
@@ -4312,7 +4309,7 @@ break
                     let naisa = body.slice(6)
                     let zidan = ytsearch(naisa)
                     console.log(zidan)
-                    //const hasDurationProperty = Object.prototype.hasOwnProperty.call(zidan, 'duration')
+                    const hasDurationProperty = Object.prototype.hasOwnProperty.call(zidan, 'duration')
                    // if (!hasDurationProperty) return zfa.reply(from, `Maaf fitur sedang dalam perbaikan`, id)
 
                     try {
