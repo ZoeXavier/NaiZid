@@ -1443,7 +1443,7 @@ break
                 zfa.reply(from, 'Pilih enable atau disable udin!', id)
             }
             break
-		case '#lock':
+		case prefix+'lock':
 			if(isReg(obj)) return
           
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
