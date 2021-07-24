@@ -22,6 +22,7 @@ nocache('./lib/database/setting.json', module => console.log(`'${module}' Update
 const adminNumber = JSON.parse(fs.readFileSync('./lib/database/admin.json'))
 const setting = JSON.parse(fs.readFileSync('./lib/database/setting.json'))
 const isWhite = (chatId) => adminNumber.includes(chatId) ? true : false
+const ownerNumber = '6281310253704@c.us'
 
 let { 
     limitCount,
@@ -44,18 +45,26 @@ lolcatjs.options.seed = Math.round(Math.random() * 1000);
 lolcatjs.options.colors = true;
 
 const start = async (zfa = new Client()) => {
+
         console.log('------------------------------------------------')
         lolcatjs.fromString(color(figlet.textSync('RAISA BOT', { horizontalLayout: 'full' })))
         console.log('------------------------------------------------')
-        lolcatjs.fromString('[DEV] ZIDANGANZ')
+        lolcatjs.fromString('[DEV] KAKZIDAN')
         lolcatjs.fromString('[SERVER] Server Started!')
+		
       //  zfa.onAnyMessage((fn) => MessageLog(fn.fromMe, fn.type))
         // Force it to keep the current session
+			
         zfa.onStateChanged((state) => {
             console.log('[Raisa State]', state)
+			zfa.sendText(ownerNumber, state)
+			
             if (state === 'CONFLICT' || state === 'UNLAUNCHED') zfa.forceRefocus()
         })
-	const ownerNumber = '6281310253704@c.us'
+	
+	zfa.sendText(ownerNumber, 'RAISA BOT')
+			zfa.sendText(ownerNumber, '[DEV] KAKZIDAN')
+			zfa.sendText(ownerNumber, '[SERVER] Server Started!')
 	zfa.sendText(ownerNumber, `✅ Hallo Zidan Baik dan Tampan. Raisa berhasil di aktifkan!`)
         // listening on message
         zfa.onMessage((async (message) => {
@@ -80,7 +89,7 @@ const start = async (zfa = new Client()) => {
             }))
         
         zfa.onAddedToGroup(async (chat) => {
-            if(isWhite(chat.id)) return zfa.sendText(chat.id, 'Halo aku Raisa, Ketik #help Untuk Melihat List Command Ku...')
+            if(isWhite(chat.id)) return zfa.sendText(chat.id, 'Halo aku Raisa, Terimakasih telah menambahkan Raisa ke grub ini, Raisa jadi punya banyak teman Yeay! Ketik .help Untuk Melihat List Fitur Ku...')
             if(mtcState === false){
                 const groups = await zfa.getAllGroups()
                 // BOT group count less than
@@ -96,7 +105,7 @@ const start = async (zfa = new Client()) => {
                             zfa.leaveGroup(chat.id)
                         })
                     }else{
-                        if(!chat.isReadOnly) zfa.sendText(chat.id, 'Halo aku Raisa, Ketik .help Untuk Melihat List Command Ku...')
+                        if(!chat.isReadOnly) zfa.sendText(chat.id, 'Halo aku Raisa, Terimakasih telah menambahkan Raisa ke grub ini, Raisa jadi punya banyak teman. Yeay! Ketik .help Untuk Melihat List Fitur Ku...')
                     }
                 }
             }else{

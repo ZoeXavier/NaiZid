@@ -270,6 +270,8 @@ module.exports = zfa = async (zfa, message) => {
         }
 		// Biar Dek Raisa Baca Chatt Secara Otomatis
          zfa.sendSeen(chatId)
+		 // Mengetikkk
+		 zfa.simulateTyping(from, true)
         // Generates a Serial Number, based on a certain mask
         function GenerateSerialNumber(mask){
             var serialNumber = "";
@@ -706,10 +708,7 @@ module.exports = zfa = async (zfa, message) => {
                 addBadCount(serial)
         }
         if (args.includes('@84927940100')) { //replace with your bot number
-            zfa.reply(from, 'Iya ada apa kak?', id)
-        }
-		if (args.includes('@6281310253704')) { //replace with your bot number
-            zfa.reply(from, 'Ngapain tag owner aku yang baik dan tampan? Suka ya? Maaf kak Owner aku udah ada yang punya.', id)
+            zfa.reply(from, 'Iya ada apa?', id)
         }
 		if (args.includes('ngab')) { //Edit ae ngab
             zfa.reply(from, '🆖🆎', id)
@@ -724,13 +723,13 @@ module.exports = zfa = async (zfa, message) => {
             zfa.reply(from, `sama-sama *${pushname}* 💖`, id)
         }
 		if (args.includes('shalom')) { //Edit sesuka hati kamu sayang
-            zfa.reply(from, `_Shallom *${pushname}*_ 💖\nKetik ${prefix}menu untuk melihat fitur bot`, id)
+            zfa.reply(from, `_Shallom *${pushname}*_ 💖\nKetik #menu untuk melihat fitur bot`, id)
         }
 		if (args.includes('shallom')) { //Edit sesuka hati kamu sayang
-            zfa.reply(from, `_Shallom *${pushname}*_ 💖\nKetik ${prefix}menu untuk melihat fitur bot`, id)
+            zfa.reply(from, `_Shallom *${pushname}*_ 💖\nKetik #menu untuk melihat fitur bot`, id)
         }
 		if (args.includes('assalamualaikum')) { //Edit sesuka hati kamu sayang
-            zfa.reply(from, `_Waalaikumsalam *${pushname}*_ 💖\nKetik ${prefix}menu untuk melihat fitur bot`, id)
+            zfa.reply(from, `_Waalaikumsalam *${pushname}*_ 💖`, id)
         }
         /*if (args.includes('zidan')) {
             const zid = body.slice(4)
@@ -741,9 +740,9 @@ module.exports = zfa = async (zfa, message) => {
                         zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\n\n${zid}`)
                         zfa.reply(from, 'HAYOO LAGI NGOMONGIN OWNER YAH. RAISA CEPUIN AH :D', id)
         }*/
-                if(body === '#mute' && isMuted(chatId) == true){
+                if(body === '.mute' && isMuted(chatId) == true){
                     if(isGroupMsg) {
-                        if (!isAdmin) return zfa.reply(from, 'Maaf, perintah ini hanya dapat dilakukan oleh admin Raisa!', id)
+                        if (!isGroupAdmins) return zfa.reply(from, 'Maaf kak fitur ini hanya untuk Admin grub Yang Tampan Dan Cantik.', id)
                         if(isMsgLimit(serial)){
                             return
                         }else{
@@ -751,7 +750,7 @@ module.exports = zfa = async (zfa, message) => {
                         }
                         muted.push(chatId)
                         fs.writeFileSync('./lib/database/muted.json', JSON.stringify(muted, null, 2))
-                        zfa.reply(from, 'Bot telah di mute pada chat ini! #unmute untuk unmute!', id)
+                        zfa.reply(from, 'Bot telah di mute pada chat ini! .unmute untuk unmute!', id)
                     }else{
                         if(isMsgLimit(serial)){
                             return
@@ -786,9 +785,9 @@ module.exports = zfa = async (zfa, message) => {
                             zfa.sendText(from, `Tidak ada gambar! Untuk membuat sticker kirim gambar dengan caption \n${prefix}stiker`)
                         }
                     }
-                if(body === '#unmute' && isMuted(chatId) == false){
+                if(body === '.unmute' && isMuted(chatId) == false){
                     if(isGroupMsg) {
-                        if (!isAdmin) return zfa.reply(from, 'Maaf, perintah ini hanya dapat dilakukan oleh admin Raisa!', id)
+                        if (!isGroupAdmins) return zfa.reply(from, 'Maaf kak fitur ini hanya untuk Admin grub Yang Tampan Dan Cantik.', id)
                         if(isMsgLimit(serial)){
                             return
                         }else{
@@ -813,13 +812,12 @@ module.exports = zfa = async (zfa, message) => {
 				if(body === 'zidan') { // Edit jadi nama nte
                    // if (args.length === 1) return zfa.reply(from, '[❗] Kirim perintah *#bugreport [teks]*\ncontoh : *#bugreport Permisi Owner, Ada bug pada command #otakudesu, Tolong diperbaiki*')
                     const zid = body.slice(6)
-                   // if(!bug) return
                     if(isGroupMsg){
                         zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\nGroup : ${formattedTitle}\n\n${zid}`)
-                        zfa.reply(from, 'Masalah telah di laporkan ke owner BOT, laporan palsu/main2 tidak akan ditanggapi.' ,id)
+                        zfa.reply(from, 'Hayooo Kakak lagi ngomongin Owner Raisa yah... Raisa Cepuin Ahhhh :D' ,id)
                     }else{
                         zfa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\n\n${zid}`)
-                        zfa.reply(from, 'Masalah telah di laporkan ke owner BOT, laporan palsu/main2 tidak akan ditanggapi.', id)
+                        zfa.reply(from, 'Hayooo Kakak lagi ngomongin Owner Raisa yah... Raisa Cepuin Ahhhh :D', id)
                     }
 
                 if (body === '#unbanchat') {
@@ -887,7 +885,7 @@ module.exports = zfa = async (zfa, message) => {
 					}
 					break
 		case prefix+'imgtopdf':
-		case prefix+'topdf':
+		/////case prefix+'topdf':
 					if (isMedia && isImage || isQuotedImage) {
 						await zfa.reply(from, mess.wait, id)
 						const skript = isQuotedImage ? quotedMsg : message
@@ -935,27 +933,7 @@ module.exports = zfa = async (zfa, message) => {
 						zfa.reply(from, 'Format pesan salah, hanya bisa foto', id)
 					}
 					break
-		case prefix+'ytdl':
-		if (args.length == 0) return zfa.reply(from, 'Kirim perintah /ytdl <query>\nContoh : /ytdl slow dancing in the dark', id)
-		zfa.reply(from, mess.wait, id)
-	   const pncrian = body.slice(6)
-	   axios.get(`https://api.vhtear.com/ytmp3?query=${pncrian}&apikey=${vhtearkey}`)
-		.then(async(res) => {
-		await zfa.sendFileFromUrl(from, `${res.data.result.image}`, '', `「 *Youtube Download* 」\n\nJudul: ${res.data.result.title}\nDurasi: ${res.data.result.duration}\nSize: ${res.data.result.size}\nURL: ${res.data.result.url}\n\n*_Waitt, sedang di prosess oleh Bot!_*`, id)
-		const saveit2 = await fetch(res.data.result.mp3)
-		const bufflah = await saveit2.buffer();
-		await sleep(1000)
-		fs.writeFile('./media/lagu.mp3', bufflah)
-		await zfa.sendFile(from, './media/lagu.mp3', '', '', id)
-		rugaapi.ymp4(`https://youtu.be/${res.data.result.id}`)
-		.then(async(res) => {
-		await zfa.sendFileFromUrl(from, res.result, '', '', id)
-		.catch(() => {
-		zfa.reply(from, 'Maaf, terjadi kesalahan', id)
-		})
-		})
-		})
-		break
+		
 		case prefix+'santet':
 		if(isReg(obj)) return
            
@@ -1020,7 +998,7 @@ module.exports = zfa = async (zfa, message) => {
 						const skript = isQuotedImage ? quotedMsg : message
 						const mediaData = await decryptMedia(skript, uaOverride)
 						const linksx = await uploadImages(mediaData, `${sender.id}_img`)
-						await zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/convert/imgtopdf?apikey=NaisaPunyaZidan&img=${linksx}`, `${sender.id}`, '', id)
+						await zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/convert/imgtopdf?apikey=${lolhuman}&img=${linksx}`, `${sender.id}`, '', id)
 					} else {
 						zfa.reply(from, 'Format pesan salah', id)
 					}
@@ -1231,10 +1209,10 @@ break
             if(isReg(obj)) return
            
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
-				zfa.reply(from, `Fitur masih dalam perbaikan`, id)
          //   if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            /*zfa.reply(from, mess.wait, id)
-            const googleQuery = body.slice(8)
+            zfa.reply(from, mess.wait, id)
+		zfa.reply(from, 'Dalam perbaikan', id)
+            /*const googleQuery = body.slice(8)
             if(googleQuery == undefined || googleQuery == ' ') return zfa.reply(from, `*Hasil Pencarian : ${googleQuery}* tidak ditemukan`, id)
             google({ 'query': googleQuery }).then(results => {
             let vars = `_*Hasil Pencarian : ${googleQuery}*_\n`
@@ -1246,8 +1224,8 @@ break
             }).catch(e => {
                 console.log(e)
                 zfa.sendText(ownerNumber, 'Google Error : ' + e);
-            })*/
-            break
+            })
+            break*/
 		case prefix+'bass':
                 if(isReg(obj)) return
               
@@ -1402,7 +1380,7 @@ break
         case prefix+'translate':
             if(isReg(obj)) return
            
-            if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
+           // if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
        //     if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if(args[1] == undefined || args[2] == undefined) return
             if(args.length >= 2){
@@ -1416,6 +1394,20 @@ break
                 });
             }
             break
+		case prefix+'tr':
+		if(isReg(obj)) return
+		if(args[1] == undefined || args[2] == undefined) return
+        if(args.length >=2){
+         var codelang = args[1]	
+var textai = body.slice(4+codelang.length);
+                translatte(textai, {to: codelang}).then(res => {
+                    zfa.reply(from,res.text, id);
+                    limitAdd(serial)
+                }).catch(err => {
+                     zfa.sendText(from,`[ERROR] Teks tidak ada, atau kode bahasa ${codelang} tidak support\n~> *${prefix}bahasa* untuk melihat list kode bahasa`);
+                });
+            }
+            break		 
 		case prefix+'left':
             if(isReg(obj)) return
          
@@ -1452,6 +1444,7 @@ break
                 zfa.reply(from, 'Pilih enable atau disable udin!', id)
             }
             break
+		case prefix+'lock':
 		case prefix+'lock':
 			if(isReg(obj)) return
           
@@ -1871,7 +1864,7 @@ break
             if(isReg(obj)) return
           //  if (isLimit(serial)) return 
             try {
-            const ytstalk2 = await axios.get(`http://lolhuman.herokuapp.com/api/ytchannel?apikey=NaisaPunyaZidan&query=${body.slice(9)}`)
+            const ytstalk2 = await axios.get(`http://lolhuman.herokuapp.com/api/ytchannel?apikey=NaisaZidan&query=${body.slice(9)}`)
             const nzcocok =
             `Channel Ditemukan
             
@@ -2086,17 +2079,17 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             if(isReg(obj)) return
            
          //   if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#thunder [ Teks ]*, contoh *.thunder Jeager*`, id)
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#thunder [ Teks ]*, contoh *#thunder Jeager*`, id)
             zfa.reply(from, mess.wait, id)
             const thndr = body.slice(9)
             if (thndr.length > 10) return zfa.reply(from, '*Teks Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
-            await zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/textprome/thunder?apikey=NaisaPunyaZidan0&text=${thndr}`, 'thndr.jpg', 'Follow Me On: instagram.com/_zidanfadilaharsa', id)
+            await zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/textprome/thunder?apikey=7ae631348bca4b16425b40a0&text=${thndr}`, 'thndr.jpg', 'Follow Me On: instagram.com/_zidanfadilaharsa', id)
             break
 		case prefix+'glitch':
             if(isReg(obj)) return
             
           //  if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#glitch [ |Teks1|Teks2 ]*, contoh *.glitch |Jeager|Dev Jarvis*`, id)
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#glitch [ |Teks1|Teks2 ]*, contoh *#glitch |Jeager|Dev Jarvis*`, id)
             argz = body.trim().split('|')
             if (argz.length >= 2) {
                 zfa.reply(from, mess.wait, id)
@@ -2104,10 +2097,10 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                 const glitch2 = argz[2]
                 if (glitch1.length > 10) return zfa.reply(from, '*Teks1 Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
                 if (glitch2.length > 15) return zfa.reply(from, '*Teks2 Terlalu Panjang!*\n_Maksimal 15 huruf!_', id)
-                zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/textprome2/glitch?apikey=NaisaPunyaZidan&text1=${glitch1}&text2=${glitch2}`)
+                zfa.sendFileFromUrl(from, `http://lolhuman.herokuapp.com/api/textprome2/glitch?apikey=7ae631348bca4b16425b40a0&text1=${glitch1}&text2=${glitch2}`)
                 await limitAdd(serial)
             } else {
-                await zfa.reply(from, `Wrong Format!\n[❗] Kirim perintah *#glitch [ |Teks1|Teks2 ]*, contoh *.glitch |Jeager|Dev Jarvis*`, id)
+                await zfa.reply(from, `Wrong Format!\n[❗] Kirim perintah *#glitch [ |Teks1|Teks2 ]*, contoh *#glitch |Jeager|Dev Jarvis*`, id)
             }
             break
 		case prefix+'pornhub':
@@ -2115,7 +2108,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             if(isReg(obj)) return
             
          //   if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#pornhub [ |Teks1|Teks2 ]*, contoh *.pornhub |Jeager|Dev Jarvis*`, id)
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#pornhub [ |Teks1|Teks2 ]*, contoh *#pornhub |Jeager|Dev Jarvis*`, id)
             argz = body.trim().split('|')
             if (argz.length >= 2) {
                 zfa.reply(from, mess.wait, id)
@@ -2720,8 +2713,8 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             for(let lmt of limidat){
                 if(lmt.id === serial){
                     let limitCounts = limitCount-lmt.limit
-                    if(limitCounts <= 0) return zfa.reply(from, `Limit join grub anda sudah habis\n\n_Note : Jika ingin limit direset silahkan chatt owner_`, id)
-                    zfa.reply(from, `Sisa limit join grub anda tersisa : *${limitCounts}*\n\n_Note : Jika ingin limit direset silahkan chatt owner_`, id)
+                    if(limitCounts <= 0) return zfa.reply(from, `Limit  anda sudah habis\n\n_Note : Jika ingin limit direset silahkan chatt owner_`, id)
+                    zfa.reply(from, ` limitanda tersisa : *${limitCounts}*\n\n_Note : Jika ingin limit direset silahkan chatt owner_`, id)
                     found = true
                 }
             }
@@ -2733,6 +2726,21 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                 fs.writeFileSync('./lib/database/limit.json',JSON.stringify(limit, 1));
                 zfa.reply(from, `Sisa limit join grub anda tersisa : *${limitCount}*\n\n_Note : Jika ingin limit direset silahkan chatt owner__`, id)
             }
+            break
+		case prefix+'addadmin':
+            if (!isOwner) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner Raisa yang banik dan tampan', id)
+                for (let i = 0; i < mentionedJidList.length; i++) {
+                adminNumber.push(mentionedJidList[i])
+                fs.writeFileSync('./lib/database/admin.json', JSON.stringify(adminNumber))
+                zfa.reply(from, 'Success Menambahkan Admin Elaina!', id)
+                }
+            break
+        case prefix+'deladmin':
+            if (!isOwner) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner Raisa yang banik dan tampan', id)
+                let inq = adminNumber.indexOf(mentionedJidList[0])
+                adminNumber.splice(inq, 1)
+                fs.writeFileSync('./lib/database/admin.json', JSON.stringify(adminNumber))
+                zfa.reply(from, 'Success Menghapus Admin Elaina!', id)
             break
 		 case prefix+'delete':
             if (!isGroupMsg) return zfa.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', id)
@@ -3769,7 +3777,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
                 zfa.reply(from, `Maaf, Terjadi Kesalahan`, id)
             })
             break
-		/*case prefix+'ig':
+		case prefix+'ig':
         case prefix+'instagram':
                            if (args.length == 0) return zfa.reply(from, `Kirim perintah *${prefix}ig [linkIg]*`, id)
 						   zfa.reply(from, mess.wait, id)
@@ -3784,7 +3792,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
 				.catch(err => {
 					zfa.reply(from, `Error\nSilahkan gunakan ${prefix}ig2`, id)
 				})
-                                break*/
+                                break
 	    /*case prefix+'tik':
 		case prefix+'tiktok':
 		case prefix+'tiktoknowm':
@@ -4244,6 +4252,7 @@ break
                                     })
                             break
 	    case prefix+'ytmp3':
+		if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
 		if (args.length == 0) return zfa.reply(from, `Untuk mendownload audio dari youtube\nketik: ${prefix}ytmp3 <link yt> (don't include <> symbol)`, id)
                     if (arg.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/) === null) return zfa.reply(from, `Link youtube tidak valid.`, id)
                     zfa.sendText(from, 'Bentar ya kak lagi raisa proses nih mohon tunggu sebentar...', id)
@@ -4288,6 +4297,7 @@ break
                     }
                     break
 					case prefix+'ytmp4':
+					if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
 					if (args.length == 0) return zfa.reply(from, `Untuk mendownload video dari youtube\nketik: ${prefix}ytmp4 <link yt> (don't include <> symbol)`, id)
                     if (arg.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/) === null) return zfa.reply(from, `Link youtube tidak valid.`, id)
                     zfa.reply(from, 'Bentar ya kak lagi Raisa proses nih, Mohon tunggu sebentar', id)
@@ -4369,6 +4379,46 @@ break
                         zfa.reply(from, 'Aduh error kak. Silahkan coba lagi, jika masalah berkelanjutan silahkan hubungi ownerku yang baik dan tampan.', id)
                     }
                     break*/
+					
+				case prefix+'clearall':
+            if (!isOwner) return zfa.reply(from, 'Perintah ini hanya untuk Owner Raisa yang baik dan tampan', id)
+            const allChatz = await zfa.getAllChats()
+            for (let dchat of allChatz) {
+                await zfa.deleteChat(dchat.id)
+            }
+            zfa.reply(from, 'Succes clear all chat!', id)
+            break
+			
+			case prefix+'block':
+            if (!isOwner) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner Raisa yang baik dan tampan', id)
+            for (let i = 0; i < mentionedJidList.length; i++) {
+                let unblock = `${mentionedJidList[i]}`
+                await zfa.contactBlock(unblock).then((a)=>{
+                    console.log(a)
+                    zfa.reply(from, `Success block ${args[1]}!`, id)
+                })
+            }
+            break
+	
+        case prefix+'unblock':
+            if (!isOwner) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner Raisa yang baik dan tampan', id)
+            for (let i = 0; i < mentionedJidList.length; i++) {
+                let unblock = `${mentionedJidList[i]}`
+                await zfa.contactUnblock(unblock).then((a)=>{
+                    console.log(a)
+                    zfa.reply(from, `Success unblok ${args[1]}!`, id)
+                })
+            } 
+            break
+		case prefix+'ban':
+            if (!isAdmin) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh admin Elaina!', id)
+            for (let i = 0; i < mentionedJidList.length; i++) {
+                if ((adminNumber).includes(mentionedJidList[i])) return zfa.reply(from,`Maaf ${pushname}, Kamu tidak bisa banned Admin Elaina!`, id)
+                banned.push(mentionedJidList[i])
+                fs.writeFileSync('./lib/banned.json', JSON.stringify(banned))
+                zfa.reply(from, `Succes ban target!`,id)
+            }
+            break
 		/*case prefix+'yts':
 		if (args.length == 0) return zfa.reply(from, `Contoh ${prefix}yts Zidan Fadilah Arsa`, id)
                     
@@ -4508,7 +4558,8 @@ break
                     break
 		case prefix+'play'://silahkan kalian custom sendiri jika ada yang ingin diubah
            //zfa.reply(from, 'Fitur ini di nonaktfkan oleh onwer', id)
-		  if (args.length == 1) return zfa.reply(from, `Untuk mencari lagu from youtube\n\nPenggunaan: ${prefix}play judul lagu`, id)
+		   if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
+		  if (args.length == 1) return zfa.reply(from, `Untuk mencari lagu from youtube\n\nPenggunaan: #play judul lagu`, id)
                     try {
                         zfa.reply(from, mess.wait, id)
                         const serplay = body.slice(6)
@@ -4575,7 +4626,7 @@ break
             if (quotedMsg && quotedMsg.type == 'image') {
                 if (!Number(args[1])) return zfa.reply(from, `*Apabila ditag hanya cantumkan nomer urutan bukan ID Download!*\nContoh : *${prefix}getvideo 1*`, id)
                 const dataDownmp3 = quotedMsg.type == 'chat' ? quotedMsg.body : quotedMsg.type == 'image' ? quotedMsg.caption : ''
-                const pilur = dataDownmp3.split('(.)')
+                const pilur = dataDownmp3.split('(#)')
                 console.log(pilur[args[1]])
                 zfa.reply(from, mess.wait, id)
                 const mhanky45 = await fetch(`https://api.vhtear.com/ytdl?link=https://youtu.be/${pilur[args[1]]}&apikey=${vhtearkey}`)
@@ -4824,7 +4875,7 @@ break
           //  if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#shorturl [linkWeb]*\nContoh : *#shorturl https://neonime.vip*', id)
             const shorturl2 = body.slice(9)
-            const tiny1 = await axios.get('http://lolhuman.herokuapp.com/api/shortlink?apikey=NaisaPunyaZidan&url=' + shorturl2)
+            const tiny1 = await axios.get('http://lolhuman.herokuapp.com/api/shortlink?apikey=7ae631348bca4b16425b40a0&url=' + shorturl2)
             const tiny2 = tiny1.data
             if (tiny2.error) return zfa.reply(from, tiny2.error, id)
             const surl3 = `Link : ${shorturl2}\nShort URL : ${tiny2.result}`
@@ -4861,12 +4912,12 @@ break
             break*/  
 		case prefix+'loli':
             if(isReg(obj)) return
-           //zfa.reply(from, `Aduh error kak. Owner Raisa belum beli api key vhtear lagi, Duitnya habis buat jajanin cw nya. Donasi dong kak *${pushname}* Ketik *${prefix}donasi* Jika ingin membantu`, id)
+          
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
            // if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            const loli = await axios.get(`https://api.vhtear.com/randomloli&apikey=NaisaZidan`)
+            const loli = await axios.get(`https://api.vhtear.com/randomloli&apikey=NaisaPunyaZidan`)
             const loly = loli.data.result
-            zfa.sendFileFromUrl(from, loly.result, 'loli.jpeg', `Follow ya ka ${pushname} instagram.com/_zidanfadilaharsa`, id)
+            zfa.sendFileFromUrl(from, loly.result, 'loli.jpeg', `Subscribe ya ka ${pushname} youtube.com/zidanfadilaharsazfaa`, id)
             await limitAdd(serial)
             break
 	    case prefix+'ttg':
@@ -4902,7 +4953,7 @@ break
             if(isReg(obj)) return
           
          //   if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}lovemessage [ Teks ]*, contoh *${prefix}lovemessage Nay*`, id)
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}lovemessage [ Teks ]*, contoh *${prefix}lovemessage Tobz*`, id)
             zfa.reply(from, mess.wait, id)
             const lovemsg = body.slice(12)
             if (lovemsg.length > 10) return zfa.reply(from, '*Teks Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
@@ -4912,7 +4963,7 @@ break
             if(isReg(obj)) return
          
       //      if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}party [ Teks ]*, contoh *${prefix}party NaisaZidan*`, id)
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}party [ Teks ]*, contoh *${prefix}party ZidanGanzz*`, id)
             zfa.reply(from, mess.wait, id)
             const prty = body.slice(7)
             if (prty.length > 10) return zfa.reply(from, '*Teks Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
@@ -4922,7 +4973,7 @@ break
             if(isReg(obj)) return
            
        //     if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}romance [ Teks ]*, contoh *${prefix}romance NaisaPunyaZidan*`, id)
+            if (args.length === 1) return zfa.reply(from, `Kirim perintah *${prefix}romance [ Teks ]*, contoh *${prefix}romance ZidanGanzz*`, id)
             zfa.reply(from, mess.wait, id)
             const rmnc = body.slice(9)
             if (rmnc.length > 10) return zfa.reply(from, '*Teks Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
