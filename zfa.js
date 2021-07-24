@@ -2735,13 +2735,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                 zfa.reply(from, 'Success Menambahkan Admin Elaina!', id)
                 }
             break
-        case prefix+'deladmin':
-            if (!isOwner) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner Raisa yang banik dan tampan', id)
-                let inq = adminNumber.indexOf(mentionedJidList[0])
-                adminNumber.splice(inq, 1)
-                fs.writeFileSync('./lib/database/admin.json', JSON.stringify(adminNumber))
-                zfa.reply(from, 'Success Menghapus Admin Elaina!', id)
-            break
+       
 		 case prefix+'delete':
             if (!isGroupMsg) return zfa.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', id)
             if (!isGroupAdmins) return zfa.reply(from, 'Fitur ini hanya bisa di gunakan oleh admin group', id)
