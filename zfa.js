@@ -2708,13 +2708,15 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             if(isReg(obj)) return
             
             if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+				if(isAdmin) return zfa.reply(from, `limit anda tersisa : *UNLIMITED*\n\n_Note : Berlaku sampai bot mati_`, id)
             var found = false
             const limidat = JSON.parse(fs.readFileSync('./lib/database/limit.json'))
             for(let lmt of limidat){
                 if(lmt.id === serial){
                     let limitCounts = limitCount-lmt.limit
-                    if(limitCounts <= 0) return zfa.reply(from, `Limit  anda sudah habis\n\n_Note : Jika ingin limit direset silahkan chatt owner_`, id)
-                    zfa.reply(from, ` limitanda tersisa : *${limitCounts}*\n\n_Note : Jika ingin limit direset silahkan chatt owner_`, id)
+                    if(limitCounts <= 0) return zfa.reply(from, `Limit anda sudah habis\n\n_Note : Jika ingin limit direset silahkan chatt owner_`, id)
+                    zfa.reply(from, ` limit anda tersisa : *${limitCounts}*\n\n_Note : Jika ingin limit direset silahkan chatt owner_`, id)
+				    
                     found = true
                 }
             }
@@ -2732,7 +2734,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                 for (let i = 0; i < mentionedJidList.length; i++) {
                 adminNumber.push(mentionedJidList[i])
                 fs.writeFileSync('./lib/database/admin.json', JSON.stringify(adminNumber))
-                zfa.reply(from, 'Success Menambahkan Admin Elaina!', id)
+                zfa.reply(from, 'Success Menambahkan Admin Raisa', id)
                 }
             break
        
