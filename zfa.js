@@ -91,6 +91,10 @@ const {
     picturemis
     } = require('./lib/fetcher')
 
+
+
+const _afk = JSON.parse(fs.readFileSync('./lib/database/afk.json'))
+//const tebak = require('./lib/tebak.js')
 // LOAD FILE
 let banned = JSON.parse(fs.readFileSync('./lib/database/banned.json'))
 let nsfw_ = JSON.parse(fs.readFileSync('./lib/database/nsfwz.json'))
@@ -159,7 +163,8 @@ module.exports = zfa = async (zfa, message) => {
         const command = commands.toLowerCase().split(' ')[0] || ''
 
         global.prefix
-        
+        const q = body.slice(5)
+        const reason = q ? q : 'Gada alasan'
         const time = moment(t * 1000).format('DD/MM HH:mm:ss')
         const botNumber = await zfa.getHostNumber()
         const blockNumber = await zfa.getBlockedIds()
@@ -201,10 +206,85 @@ module.exports = zfa = async (zfa, message) => {
         const timu = moment(t * 1000).format('DD/MM/YYYY');
         const timi = moment(t * 1000).add(30, 'days').calendar();
 		
+		
+		const addAfk = (userId, time) => {
+		let obj = {id: `${userId}`, time: `${time}`, reason: `${reason}`}
+		_afk.push(obj)
+		fs.writeFileSync('./lib/database/afk.json', JSON.stringify(_afk))
+		}
+		
+		const getAfk = (userId) => {
+			let isAfk = false
+			Object.keys(_afk).forEach((i) => {
+				if (_afk[i].id === userId) {
+				isAfk = true
+				
+			}
+			})
+			return isAfk
+			}
+
+		const getAfkReason = (userId) => {
+				let position = false
+				Object.keys(_afk).forEach((i) => {
+				if (_afk[i].id === userId) {
+					position = i
+				}
+			})
+			if (position !== false) {
+				return _afk[position].reason
+			}
+		}
+
+		const getAfkTime = (userId) => {
+			let position = false
+			Object.keys(_afk).forEach((i) => {
+			if (_afk[i].id === userId) {
+				position = i
+			}
+		})
+		if (position !== false) {
+			return _afk[position].time
+		}
+		}
+
+		const getAfkId = (userId) => {
+			let position = false
+			Object.keys(_afk).forEach((i) => {
+				if (_afk[i].id === userId) {
+					position = i
+				}
+			})
+			if (position !== false) {
+				return _afk[position].id
+			}
+			}
+
+
+	const isAfkOn = getAfk(sender.id)
+		if (isGroupMsg) {
+			const checking = getAfk(sender.id)
+			for (let ment of mentionedJidList) {
+				if(getAfk(ment)) {
+					const getId = getAfkId(ment)
+					const getReason = getAfkReason(getId)
+					const getTime = getAfkTime(getId)
+					await zfa.reply(from, `*「 AFK MODE 」*\n\nSssttt! Orangnya lagi afk, jangan diganggu!\n➸ *Alasan*: ${getReason}\n➸ *Sejak*: ${getTime}`, id)
+					zfa.sendText(userId, `Seseorang telah tag anda bernama @{pushname}`)
+					}
+				}
+				if (checking && !isCmd) {
+					_afk.splice(sender.id, 1)
+					fs.writeFileSync('./lib/database/afk.json', JSON.stringify(_afk))
+					zfa.sendTextWithMentions(from, `Kak @${sender.id.replace(/@c.us/g, '')} Telah kembali dari AFK selamat datang kembali~`)
+				}
+				}
+
         //const Premium = premium.checkPremiumUser(sender.id, _premium)
         const serial = sender.id
+		const userid = sender.id
         const isAdmin = adminNumber.includes(sender.id)
-        const ownerNumber = '6281310253704@c.us'
+        const ownerNumber = '77472105089@c.us'
         const isOwner = ownerNumber.includes(sender.id)
         //const isAfkOn = afk.checkAfkUser(sender.id, _afk)
         if (isGroupMsg && GroupLinkDetector && !isGroupAdmins && !isAdmin && !isOwner){
@@ -832,6 +912,32 @@ module.exports = zfa = async (zfa, message) => {
                     zfa.reply(from, 'Hayoooo kakak lagi ngomongin owner yaaaa', id)
                 }
         }
+		// Jika bot dimention maka akan merespon pesan
+        /*if (message?.mentionedJidList?.length == 1 && message?.mentionedJidList?.includes(botNumber)) {
+            let txt = chats.replace(/@\d+/g, '')
+            if (txt.length === 0) {
+                zfa.reply(`Iya, ada apa?`)
+            } else {
+                doSimi(txt)
+            }
+        }
+        if (quotedMsg?.fromMe && !isCmd && type === `chat`) tebak.getAns(from).then(res => {
+            if (!res) return doSimi(chats)
+        })
+		const doSimi = async (inp) => {
+            let apiSimi // set default simi di /utils/index.js
+            if (simi == 0) return null
+            if (simi == 1) apiSimi = (q) => api.simiLol(q)
+            if (simi == 2) apiSimi = (q) => api.simiPais(q)
+            if (simi == 3) apiSimi = (q) => api.simiZeks(q)
+            if (simi == 4) apiSimi = (q) => api.simiSumi(q)
+            let respon = await apiSimi(inp.replace(/\b(Raisa)\b/ig, 'simi')).catch(e => { return console.log(color('[ERR>]', 'red'), e) })
+            if (respon) {
+                console.log(color('[LOGS] Simi respond:', 'grey'), respon)
+                zfa.reply('▸ ' + respon.replace(/\b(simi|simsim|simsimi)\b/ig, 'Raisa'))
+            }
+        }*/
+		
         if (isMuted(chatId) && banChat() && !isBlocked && !isBanned || isOwner ) {
         switch(command) {
         case prefix+'banchat':
@@ -842,7 +948,12 @@ module.exports = zfa = async (zfa, message) => {
             fs.writeFileSync('./lib/database/setting.json', JSON.stringify(setting, null, 2))
             zfa.reply(from, 'Berhasil beralih ke mode Owner only.', id)
             break
-
+/*case /\b(bot|raisa|raisabot)\b/ig.test(chats): 
+                if (!isCmd) {
+                    let txt = chats.replace(/@\d+/g, '')
+                    return doSimi(txt)
+                }
+                break*/
         case prefix+'unmute':
             console.log(`Unmuted ${name}!`)
             await zfa.sendSeen(from)
@@ -1121,6 +1232,7 @@ break
                 const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`
                 await zfa.sendImageAsSticker(from, imageBase64, StickerMetadata)
 				console.log(color(`Sticker processed for ${processTime(t, moment())} seconds`, 'aqua'))
+				zfa.reply(from, `Join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp`, id)
 			} else {
 				zfa.reply(from, mess.error.St, id)
 			}			
@@ -1560,6 +1672,12 @@ var textai = body.slice(4+codelang.length);
                     }
                     zfa.sendFileFromUrl(from, ranime.url, `RandomAnime${ext}`, 'Random Anime!', id)
                     break
+		case prefix+'afk':
+             // if (!isGroupMsg) return await zfa.reply(from, 'Maaf, fitur ini hanya bisa digunakan didalam Grup!', id)
+                if (isAfkOn) return await zfa.reply(from, `${pushname} sekarang sedang *AFK (AWAY FROM KEYBOARD)*\n\nReason: ${reason}`, id)
+                addAfk(sender.id, time, reason)
+		zfa.sendTextWithMentions(from, `*@${sender.id.replace(/@c.us/g, '')} SEKARANG SEDANG AFK! (AWAY FROM KEYBOARD)*\n\n*Alasan: ${reason}*`)
+		break
 		 case prefix+'quran':
             if(isReg(obj)) return
          
@@ -2244,7 +2362,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             const sesPic = await zfa.getSnapshot()
             zfa.sendFile(from, sesPic, 'session.png', 'Nih boss', id)
             break
-        case prefix+'raisaadmin':
+        case prefix+'listcakep':
             let admn = `This is list of Raisa Admin\nTotal : ${adminNumber.length}\n`
             for (let i of adminNumber) {
                 admn += `➸ ${i.replace(/@c.us/g,'')}\n`
@@ -2409,6 +2527,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             }
             break
 		case prefix+'take':
+		//if (!isAdmin) return zfa.reply(from, `Khusus orang Ganteng Dan Cantik ketik *${prefix}aduh* Untung melihat cara jadi Orang Ganteng dan Cantik`, id)
                     if (quotedMsg && quotedMsg.type == 'sticker' || quotedMsg && quotedMsg.type == 'image') {
                         argz = body.trim().split('|') //zfa.reply(from, 'Contoh #take |Raisa Punya|ZidanGanzz', id)
                         await zfa.reply(from, mess.wait, id)
@@ -2428,6 +2547,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
                         const mediaData = await decryptMedia(message, uaOverride)
 						const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
                         await zfa.sendImageAsSticker(from, imageBase64, { author: `${authors}`, pack: `${packnames}` })
+						zfa.reply(from, `Join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp`, id)
 					} else {
 						zfa.reply(from, 'format pesan salah kak', id)
 					}
@@ -2739,6 +2859,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             break
        
 		 case prefix+'delete':
+		 case prefix+'del':
             if (!isGroupMsg) return zfa.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', id)
             if (!isGroupAdmins) return zfa.reply(from, 'Fitur ini hanya bisa di gunakan oleh admin group', id)
             if (!quotedMsg) return zfa.reply(from, 'Salah!!, kirim perintah *#delete [tagpesanbot]*', id)
@@ -2848,6 +2969,7 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             })
             break  // BY MFARELS
 		case prefix+'join':
+		//if (!isAdmin) return zfa.reply(from, `Khusus orang Ganteng Dan Cantik ketik *${prefix}aduh* Untung melihat cara jadi Orang Ganteng dan Cantik`, id)
            // if (args.length === 1) return zfa.reply(from, 'Hanya Owner yang bisa memasukan Bot ke dalam Grup!', id)
            // if (!isOwner) return zfa.reply(from, 'Fitur Ini Hanya Untuk Zidan Tersayang :*', id)
 			if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
@@ -2856,15 +2978,21 @@ Created: ${ytstalk2.data.result[0].channel_created} ${mess.iklan}`
             const minMem = 5
             const isLink = link.match(/(https:\/\/chat.whatsapp.com)/gi)
             const check = await zfa.inviteInfo(link)
-            if (!isLink) return zfa.reply(from, 'Contoh: #join https://chat.whatsapp.com/xnxx', id)
+            if (!isLink) return zfa.reply(from, 'Contoh: .join https://chat.whatsapp.com/xnxx', id)
             if (tGr.length > 256) return zfa.reply(from, 'Maaf jumlah group sudah maksimal!', id)
             if (check.size < minMem) return zfa.reply(from, 'Member group tidak melebihi 5, bot tidak bisa masuk', id)
             if (check.status === 200) {
                 await zfa.joinGroupViaLink(link).then(() => zfa.reply(from, 'Okey kak. Raisa akan join', id))
+				zfa.reply(from, `Kak *${pushname}* join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp`, id)
+				
             } else {
                 zfa.reply(from, 'Link group tidak valid!', id)
             }
             break
+		case prefix+'aduh':
+		zfa.reply(from, `Ingin join ke list orang cakep? Cukup bayar Rp5.0000 Berlaku sampai bot mati. 
+		Ketik *${prefix}donasi* untuk melihat metode pembayaran`, id)
+		break
 		case prefix+'demote':
             if (!isGroupMsg) return zfa.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', id)
             if (!isGroupAdmins) return zfa.reply(from, 'Fitur ini hanya bisa di gunakan oleh admin group', id)
@@ -3204,10 +3332,12 @@ Nte owner?`, id)
                         }
             break
 		case prefix+'wallanime' :
+		if (!isAdmin) return zfa.reply(from, `Khusus orang Ganteng Dan Cantik ketik *${prefix}aduh* Untung melihat cara jadi Orang Ganteng dan Cantik`, id)
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             const walnime = ['https://wallpaperaccess.com/full/395986.jpg','https://wallpaperaccess.com/full/21628.jpg','https://wallpaperaccess.com/full/21622.jpg','https://wallpaperaccess.com/full/21612.jpg','https://wallpaperaccess.com/full/21611.png','https://wallpaperaccess.com/full/21597.jpg','https://cdn.nekos.life/wallpaper/QwGLg4oFkfY.png','https://wallpaperaccess.com/full/21591.jpg','https://cdn.nekos.life/wallpaper/bUzSjcYxZxQ.jpg','https://cdn.nekos.life/wallpaper/j49zxzaUcjQ.jpg','https://cdn.nekos.life/wallpaper/YLTH5KuvGX8.png','https://cdn.nekos.life/wallpaper/Xi6Edg133m8.jpg','https://cdn.nekos.life/wallpaper/qvahUaFIgUY.png','https://cdn.nekos.life/wallpaper/leC8q3u8BSk.jpg','https://cdn.nekos.life/wallpaper/tSUw8s04Zy0.jpg','https://cdn.nekos.life/wallpaper/sqsj3sS6EJE.png','https://cdn.nekos.life/wallpaper/HmjdX_s4PU4.png','https://cdn.nekos.life/wallpaper/Oe2lKgLqEXY.jpg','https://cdn.nekos.life/wallpaper/GTwbUYI-xTc.jpg','https://cdn.nekos.life/wallpaper/nn_nA8wTeP0.png','https://cdn.nekos.life/wallpaper/Q63o6v-UUa8.png','https://cdn.nekos.life/wallpaper/ZXLFm05K16Q.jpg','https://cdn.nekos.life/wallpaper/cwl_1tuUPuQ.png','https://cdn.nekos.life/wallpaper/wWhtfdbfAgM.jpg','https://cdn.nekos.life/wallpaper/3pj0Xy84cPg.jpg','https://cdn.nekos.life/wallpaper/sBoo8_j3fkI.jpg','https://cdn.nekos.life/wallpaper/gCUl_TVizsY.png','https://cdn.nekos.life/wallpaper/LmTi1k9REW8.jpg','https://cdn.nekos.life/wallpaper/sbq_4WW2PUM.jpg','https://cdn.nekos.life/wallpaper/QOSUXEbzDQA.png','https://cdn.nekos.life/wallpaper/khaqGIHsiqk.jpg','https://cdn.nekos.life/wallpaper/iFtEXugqQgA.png','https://cdn.nekos.life/wallpaper/deFKIDdRe1I.jpg','https://cdn.nekos.life/wallpaper/OHZVtvDm0gk.jpg','https://cdn.nekos.life/wallpaper/YZYa00Hp2mk.jpg','https://cdn.nekos.life/wallpaper/R8nPIKQKo9g.png','https://cdn.nekos.life/wallpaper/_brn3qpRBEE.jpg','https://cdn.nekos.life/wallpaper/ADTEQdaHhFI.png','https://cdn.nekos.life/wallpaper/MGvWl6om-Fw.jpg','https://cdn.nekos.life/wallpaper/YGmpjZW3AoQ.jpg','https://cdn.nekos.life/wallpaper/hNCgoY-mQPI.jpg','https://cdn.nekos.life/wallpaper/3db40hylKs8.png','https://cdn.nekos.life/wallpaper/iQ2FSo5nCF8.jpg','https://cdn.nekos.life/wallpaper/meaSEfeq9QM.png','https://cdn.nekos.life/wallpaper/CmEmn79xnZU.jpg','https://cdn.nekos.life/wallpaper/MAL18nB-yBI.jpg','https://cdn.nekos.life/wallpaper/FUuBi2xODuI.jpg','https://cdn.nekos.life/wallpaper/ez-vNNuk6Ck.jpg','https://cdn.nekos.life/wallpaper/K4-z0Bc0Vpc.jpg','https://cdn.nekos.life/wallpaper/Y4JMbswrNg8.jpg','https://cdn.nekos.life/wallpaper/ffbPXIxt4-0.png','https://cdn.nekos.life/wallpaper/x63h_W8KFL8.jpg','https://cdn.nekos.life/wallpaper/lktzjDRhWyg.jpg','https://cdn.nekos.life/wallpaper/j7oQtvRZBOI.jpg','https://cdn.nekos.life/wallpaper/MQQEAD7TUpQ.png','https://cdn.nekos.life/wallpaper/lEG1-Eeva6Y.png','https://cdn.nekos.life/wallpaper/Loh5wf0O5Aw.png','https://cdn.nekos.life/wallpaper/yO6ioREenLA.png','https://cdn.nekos.life/wallpaper/4vKWTVgMNDc.jpg','https://cdn.nekos.life/wallpaper/Yk22OErU8eg.png','https://cdn.nekos.life/wallpaper/Y5uf1hsnufE.png','https://cdn.nekos.life/wallpaper/xAmBpMUd2Zw.jpg','https://cdn.nekos.life/wallpaper/f_RWFoWciRE.jpg','https://cdn.nekos.life/wallpaper/Y9qjP2Y__PA.jpg','https://cdn.nekos.life/wallpaper/eqEzgohpPwc.jpg','https://cdn.nekos.life/wallpaper/s1MBos_ZGWo.jpg','https://cdn.nekos.life/wallpaper/PtW0or_Pa9c.png','https://cdn.nekos.life/wallpaper/32EAswpy3M8.png','https://cdn.nekos.life/wallpaper/Z6eJZf5xhcE.png','https://cdn.nekos.life/wallpaper/xdiSF731IFY.jpg','https://cdn.nekos.life/wallpaper/Y9r9trNYadY.png','https://cdn.nekos.life/wallpaper/8bH8CXn-sOg.jpg','https://cdn.nekos.life/wallpaper/a02DmIFzRBE.png','https://cdn.nekos.life/wallpaper/MnrbXcPa7Oo.png','https://cdn.nekos.life/wallpaper/s1Tc9xnugDk.jpg','https://cdn.nekos.life/wallpaper/zRqEx2gnfmg.jpg','https://cdn.nekos.life/wallpaper/PtW0or_Pa9c.png','https://cdn.nekos.life/wallpaper/0ECCRW9soHM.jpg','https://cdn.nekos.life/wallpaper/kAw8QHl_wbM.jpg','https://cdn.nekos.life/wallpaper/ZXcaFmpOlLk.jpg','https://cdn.nekos.life/wallpaper/WVEdi9Ng8UE.png','https://cdn.nekos.life/wallpaper/IRu29rNgcYU.png','https://cdn.nekos.life/wallpaper/LgIJ_1AL3rM.jpg','https://cdn.nekos.life/wallpaper/DVD5_fLJEZA.jpg','https://cdn.nekos.life/wallpaper/siqOQ7k8qqk.jpg','https://cdn.nekos.life/wallpaper/CXNX_15eGEQ.png','https://cdn.nekos.life/wallpaper/s62tGjOTHnk.jpg','https://cdn.nekos.life/wallpaper/tmQ5ce6EfJE.png','https://cdn.nekos.life/wallpaper/Zju7qlBMcQ4.jpg','https://cdn.nekos.life/wallpaper/CPOc_bMAh2Q.png','https://cdn.nekos.life/wallpaper/Ew57S1KtqsY.jpg','https://cdn.nekos.life/wallpaper/hVpFbYJmZZc.jpg','https://cdn.nekos.life/wallpaper/sb9_J28pftY.jpg','https://cdn.nekos.life/wallpaper/JDoIi_IOB04.jpg','https://cdn.nekos.life/wallpaper/rG76AaUZXzk.jpg','https://cdn.nekos.life/wallpaper/9ru2luBo360.png','https://cdn.nekos.life/wallpaper/ghCgiWFxGwY.png','https://cdn.nekos.life/wallpaper/OSR-i-Rh7ZY.png','https://cdn.nekos.life/wallpaper/65VgtPyweCc.jpg','https://cdn.nekos.life/wallpaper/3vn-0FkNSbM.jpg','https://cdn.nekos.life/wallpaper/u02Y0-AJPL0.jpg','https://cdn.nekos.life/wallpaper/_-Z-0fGflRc.jpg','https://cdn.nekos.life/wallpaper/3VjNKqEPp58.jpg','https://cdn.nekos.life/wallpaper/NoG4lKnk6Sc.jpg','https://cdn.nekos.life/wallpaper/xiTxgRMA_IA.jpg','https://cdn.nekos.life/wallpaper/yq1ZswdOGpg.png','https://cdn.nekos.life/wallpaper/4SUxw4M3UMA.png','https://cdn.nekos.life/wallpaper/cUPnQOHNLg0.jpg','https://cdn.nekos.life/wallpaper/zczjuLWRisA.jpg','https://cdn.nekos.life/wallpaper/TcxvU_diaC0.png','https://cdn.nekos.life/wallpaper/7qqWhEF_uoY.jpg','https://cdn.nekos.life/wallpaper/J4t_7DvoUZw.jpg','https://cdn.nekos.life/wallpaper/xQ1Pg5D6J4U.jpg','https://cdn.nekos.life/wallpaper/aIMK5Ir4xho.jpg','https://cdn.nekos.life/wallpaper/6gneEXrNAWU.jpg','https://cdn.nekos.life/wallpaper/PSvNdoISWF8.jpg','https://cdn.nekos.life/wallpaper/SjgF2-iOmV8.jpg','https://cdn.nekos.life/wallpaper/vU54ikOVY98.jpg','https://cdn.nekos.life/wallpaper/QjnfRwkRU-Q.jpg','https://cdn.nekos.life/wallpaper/uSKqzz6ZdXc.png','https://cdn.nekos.life/wallpaper/AMrcxZOnVBE.jpg','https://cdn.nekos.life/wallpaper/N1l8SCMxamE.jpg','https://cdn.nekos.life/wallpaper/n2cBaTo-J50.png','https://cdn.nekos.life/wallpaper/ZXcaFmpOlLk.jpg','https://cdn.nekos.life/wallpaper/7bwxy3elI7o.png','https://cdn.nekos.life/wallpaper/7VW4HwF6LcM.jpg','https://cdn.nekos.life/wallpaper/YtrPAWul1Ug.png','https://cdn.nekos.life/wallpaper/1p4_Mmq95Ro.jpg','https://cdn.nekos.life/wallpaper/EY5qz5iebJw.png','https://cdn.nekos.life/wallpaper/aVDS6iEAIfw.jpg','https://cdn.nekos.life/wallpaper/veg_xpHQfjE.jpg','https://cdn.nekos.life/wallpaper/meaSEfeq9QM.png','https://cdn.nekos.life/wallpaper/Xa_GtsKsy-s.png','https://cdn.nekos.life/wallpaper/6Bx8R6D75eM.png','https://cdn.nekos.life/wallpaper/zXOGXH_b8VY.png','https://cdn.nekos.life/wallpaper/VQcviMxoQ00.png','https://cdn.nekos.life/wallpaper/CJnRl-PKWe8.png','https://cdn.nekos.life/wallpaper/zEWYfFL_Ero.png','https://cdn.nekos.life/wallpaper/_C9Uc5MPaz4.png','https://cdn.nekos.life/wallpaper/zskxNqNXyG0.jpg','https://cdn.nekos.life/wallpaper/g7w14PjzzcQ.jpg','https://cdn.nekos.life/wallpaper/KavYXR_GRB4.jpg','https://cdn.nekos.life/wallpaper/Z_r9WItzJBc.jpg','https://cdn.nekos.life/wallpaper/Qps-0JD6834.jpg','https://cdn.nekos.life/wallpaper/Ri3CiJIJ6M8.png','https://cdn.nekos.life/wallpaper/ArGYIpJwehY.jpg','https://cdn.nekos.life/wallpaper/uqYKeYM5h8w.jpg','https://cdn.nekos.life/wallpaper/h9cahfuKsRg.jpg','https://cdn.nekos.life/wallpaper/iNPWKO8d2a4.jpg','https://cdn.nekos.life/wallpaper/j2KoFVhsNig.jpg','https://cdn.nekos.life/wallpaper/z5Nc-aS6QJ4.jpg','https://cdn.nekos.life/wallpaper/VUFoK8l1qs0.png','https://cdn.nekos.life/wallpaper/rQ8eYh5mXN8.png','https://cdn.nekos.life/wallpaper/D3NxNISDavQ.png','https://cdn.nekos.life/wallpaper/Z_CiozIenrU.jpg','https://cdn.nekos.life/wallpaper/np8rpfZflWE.jpg','https://cdn.nekos.life/wallpaper/ED-fgS09gik.jpg','https://cdn.nekos.life/wallpaper/AB0Cwfs1X2w.jpg','https://cdn.nekos.life/wallpaper/DZBcYfHouiI.jpg','https://cdn.nekos.life/wallpaper/lC7pB-GRAcQ.png','https://cdn.nekos.life/wallpaper/zrI-sBSt2zE.png','https://cdn.nekos.life/wallpaper/_RJhylwaCLk.jpg','https://cdn.nekos.life/wallpaper/6km5m_GGIuw.png','https://cdn.nekos.life/wallpaper/3db40hylKs8.png','https://cdn.nekos.life/wallpaper/oggceF06ONQ.jpg','https://cdn.nekos.life/wallpaper/ELdH2W5pQGo.jpg','https://cdn.nekos.life/wallpaper/Zun_n5pTMRE.png','https://cdn.nekos.life/wallpaper/VqhFKG5U15c.png','https://cdn.nekos.life/wallpaper/NsMoiW8JZ60.jpg','https://cdn.nekos.life/wallpaper/XE4iXbw__Us.png','https://cdn.nekos.life/wallpaper/a9yXhS2zbhU.jpg','https://cdn.nekos.life/wallpaper/jjnd31_3Ic8.jpg','https://cdn.nekos.life/wallpaper/Nxanxa-xO3s.png','https://cdn.nekos.life/wallpaper/dBHlPcbuDc4.jpg','https://cdn.nekos.life/wallpaper/6wUZIavGVQU.jpg','https://cdn.nekos.life/wallpaper/_-Z-0fGflRc.jpg','https://cdn.nekos.life/wallpaper/H9OUpIrF4gU.jpg','https://cdn.nekos.life/wallpaper/xlRdH3fBMz4.jpg','https://cdn.nekos.life/wallpaper/7IzUIeaae9o.jpg','https://cdn.nekos.life/wallpaper/FZCVL6PyWq0.jpg','https://cdn.nekos.life/wallpaper/5dG-HH6d0yw.png','https://cdn.nekos.life/wallpaper/ddxyA37HiwE.png','https://cdn.nekos.life/wallpaper/I0oj_jdCD4k.jpg','https://cdn.nekos.life/wallpaper/ABchTV97_Ts.png','https://cdn.nekos.life/wallpaper/58C37kkq39Y.png','https://cdn.nekos.life/wallpaper/HMS5mK7WSGA.jpg','https://cdn.nekos.life/wallpaper/1O3Yul9ojS8.jpg','https://cdn.nekos.life/wallpaper/hdZI1XsYWYY.jpg','https://cdn.nekos.life/wallpaper/h8pAJJnBXZo.png','https://cdn.nekos.life/wallpaper/apO9K9JIUp8.jpg','https://cdn.nekos.life/wallpaper/p8f8IY_2mwg.jpg','https://cdn.nekos.life/wallpaper/HY1WIB2r_cE.jpg','https://cdn.nekos.life/wallpaper/u02Y0-AJPL0.jpg','https://cdn.nekos.life/wallpaper/jzN74LcnwE8.png','https://cdn.nekos.life/wallpaper/IeAXo5nJhjw.jpg','https://cdn.nekos.life/wallpaper/7lgPyU5fuLY.jpg','https://cdn.nekos.life/wallpaper/f8SkRWzXVxk.png','https://cdn.nekos.life/wallpaper/ZmDTpGGeMR8.jpg','https://cdn.nekos.life/wallpaper/AMrcxZOnVBE.jpg','https://cdn.nekos.life/wallpaper/ZhP-f8Icmjs.jpg','https://cdn.nekos.life/wallpaper/7FyUHX3fE2o.jpg','https://cdn.nekos.life/wallpaper/CZoSLK-5ng8.png','https://cdn.nekos.life/wallpaper/pSNDyxP8l3c.png','https://cdn.nekos.life/wallpaper/AhYGHF6Fpck.jpg','https://cdn.nekos.life/wallpaper/ic6xRRptRes.jpg','https://cdn.nekos.life/wallpaper/89MQq6KaggI.png','https://cdn.nekos.life/wallpaper/y1DlFeHHTEE.png']
             let walnimek = walnime[Math.floor(Math.random() * walnime.length)]
             zfa.sendFileFromUrl(from, walnimek, 'Nimek.jpg', '', id)
+			zfa.reply(from, `Join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp`, id)
             break
 		case prefix+'shota':
             if(isReg(obj)) return
@@ -3301,7 +3431,8 @@ Nte owner?`, id)
 		  zfa.reply(from, `Bentar ya kak, Lagi Raisa proses nih mohon tunggu sebentar`, id)
 		  const asupa = JSON.parse(fs.readFileSync('./lib/asupan.json')) 
 		  let asupan = asupa[Math.floor(Math.random() * asupa.length)]
-		  zfa.sendFileFromUrl(from, asupan, 'asupan.mp4', 'Nih kak....', id)
+		  zfa.sendFileFromUrl(from, asupan, 'asupan.mp4', 'Join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp', id)
+		  
 		  break
 		case prefix+'bug':
             if(isReg(obj)) return
@@ -3391,7 +3522,7 @@ Nte owner?`, id)
 		case 'zowner':
            // zfa.sendContact(chatId, `6281310253704@c.us`)
             //zfa.reply(from, 'Itu nomor Pacar ku, eh maksudnya Owner ku', id)
-			zfa.sendTextWithMentions(from, 'Ownnerku yang baik dan tampan @6281310253704@c.us', id)
+			zfa.sendTextWithMentions(from, 'Ownnerku yang baik dan tampan @77472105089@c.us', id)
             break
 		case prefix+'verif':
 		case prefix+'verifikasi':
@@ -3515,31 +3646,6 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             const sigot = sigo.data
             zfa.reply(from, sigot.success, id)
             console.log(sigot)
-            break
-		case prefix+'puisi': // ARUGAZ
-            if(isReg(obj)) return
-            
-            if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
-          //  if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
-            const puisi = await get.get('https://arugaz.herokuapp.com/api/puisi1').json()
-            zfa.reply(from, `• *Puisi*: ${puisi.result}`, id)
-            break
-        case prefix+'puisi2': // ARUGAZ
-            if(isReg(obj)) return
-           
-            if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
-          //  if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            const puisi2 = await get.get('https://arugaz.herokuapp.com/api/puisi2').json()
-            zfa.reply(from, `• *Puisi*: ${puisi2.result}`, id)
-            break
-        case prefix+'puisi3': // ARUGAZ
-            if(isReg(obj)) return
-            
-            if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
-         //   if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            const puisi3 = await get.get('https://arugaz.herokuapp.com/api/puisi3').json()
-            zfa.reply(from, `• *Puisi*: ${puisi3.result}`, id)
             break
 		case prefix+'waktu':
             if(isReg(obj)) return
@@ -3698,6 +3804,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             let pep = pptl[Math.floor(Math.random() * pptl.length)]
             zfa.sendFileFromUrl(from, pep, 'pptl.jpg', 'Suppor Raisa Dengan Cara Follow IG: https://instagram.com/_zidanfadilaharsa Dan Subscribe YT: https://youtube.com/zidanfadilaharsazfaa', message.id)
             await limitAdd(serial)
+			zfa.reply(from, `Join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp`, id)
             break
         case prefix+'neko':
             if(isReg(obj)) return
@@ -3755,26 +3862,9 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
                             zfa.reply(from, 'Ada yang eror!', id)
                         })
                     break
-		case prefix+'fb':
-		case prefix+'mark':
-            if(isReg(obj)) return
-        
-            if (!isGroupMsg) return zfa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
-         //   if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return zfa.reply(from, `Kirim perintah *#fb [ Link Fb ]*\nContoh : *#fb https://www.facebook.com/24609282673/posts/10158628585367674/*`, id)
-            zfa.reply(from, mess.wait, id)
-            facebook(args[1]).then(async(res) => {
-                let { VideoUrl } = await res
-                const epbe2 = `*「 FACEBOOK DOWNLOADER 」*\n➸ *Aplikasi*: Facebook\n\n_Silahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit._`
-                zfa.sendFileFromUrl(from, VideoUrl, `Facebook.mp4`, epbe2, id)
-                await limitAdd(serial)
-            }).catch((err) => {
-                console.log(err);
-                zfa.reply(from, `Maaf, Terjadi Kesalahan`, id)
-            })
-            break
+		
 		case prefix+'ig':
-        case prefix+'instagram':
+  
                            if (args.length == 0) return zfa.reply(from, `Kirim perintah *${prefix}ig [linkIg]*`, id)
 						   zfa.reply(from, mess.wait, id)
                             const igUrl = body.slice(4)
@@ -3938,7 +4028,6 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             await zfa.sendFileFromUrl(from, `https://api.vhtear.com/blackpinkicon?text=${blpk}&apikey=${vhtearkey}`, 'blackpink.jpg', '', id)
             break
 		 case prefix+'pornhub':
-		 case prefix+'ph':
             if(isReg(obj)) return
           
           //  if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
@@ -3977,7 +4066,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'sspc':
             if(isReg(obj)) return
-         
+         if (!isAdmin) return zfa.reply(from, `Khusus orang Ganteng Dan Cantik ketik *${prefix}aduh* Untung melihat cara jadi Orang Ganteng dan Cantik`, id)
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#sspc [linkWeb]*\nContoh : *#sspc https://neonime.vip*', id)
             const sspc = body.slice(6)
@@ -3986,7 +4075,7 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
             break
 		case prefix+'ssphone':
             if(isReg(obj)) return
-         
+         if (!isAdmin) return zfa.reply(from, `Khusus orang Ganteng Dan Cantik ketik *${prefix}aduh* Untung melihat cara jadi Orang Ganteng dan Cantik`, id)
             if (!isGroupMsg) return zfa.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
           //  if (isLimit(serial)) return zfa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return zfa.reply(from, 'Kirim perintah *#ssphone [linkWeb]*\nContoh : *#ssphone https://neonime.vip*', id)
@@ -4062,6 +4151,16 @@ Total Pengguna yang telah terdaftar ${pendaftar.length}`)
          
 			zfa.sendText(from, 'This is my WhatsApp number link, sir https://wa.me/447537102515 dont forget to share it with your friends', id)
 			break
+			case prefix+'bokep': // MFARELS
+            case prefix+'randombokep': // MFARELS
+            case prefix+'bkp': // MFARELS
+                //if (!isPrem) return aruga.reply(from, mess.prem, id)
+                const mskkntl = fs.readFileSync('./lib/18+.json') // MFARELS
+                const kntlnya = JSON.parse(mskkntl) // MFARELS
+                const rindBkp = Math.floor(Math.random() * kntlnya.length) // MFARELS
+                const rindBkep = kntlnya[rindBkp] // MFARELS
+                zfa.reply(from, rindBkep.teks, id) // MFARELS
+                break
 		case prefix+'menu':
         case prefix+'help':
 		case prefix+'raisamenu':
@@ -4106,8 +4205,16 @@ zfa.reply(from, `Jangan lupa donasi yah kak *${pushname}*. Silahkan Ketik *${pre
            // zfa.sendText(from, help(prefix, cts, pendaftar)) */
 zfa.reply(from, `Hallo kak *${pushname}*💝 Ini adalah list fitur ku
 
-*${prefix}join* linkgrub (gratis)
+*${prefix}join* linkgrub (Gratis)
 -> Buat masukin bot ke grub 
+*${prefix}lock*
+-> Setting Grub ke Admin Yg dapat mengirim pesan
+*${prefix}unlock*
+-> Setting Grub Ke Semua peserta dapat mengirimkan pesan
+*${prefix}blackpink* Text
+-> Membuat Logo blekping
+*${prefix}pornhub* |text1|text2
+-> Membuat Logo PornHub
 *${prefix}thuglife* 
 -> Foto efek thuglife
 *${prefix}tobecontinue*
@@ -4158,8 +4265,8 @@ zfa.reply(from, `Hallo kak *${pushname}*💝 Ini adalah list fitur ku
 -> Nte pasti tau ini buat apa
 *${prefix}stickergift*
 -> Buat bikin stiker gip
-*${prefix}play* <Error>
--> Buat denger jedag jedug
+*${prefix}bokep*
+-> Buat ngocok batang
 *${prefix}addvn*
 -> Buat ngisi list vn
 *${prefix}listvn*
@@ -4194,9 +4301,9 @@ _JIKA ADA YANG ERROR SILAHKAN KETIK *${prefix}bug*_
 💝 *RAISA FARIZA* 💝`, id)
 
 zfa.reply (from,`
-Pengen nomor luar negri kaya bot? nih nomor seller nyah: 
-wa.me/441400222229
-Ada banyak pilihan nomor loh....
+Kak join Grub Raisa yah 
+https://tinyurl.com/yzmg4cqx
+Terimakasih...
 ` ,id)
             break
 case prefix+'menuen':
@@ -4231,13 +4338,28 @@ break
 case prefix+'user':
 zfa.reply(from, `Total User *${pendaftar.length}* Orang`,id)
 break
+case prefix+'doaharian':
+		//aruga.reply(from, mess.wait, id)
+		try {
+			const dataplaw = await axios.get(`https://urbaee-xyz.herokuapp.com/api/muslim/doaharian?apikey=Urbaeexyz`)
+			const dataplax = dataplaw.data.result
+			let harian = `*「 DOA HARIAN 」*`
+			for (let i = 0; i < dataplax.data.length; i++) {
+				harian += `\n─────────────────\n\n• *Judul Doa:* ${dataplax.data[i].title}\n• *Arab:* ${dataplax.data[i].arabic}\n• *Latin:* ${dataplax.data[i].latin}\n• *Arti:* ${dataplax.data[i].translation}\n\n`
+		}
+		await zfa.reply(from, harian, id)
+		} catch (err) {
+			zfa.reply(from, 'Error', id)
+			console.log(err)
+		}
+		break
         case prefix+'asupan2':
 		//zfa.reply(from, 'Fitur ini dinonaktifkan karena sekarang bulan puasa. Tobat woy ngentuy', id)
                                 if (!isGroupMsg) return await zfa.reply(from, 'Fitur ini hanya bisa digunakan didalam grup!', id)
                                 await zfa.reply(from, mess.wait, id)
                                 axios.get(`http://lolhuman.herokuapp.com/api/asupan?apikey=NaisaPunyaZidan`)
                                     .then(async (res) => {
-                                     zfa.sendFileFromUrl(from, res.data.result, 'asupan.mp4', `nehh asupan ${pushname}`, id)
+                                     zfa.sendFileFromUrl(from, res.data.result, 'asupan.mp4', `kak *${pushname}* Join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp`, id)
 									 .catch(() => {
 											zfa.reply(from, res.data.message, id)
                                     })
@@ -4286,6 +4408,7 @@ break
                                 fs.existsSync(path)//unlinkSync(path)
                             })
                             .saveToFile(path)
+							zfa.reply(from, `Join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp`, id)
                     } catch (err) {
                         console.log(err)
                         zfa.reply(from, `Aduh error kak, Silahkan coba ;agi. Jika masalah berkelanjutan silahkan hubungi Owner Aku yang baik dan tampan`, id)
@@ -4327,6 +4450,7 @@ break
                                 zfa.sendFile(from, path, `${nayimut}.mp4`, inf.title, id).then(console.log(color('[LOGS]', 'grey'), `Video Processed for ${processTime(t, moment())} Seconds`))
                                 fs.existsSync(path) //unlinkSync(path)
                             })
+							zfa.reply(from, `Join grub Raisa ya kak https://chat.whatsapp.com/DdCtKYHC9Lk18lweWjTipp`, id)
                     } catch (err) {
                         console.log(err)
                         zfa.reply(from, `Aduh error kak. Silahkan coba lagi, jika masalah berkelanjutan silahkan hubungi ownerku yang baik dan tampan.`, id)
