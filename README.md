@@ -4,6 +4,8 @@
 <p align="center">
 <img src="https://i.ibb.co/qnD35XT/logo.jpg" width="100%" alt="API Giphy logo"/>
 </p>
+<p align="center">
+  <a href="https://www.mediafire.com/file/og4wxkehf1sg8fm/bin.zip/file">Download Folder Bin Nya disini</a>
 
 - 🌱 I’m currently learning **nothing**.
 
